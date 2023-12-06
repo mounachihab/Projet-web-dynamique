@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="fr">
+<!-- -->
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="accueil.css">
+  <title>ECE In - Vous</title>
+  <script src="vous.js"></script>
+</head>
+
+<body>
+<!-- Partie du logo -->
+<div id="logo">
+  <img src="logo.png"
+       alt="Logo"
+       width="160"
+       height="100"/>
+
+  <!-- Partie des boutons de connexion -->
+  <div id="compte">
+    <p>compte</p>
+  </div>
+</div>
+
+
+<!-- Partie du titre -->
+<div id="titre">
+  <h2>ECE In - Social Media Professionnel de l'ECE Paris</h2>
+</div>
+
+<div id="wrapper">
+  <!-- Partie des boutons -->
+  <div id="boutons">
+    <img src="bouton_accueil_0.png"
+         alt="accueil.html"
+         width="170"
+         height=""/>
+    <img src="bouton_mon_reseau_0.png"
+         alt=".html"
+         width="170"
+         height=""/>
+    <img src="bouton_vous_1.png"
+         alt=".html"
+         width="170"
+         height=""/>
+    <img src="bouton_notification_0.png"
+         alt=".html"
+         width="170"
+         height=""/>
+    <img src="bouton_messagerie_0.png"
+         alt=".html"
+         width="170"
+         height=""/>
+    <img src="bouton_emplois_0.png"
+         alt=".html"
+         width="170"
+         height=""/>
+
+</div>
+<div id ="vous">
+      <div id="listeFormations">
+        <!--les fomations ajoutées s ajoutent ici -->
+      </div>
+     <button onclick="ajouterformations()">Ajouter une Formation</button>
+
+     <form id="ajouterformationformulaire" style="display: none;">
+          <table>
+               <tr>
+                    <td><label for="ecole">École:</label></td>
+                    <td><input type="text" id="ecole" required></td>
+               </tr>
+               <tr>
+                    <td><label for="competence">Compétences acquises:</label></td>
+                    <td><input type="text" id="competence" required></td>
+               </tr>
+               <tr>
+                    <td><label for="diplome">Diplôme:</label></td>
+                    <td><input type="text" id="diplome" required></td>
+               </tr>
+               <tr>
+                    <td><label for="domaine">Domaine d'étude:</label></td>
+                    <td><input type="text" id="domaine" required></td>
+               </tr>
+               <tr>
+                    <td><label for="dateDebut">Date de début:</label></td>
+                    <td><input type="date" id="dateDebut" required></td>
+               </tr>
+               <tr>
+                    <td><label for="dateFin">Date de fin:</label></td>
+                    <td><input type="date" id="dateFin" required></td>
+               </tr>
+               <tr>
+                    <td><label for="description">Description:</label></td>
+                    <td><textarea id="description" rows="4"></textarea></td>
+               </tr>   
+          </table>
+          <button type="button" onclick="ajouterformations()">Ajouter une formation </button>
+     </form>  
+     <button id="genererCvBtn" onclick="genererCV()">Générer mon CV</button>
+  
+
+</div>
+</body>
+</html>
