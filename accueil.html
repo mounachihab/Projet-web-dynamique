@@ -3,114 +3,181 @@
 <!-- -->
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="accueil.css">
-  <title>ECE In - Home </title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="accueil.css">
+    <script type="text/javascript" src="accueil.js"></script>
+    <title>ECE In - Home</title>
 </head>
 
 <body>
-<!-- Partie du logo -->
-<div id="logo">
-  <img src="logo.png"
-       alt="Logo"
-       width="160"
-       height="100"/>
+    <!-- Partie du logo -->
+    <div id="banderole">
+        <div id="logo">
+            <img src="logo.png"
+                 alt="logo ECE in"
+                 width="260"
+                 height=""
+                 onclick="afficherMessageIntro()"/>
+        </div>
 
-  <!-- Partie des boutons de connexion -->
-  <div id="compte">
-    <p>compte</p>
-  </div>
-</div>
+        <!-- L'intro de l'ece in si on appuie sur le logo -->
+        <div id="overlayContainer">
+            <div id="messageOverlay">
+                <h3 style="color: #0a7677">
+                    <u>Qu'est ce qu'ECE in ?</u>
+                </h3>
+                <p style="text-align: left">
+                    Bienvenue sur le réseau social professionnel dédié à la communauté ECE Paris ! <br><br>
+
+                    Que vous soyez étudiant/e de licence, master ou doctorat, apprenti/e dans une entreprise, en quête d'un
+                    stage ou peut-être un/e enseignant/e ou employé/e de l’école à la recherche de partenaires pour un projet
+                    de recherche, ce site web est conçu pour répondre aux besoins de chacun. Notre plate-forme sociale offre
+                    une approche professionnelle, permettant à chacun de prendre en main sa vie professionnelle, de découvrir
+                    de nouvelles opportunités, et de se connecter avec d'autres passionnés partageant des objectifs similaires. <br><br>
+
+                    Votre espace personnel sur le site vous permettra de publier des statuts, des évènements, des photos,
+                    des vidéos, et même votre curriculum vitae.
+                </p>
+                <button onclick="cacherMessageIntro()">Fermer</button>
+            </div>
+        </div>
+
+        <div id="titre">
+            <h2>ECE In - Social Media Professionnel de l'ECE Paris</h2>
+        </div>
+
+        <div id="nomCompte">
+            Nom compte
+        </div>
+
+        <!-- Partie du boutons de déconnexion -->
+        <div id="deco">
+            <a href="connexion.html">
+                <img src="bouton_deconnexion.png"
+                 alt="deconnexion"
+                 width="50"
+                 height=""/>
+            </a>
+        </div>
+    </div>
+
+    <!-- Partie du bandeau de couleur -->
+    <div id="couleur"></div>
+
+    <!-- Partie du wrapper, avec toutes les infos de la page -->
+    <div id="wrapper">
+        <!-- Partie des boutons -->
+        <div id="boutons">
+            <a href=".html">
+                <img src="bouton_accueil_1.png"
+                                 alt="accueil"
+                                 width="150"
+                                 height=""/>
+            </a>
+
+            <a href=".html">
+                <img src="bouton_mon_reseau_0.png"
+                     alt="mon resau"
+                     width="150"
+                     height=""/>
+            </a>
+
+            <a href=".html">
+                <img src="bouton_vous_0.png"
+                     alt="vous"
+                     width="150"
+                     height=""/>
+            </a>
+
+            <a href=".html">
+                <img src="bouton_notification_0.png"
+                     alt="notifications"
+                     width="150"
+                     height=""/>
+            </a>
+
+            <a href=".html">
+                <img src="bouton_messagerie_0.png"
+                     alt="messagerie"
+                     width="150"
+                     height=""/>
+            </a>
+
+            <a href=".html">
+                <img src="bouton_emplois_0.png"
+                                 alt="emplois"
+                                 width="150"
+                                 height=""/>
+            </a>
 
 
-<!-- Partie du titre -->
-<div id="titre">
-  <h2>ECE In - Social Media Professionnel de l'ECE Paris</h2>
-</div>
+        </div>
 
-<div id="wrapper">
-  <!-- Partie des boutons -->
-  <div id="boutons">
-    <img src="bouton_accueil_1.png"
-         alt="accueil.html"
-         width="170"
-         height=""/>
-    <img src="bouton_mon_reseau_0.png"
-         alt=".html"
-         width="170"
-         height=""/>
-    <img src="bouton_profil_0.png"
-         alt=".html"
-         width="170"
-         height=""/>
-    <img src="bouton_notification_0.png"
-         alt=".html"
-         width="170"
-         height=""/>
-    <img src="bouton_messagerie_0.png"
-         alt=".html"
-         width="170"
-         height=""/>
-    <img src="bouton_emplois_0.png"
-         alt=".html"
-         width="170"
-         height=""/>
+        <!-- Evenement semaine -->
+        <div id="even_semaine">
+            <div class="scrollable-container">
+                <h3>
+                    Évènements de la semaine
+                </h3>
 
-  </div>
+            </div>
+        </div>
 
-  <!-- L'intro de l'ece -->
-  <div id="intro">
-    <p>intro</p>
-  </div>
+        <!-- Evenement vous+resaux -->
+        <div id="even_vous">
+            <div class="scrollable-container">
+                <h3>
+                    Évènements de vous et votre réseaux
+                </h3>
+            </div>
+        </div>
 
-  <!-- Evenement semaine -->
-  <div id="even_semaine">
-    <p>evenemetn semaine</p>
-  </div>
+        <!-- Carousel -->
+        <div id="carrousel">
+            <h3>
+                Les images de la semaine
+            </h3>
 
-  <!-- Evenement vous+resaux -->
-  <div id="even_vous">
-    <p>evenement vous</p>
-  </div>
+        </div>
 
-  <!-- Carousel -->
-  <div id="carrousel">
-    <p>carousel</p>
-  </div>
+        <!-- Publier Photo -->
+        <div id="photo">
+            <h3>
+                Publiez une photo
+            </h3>
+        </div>
 
-  <!-- Publier Photo -->
-  <div id="photo">
-    <p>photo</p>
-  </div>
+        <!-- Publier CV -->
+        <div id="cv">
+            <h3>
+                Publiez ou modifiez votre cv
+            </h3>
+        </div>
 
-  <!-- Publier CV -->
-  <div id="cv">
-    <p>cv</p>
-  </div>
+        <!-- Coordonne -->
+        <div id="plan">
+            <h3>
+                Contactez-nous !
+            </h3>
+            Email: <a href="mailto : admin@ecein.com">admin@ecein.com</a> <br>
+            Téléphone: <a href="+33 1 23 45 67 89">+33 1 23 45 67 89</a> <br>
+            Adresse: <a href="https://www.google.com/maps/place/ECE+-+Ecole+d'ing%C3%A9nieurs+-+Campus+de+Paris/@48.8512252,2.285991,17z/data=!3m2!4b1!5s0x47e670049820700f:0x5e9c35374e6fe5df!4m6!3m5!1s0x47e6701b4f58251b:0x167f5a60fb94aa76!8m2!3d48.8512252!4d2.2885659!16s%2Fg%2F11dyjwlyp?entry=ttu">10 Rue Sextius Michel, 75015 Paris, France</a></p>
 
-  <!-- Coordonne -->
-  <div id="coordo">
-    <h3>Contact</h3>
-    <p><u>Coordonnées de l'administrateur :</u><br>
-      Email: <a href="mailto : admin@ecein.com">admin@ecein.com</a> <br>
-      Téléphone: <a href="+33 1 23 45 67 89">+33 1 23 45 67 89</a> <br>
-      Adresse: <a href="https://www.google.com/maps/place/ECE+-+Ecole+d'ing%C3%A9nieurs+-+Campus+de+Paris/@48.8512252,2.285991,17z/data=!3m2!4b1!5s0x47e670049820700f:0x5e9c35374e6fe5df!4m6!3m5!1s0x47e6701b4f58251b:0x167f5a60fb94aa76!8m2!3d48.8512252!4d2.2885659!16s%2Fg%2F11dyjwlyp?entry=ttu">10 Rue Sextius Michel, 75015 Paris, France</a></p>
-  </div>
+            <!-- GG maps -->
+            <img src="plan_ece.jpg"
+                 alt="Carte de localisation"
+                 width=""
+                 height=""/>
+        </div>
+    </div>
 
-  <!-- GG maps -->
-  <div id="plan">
-    <img src="plan_ece.jpg"
-         alt="Carte de localisation"
-         width=""
-         height=""/>
-  </div>
-</div>
-
-<!-- Copyright -->
-<div id="copy">
-  <p>&copy; 2023 ECE In. Tous droits réservés.</p>
-</div>
+    <!-- Copyright -->
+    <div id="copy">
+        <p>
+            &copy; 2023 ECE In. Tous droits réservés.
+        </p>
+    </div>
 
 </body>
 </html>
