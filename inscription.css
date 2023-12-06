@@ -1,0 +1,64 @@
+/* Définition des styles pour la page Accueil*/
+body {
+    background-color: #0a7677;
+    margin: 0; /* Aucune marge extérieure */
+    padding: 0; /* Aucun remplissage intérieur */
+    font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
+}
+
+
+/* Définition des styles pour le conteneur principal (celui où les bloc sont stocke) */
+#wrapper {
+    background-color: #fff;
+    width: 900px; /* Largeur fixe */
+    height: 475px; /* Hauteur fixe */
+    min-width: 900px; /* Largeur minimale */
+    margin: auto; /* Centrer horizontalement */
+    text-align: center; /* Alignement du texte au centre */
+    border-radius: 10px; /* Bordure arrondie */
+}
+
+
+/* Styles pour la barre en dessous de la bannière */
+#baniere{
+    text-align: left; /* Alignement du texte au centre */
+    padding-left: 40px; /* Espacement à gauche du paragraphe */
+    background-color: #a6cccc;
+    padding-top : 7px; /* Remplissage intérieur */
+    padding-bottom : 7px; /* Remplissage intérieur */
+    border-top-left-radius: 10px; /* Bordure arrondie */
+    border-top-right-radius: 10px; /* Bordure arrondie */
+}
+
+
+/* Styles pour le copyright */
+#copy {
+    background-color: #a6cccc;
+    clear: both; /* Annule le flottement à gauche et à droite, permettant à "copy" de se positionner sous les éléments précédents */
+    text-align: center; /* Alignement du texte au centre */
+}
+
+
+/* Pour le formulaire : */
+form {
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+input {
+    width: 90%;
+    padding: 10px;
+    margin: 8px 0;
+    box-sizing: border-box;
+}
+input[type="submit"] {
+    width: 50%;
+    background-color: #0a7677;
+    color: white;
+    cursor: pointer;
+}
+
+a {
+    text-align: right;
+}
+
