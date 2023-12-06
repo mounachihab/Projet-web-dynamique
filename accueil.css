@@ -1,129 +1,217 @@
+/* Définition des styles pour la page Accueil*/
 body {
     background-color: #0a7677;
-    margin: 0;
-    padding: 0;
+    margin: 0; /* Aucune marge extérieure */
+    padding: 0; /* Aucun remplissage intérieur */
+    font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
 }
 
-#wrapper {
-    width: 1200px;
-    height: 1350px;
-    min-width: 1200px;
-    margin: auto;
-    padding: 10px;
-    text-align: center;
+
+
+
+
+/* Définition des styles pour la bannière */
+#banderole {
+    background-color: #a6cccc;
+    padding-bottom: 10px; /* Espacement en bas */
+    padding-top: 20px; /* Espacement en haut */
+    display: flex; /* Utilisation du modèle de boîte flexible */
+    justify-content: space-between; /* Espace équitable entre les éléments enfants */
 }
 
+/* Styles spécifiques pour le logo dans la bannière */
 #logo {
-    background-color: #FFF;
+    padding-left: 220px; /* Espacement à gauche */
+    cursor: pointer; /* Curseur pointer au survol */
 }
 
-#compte {
-    cursor: pointer;
-}
-
+/* Styles spécifiques pour le titre dans la bannière */
 #titre {
-    width: 1170px;
-    min-width: 1190px;
-    margin: auto;
-    padding-left: 10px;
-    padding-right: 10px;
-    background-color: #FFF;
-    border-radius : 10px ;
+    padding-top: 23px; /* Espacement en haut */
+    padding-right: 190px; /* Espacement à droite */
 }
 
+/* Styles pour la barre en dessous de la bannière */
+#couleur{
+    background-color: #585858;
+    padding: 10px; /* Remplissage intérieur */
+}
+
+/* Styles pour le nom avec lequel l'utilisateur est connecté */
+#nomCompte {
+    padding-top: 16px; /* Espacement en haut */
+}
+
+/* Styles pour le logo deconnexion */
+#deco {
+    cursor: pointer; /* Curseur pointer au survol */
+    float: right; /* Flotter à droite */
+    padding-right: 240px; /* Espacement à droite */
+    padding-top: 6px; /* Espacement en haut */
+}
+
+
+
+
+
+/* Définition des styles pour le conteneur principal (celui où les bloc sont stocke) */
+#wrapper {
+    width: 1200px; /* Largeur fixe */
+    height: 1350px; /* Hauteur fixe */
+    min-width: 1200px; /* Largeur minimale */
+    margin: auto; /* Centrer horizontalement */
+    padding: 10px; /* Remplissage intérieur */
+    text-align: center; /* Alignement du texte au centre */
+}
+
+/* Styles pour les boutons de direction */
 #boutons{
     cursor: pointer;
+    padding-top: 6px;
 }
 
+/* Styles pour l'intro du site */
 #intro {
+    width: 1200px; /* Largeur fixe */
+    max-width: 1150px; /* Largeur maximale */
+    margin: auto; /* Centrer horizontalement */
+    padding-left: 2%; /* Espacement à gauche */
+    padding-right: 2%; /* Espacement à droite */
     background-color: #FFF;
-    border-radius : 10px ;
-    width: 393px;
-    height: 390px;
-    text-align: center;
-    float : left ;
-    margin-top: 10px;
+    border-radius: 10px; /* Bordure arrondie */
 }
 
+/* Styles pour les evenement de la semaine */
 #even_semaine {
     background-color: #FFF;
-    border-radius : 10px ;
-    width: 393px;
-    height: 390px;
-    text-align: center;
-    cursor: pointer;
-    float : left ;
-    margin-left: 10px;
-    margin-top: 10px;
+    border-radius: 10px; /* Bordure arrondie */
+    width: 797px; /* Largeur fixe */
+    height: 390px; /* Hauteur fixe */
+    text-align: center; /* Alignement du texte au centre */
+    cursor: pointer; /* Curseur pointer au survol */
+    float: left; /* Flotter à gauche */
+    margin-top: 15px; /* Espacement en haut */
 }
 
+/* Styles pour evenement de vous et entourage */
 #even_vous {
     background-color: #FFF;
-    border-radius : 10px ;
-    width: 393px;
-    height: 390px;
-    text-align: center;
-    cursor: pointer;
-    float : left ;
-    margin-left: 10px;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    border-radius: 10px; /* Bordure arrondie */
+    width: 388px; /* Largeur fixe */
+    height: 794px; /* Hauteur fixe */
+    text-align: center; /* Alignement du texte au centre */
+    cursor: pointer; /* Curseur pointer au survol */
+    float: right; /* Flotter à droite */
+    margin-left: 15px; /* Espacement à gauche */
+    margin-top: 15px; /* Espacement en haut */
+    margin-bottom: 15px; /* Espacement en bas */
 }
 
+/* Styles pour le carrousel */
 #carrousel {
     background-color: #FFF;
-    border-radius : 10px ;
-    width: 1200px;
-    height: 390px;
-    text-align: center;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    clear: both; /* permet d'etre sur que le bloc est après les blocs d'avant*/
+    border-radius: 10px; /* Bordure arrondie */
+    width: 797px; /* Largeur fixe */
+    height: 390px; /* Hauteur fixe */
+    text-align: center; /* Alignement du texte au centre */
+    margin-top: 15px; /* Espacement en haut */
+    margin-bottom: 15px; /* Espacement en bas */
+    float: left; /* Flotter à gauche */
+    clear: left; /* Permet de s'assurer que le bloc est après les blocs précédents */
 }
 
+/* Styles pour l'ajour de photo */
 #photo {
     background-color: #FFF;
-    border-radius : 10px ;
-    width: 595px;
-    height: 170px;
-    text-align: center;
-    cursor: pointer;
-    float : left ;
+    border-radius: 10px; /* Bordure arrondie */
+    width: 392px; /* Largeur fixe */
+    height: 200px; /* Hauteur fixe */
+    text-align: center; /* Alignement du texte au centre */
+    cursor: pointer; /* Curseur pointer au survol */
+    float: left; /* Flotter à gauche */
+    clear: left; /* Permet de s'assurer que le bloc est après les blocs précédents */
 }
 
+/* Styles pour l'ajour de cv */
 #cv {
     background-color: #FFF;
-    border-radius : 10px ;
-    width: 595px;
-    height: 170px;
-    text-align: center;
-    cursor: pointer;
-    float : left ;
-    margin-left: 10px;
-    margin-bottom: 10px;
+    border-radius: 10px; /* Bordure arrondie */
+    width: 392px; /* Largeur fixe */
+    height: 200px; /* Hauteur fixe */
+    cursor: pointer; /* Curseur pointer au survol */
+    float: left; /* Flotter à gauche */
+    margin-left: 15px; /* Espacement à gauche */
+    margin-bottom: 15px; /* Espacement en bas */
+    text-align: left; /* Alignement du texte à gauche */
 }
 
-#coordo {
-    background-color: #FFF;
-    border-radius : 10px ;
-    width: 595px;
-    height: 200px;
-    text-align: center;
-    float : left ;
-}
-
+/* Styles pour le plan et le coordonnées*/
 #plan {
     background-color: #FFF;
-    border-radius: 10px ;
-    width: 595px;
-    height: 200px;
-    text-align: center;
-    float : left ;
-    margin-bottom: 10px;
-    margin-left: 10px;
+    border-radius: 10px; /* Bordure arrondie */
+    width: 388px; /* Largeur fixe */
+    height: 200px; /* Hauteur fixe */
+    float: right; /* Flotter à droite */
+    text-align: left; /* Alignement du texte à gauche */
 }
 
+
+
+
+
+/* Styles pour le copyright */
 #copy {
-    background-color: #96bed2;
-    clear: both;
+    background-color: #a6cccc;
+    clear: both; /* Annule le flottement à gauche et à droite, permettant à "copy" de se positionner sous les éléments précédents */
+    text-align: center; /* Alignement du texte au centre */
+}
+
+
+
+
+
+/* Styles pour le défilement des informations */
+.scrollable-container {
+    width: 393px; /*largeur de l'élément */
+    height: 390px; /* hauteur de l'élément */
+    overflow-y: scroll; /* barre de défilement verticale */
+    overflow-x: hidden; /* barre de défilement horizontale */
+}
+
+
+
+
+
+/* Styles pour les paragraphes à l'intérieur des differents éléments */
+#cv p {
+    padding-left: 13px; /* Espacement à gauche du paragraphe */
+}
+
+
+
+
+
+
+/* Styles pour l'intro afficher dans une boite */
+
+#overlayContainer {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+#messageOverlay {
+    background: #fff;
+    width: 60%; /* largeur */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
