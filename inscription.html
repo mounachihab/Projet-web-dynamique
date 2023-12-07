@@ -7,59 +7,65 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="inscription.css">
   <script type="text/javascript" src="inscription.js"></script>
-  <title>ECE In - Connexion</title>
+  <title>ECE In - Inscription</title>
 </head>
 
 <body>
-  <br>
-  <br>
+<br>
+<br>
 
-  <div id="wrapper">
-    <div id="baniere">
-      <h3>
-        Inscription à L'ECE in.
-      </h3>
-    </div>
-
-    <br>
-
-    <form action="mot_de_passe.php" method="post">
-
-      <label for="email">E-mail :</label>
-      <input type="email" id="email" name="email" required>
-
-      <br>
-      <br>
-
-      <label for="username">Nom d'utilisateur :</label>
-      <input type="text" id="username" name="username" required>
-
-      <br>
-      <br>
-
-      <label for="password">Mot de passe :</label>
-      <input type="password" id="password" name="password" required>
-
-      <br>
-      <br>
-
-      <input type="submit" value="Inscription">
-
-    </form>
-    <br>
-    <div style="text-align: right; padding-right: 100px">
-      <a href="connexion.html"> Déjà inscrit ?</a>
-    </div>
+<div id="wrapper">
+  <div id="baniere">
+    <h3>
+      Inscription à L'ECE in.
+    </h3>
   </div>
 
   <br>
-  <br>
 
-  <!-- Copyright -->
-  <div id="copy">
-    <p>
-      &copy; 2023 ECE In. Tous droits réservés.
-    </p>
+  <form action="inscription.php" method="post">
+
+    <label for="email">E-mail :</label>
+    <input type="email" id="email" name="email" required>
+
+    <br>
+    <br>
+
+    <label for="lastname">Nom :</label>
+    <input type="text" id="lastname" name="lastname" required>
+
+    <br>
+    <br>
+
+    <label for="firstname">Prénom :</label>
+    <input type="text" id="firstname" name="firstname" required>
+
+    <br>
+    <br>
+
+    <label for="password">Mot de passe :</label>
+    <input type="password" id="password" name="password" required>
+
+    <br>
+    <br>
+
+    <input type="submit" value="Inscription">
+
+  </form>
+  <br>
+  <div style="text-align: right; padding-right: 100px">
+    <a href="connexion_interface.php"> Déjà inscrit ?</a>
+  </div>
+</div>
+
+<br>
+<br>
+
+<!-- Copyright -->
+<div id="copy">
+  <p>
+    &copy; 2023 ECE In. Tous droits réservés.
+  </p>
 </div>
 </body>
 </html>
