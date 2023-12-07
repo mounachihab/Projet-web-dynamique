@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="accueil.css">
+    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"> </script>
     <script type="text/javascript" src="accueil.js"></script>
     <title>ECE In - Home</title>
 </head>
@@ -21,7 +22,7 @@
                  onclick="afficherMessageIntro()"/>
         </div>
 
-        <!-- L'intro de l'ece in si on appuie sur le logo -->
+        <!-- si on appuie sur le logo : -->
         <div id="overlayContainer">
             <div id="messageOverlay">
                 <h3 style="color: #0a7677">
@@ -40,6 +41,7 @@
                     des vidéos, et même votre curriculum vitae.
                 </p>
                 <button onclick="cacherMessageIntro()">Fermer</button>
+
             </div>
         </div>
 
@@ -51,15 +53,24 @@
             Nom compte
         </div>
 
-        <!-- Partie du boutons de déconnexion -->
+        <!-- Partie du boutons de reglage et du boutons de déconnexion -->
         <div id="deco">
-            <a href="connexion.html">
-                <img src="bouton_deconnexion.png"
-                 alt="deconnexion"
-                 width="50"
+
+            <a href="reglages.html">
+            <img src="bouton_reglages.png"
+                 alt="reglages"
+                 width="54"
                  height=""/>
             </a>
+
+            <a href="connexion.html">
+                <img src="bouton_deconnexion.png"
+                     alt="deconnexion"
+                     width="50"
+                     height=""/>
+            </a>
         </div>
+
     </div>
 
     <!-- Partie du bandeau de couleur -->
@@ -69,42 +80,42 @@
     <div id="wrapper">
         <!-- Partie des boutons -->
         <div id="boutons">
-            <a href=".html">
+            <a href="accueil.html"> <!-- lien vers accueil -->
                 <img src="bouton_accueil_1.png"
                                  alt="accueil"
                                  width="150"
                                  height=""/>
             </a>
 
-            <a href=".html">
+            <a href=""> <!-- lien vers mon reseau -->
                 <img src="bouton_mon_reseau_0.png"
                      alt="mon resau"
                      width="150"
                      height=""/>
             </a>
 
-            <a href=".html">
+            <a href="vous.html"> <!-- lien vers vous -->
                 <img src="bouton_vous_0.png"
                      alt="vous"
                      width="150"
                      height=""/>
             </a>
 
-            <a href=".html">
+            <a href=""> <!-- lien vers notifications -->
                 <img src="bouton_notification_0.png"
                      alt="notifications"
                      width="150"
                      height=""/>
             </a>
 
-            <a href=".html">
+            <a href=""> <!-- lien vers messagerie -->
                 <img src="bouton_messagerie_0.png"
                      alt="messagerie"
                      width="150"
                      height=""/>
             </a>
 
-            <a href=".html">
+            <a href=""> <!-- lien vers emplois -->
                 <img src="bouton_emplois_0.png"
                                  alt="emplois"
                                  width="150"
@@ -134,10 +145,23 @@
         </div>
 
         <!-- Carousel -->
-        <div id="carrousel">
+        <div id="bloc_carrousel">
             <h3>
                 Les images de la semaine
             </h3>
+
+            <div id="carrousel">
+                <ul>
+                    <li><img src="eve_1.jpeg" alt="Image 1" width="" height="250"/></li>
+                    <li><img src="eve_2.jpeg" alt="Image 2" width="" height="250"/></li>
+                    <li><img src="eve_3.png" alt="Image 3" width="" height="250"/></li>
+                    <li><img src="eve_4.png" alt="Image 4" width="" height="250"/></li>
+                </ul>
+            </div>
+
+            <!-- Bontons avant après -->
+            <button id="prev" class="carouselBtn">Précédent</button>
+            <button id="next" class="carouselBtn">&nbspSuivant&nbsp</button>
 
         </div>
 
@@ -160,15 +184,20 @@
             <h3>
                 Contactez-nous !
             </h3>
-            Email: <a href="mailto : admin@ecein.com">admin@ecein.com</a> <br>
-            Téléphone: <a href="+33 1 23 45 67 89">+33 1 23 45 67 89</a> <br>
-            Adresse: <a href="https://www.google.com/maps/place/ECE+-+Ecole+d'ing%C3%A9nieurs+-+Campus+de+Paris/@48.8512252,2.285991,17z/data=!3m2!4b1!5s0x47e670049820700f:0x5e9c35374e6fe5df!4m6!3m5!1s0x47e6701b4f58251b:0x167f5a60fb94aa76!8m2!3d48.8512252!4d2.2885659!16s%2Fg%2F11dyjwlyp?entry=ttu">10 Rue Sextius Michel, 75015 Paris, France</a></p>
+            <p>
+                <i>Email :</i> <a href="mailto : admin@ecein.com" style="color: #0a7677">admin@ecein.com</a> <br>
+                <i>Téléphone : </i><a href="+33 1 23 45 67 89" style="color: #0a7677">+33 1 23 45 67 89</a> <br>
+                <i>Adresse : </i> 10 Rue Sextius Michel, 75015 Paris
+            </p>
 
             <!-- GG maps -->
-            <img src="plan_ece.jpg"
-                 alt="Carte de localisation"
-                 width=""
-                 height=""/>
+            <a href="https://www.google.com/maps/place/ECE+-+Ecole+d'ing%C3%A9nieurs+-+Campus+de+Paris/@48.8512252,2.285991,17z/data=!3m2!4b1!5s0x47e670049820700f:0x5e9c35374e6fe5df!4m6!3m5!1s0x47e6701b4f58251b:0x167f5a60fb94aa76!8m2!3d48.8512252!4d2.2885659!16s%2Fg%2F11dyjwlyp?entry=ttu">
+                <img src="plan_ece.jpg"
+                     alt="Carte de localisation"
+                     width="300"
+                     height=""/>
+            </a>
+
         </div>
     </div>
 
