@@ -1,3 +1,5 @@
+/* CSS COUMMUN POUR TOUTE LES PAGES*/
+
 /* Définition des styles pour la page Accueil*/
 body {
     background-color: #0a7677;
@@ -70,16 +72,48 @@ body {
     padding-top: 6px;
 }
 
-/* Styles pour l'intro du site */
-#intro {
-    width: 1200px; /* Largeur fixe */
-    max-width: 1150px; /* Largeur maximale */
-    margin: auto; /* Centrer horizontalement */
-    padding-left: 2%; /* Espacement à gauche */
-    padding-right: 2%; /* Espacement à droite */
-    background-color: #FFF;
-    border-radius: 10px; /* Bordure arrondie */
+/* Styles pour le copyright */
+#copy {
+    background-color: #a6cccc;
+    clear: both; /* Annule le flottement à gauche et à droite, permettant à "copy" de se positionner sous les éléments précédents */
+    text-align: center; /* Alignement du texte au centre */
 }
+
+
+
+/* Styles pour l'intro afficher dans une boite */
+
+#overlayContainer {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+#messageOverlay {
+    background: #fff;
+    width: 60%; /* largeur */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+
+
+
+
+
+
+
+
+/* POUR LA PAGE ACCUEIL */
 
 /* Styles pour les evenement de la semaine */
 #even_semaine {
@@ -158,18 +192,6 @@ body {
 
 
 
-
-/* Styles pour le copyright */
-#copy {
-    background-color: #a6cccc;
-    clear: both; /* Annule le flottement à gauche et à droite, permettant à "copy" de se positionner sous les éléments précédents */
-    text-align: center; /* Alignement du texte au centre */
-}
-
-
-
-
-
 /* Styles pour le défilement des informations */
 .scrollable-container {
     width: 393px; /*largeur de l'élément */
@@ -190,28 +212,3 @@ body {
 
 
 
-
-
-/* Styles pour l'intro afficher dans une boite */
-
-#overlayContainer {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 1;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-}
-
-#messageOverlay {
-    background: #fff;
-    width: 60%; /* largeur */
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-}
