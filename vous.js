@@ -138,14 +138,135 @@ function afficherInput() {
             envoyerBtn.style.display = "inline-block";
         }
 
-      
+ /*     
 function afficherNomFichier() {
-            var fileInput = document.getElementById("fileInput");
-            var nomFichier = fileInput.files[0].name;
+    var fileInput = document.getElementById("fileInput");
+    var nomFichier = fileInput.files[0].name;
 
-            // Mettre à jour le texte de l'élément existant pour afficher le nom du fichier
-            var listeFichiers = document.getElementById("listeFichiers");
-            listeFichiers.innerHTML = "Fichier sélectionné : " + nomFichier;
-        }
+    // Mettre à jour le texte de l'élément existant pour afficher le nom du fichier
+    var listeFichiers = document.getElementById("listeFichiers");
+    listeFichiers.innerHTML = "Fichier sélectionné : " + nomFichier;
+    // Ajouter le fichier au tableau de fichiers dans le stockage local
+    var fichiersEnvoyes = JSON.parse(localStorage.getItem("fichiersEnvoyes")) || [];
+    fichiersEnvoyes.push(nomFichier);
+    localStorage.setItem("fichiersEnvoyes", JSON.stringify(fichiersEnvoyes));
+    // Mettre à jour la liste des fichiers
+    chargerListeFichiers();
+}
 
-      
+
+// Fonction pour charger la liste des fichiers après le rechargement de la page
+function chargerListeFichiers() {
+    var listeFichiers = document.getElementById("listeFichiers");
+    // Supprimer le contenu actuel de la liste
+    listeFichiers.innerHTML = "";
+    
+    // Charger la liste depuis le stockage local
+    var fichiersEnvoyes = JSON.parse(localStorage.getItem("fichiersEnvoyes")) || [];
+
+    // Mettre à jour la liste
+   
+    for (var i = 0; i < fichiersEnvoyes.length; i++) {
+        var fichier = fichiersEnvoyes[i];
+        var nouveauFichier = document.createElement("div");
+        nouveauFichier.textContent = fichier;
+        listeFichiers.appendChild(nouveauFichier);
+        // Bouton de suppression
+        var boutonSupprimer = document.createElement("button");
+        boutonSupprimer.textContent = "Supprimer";
+        boutonSupprimer.setAttribute("data-index", i); // Ajouter l'index comme attribut pour identifier le fichier
+
+        // Ajouter un gestionnaire d'événements pour le bouton de suppression
+        boutonSupprimer.addEventListener("click", function (event) {
+            var index = event.target.getAttribute("data-index");
+            // Appeler la fonction de suppression avec l'index du fichier
+            supprimerFichier(index);
+        });
+        // Ajouter le bouton de suppression au conteneur du fichier
+        fichierContainer.appendChild(boutonSupprimer);
+
+        // Ajouter le conteneur du fichier à la liste
+        listeFichiers.appendChild(fichierContainer);    
+
+    }
+}
+
+// Appeler la fonction de chargement lors du chargement de la page
+window.onload = chargerListeFichiers;*/
+
+// Fonction pour mettre à jour l'affichage du fichier sélectionné
+function afficherNomFichier() {
+    var fileInput = document.getElementById("fileInput");
+    var nomFichier = fileInput.files[0].name;
+
+    // Mettre à jour le texte de l'élément existant pour afficher le nom du fichier
+    var listeFichiers = document.getElementById("listeFichiers");
+    listeFichiers.innerHTML = "Fichier sélectionné : " + nomFichier;
+
+    // Ajouter le fichier au tableau de fichiers dans le stockage local
+    var fichiersEnvoyes = JSON.parse(localStorage.getItem("fichiersEnvoyes")) || [];
+    fichiersEnvoyes.push(nomFichier);
+    localStorage.setItem("fichiersEnvoyes", JSON.stringify(fichiersEnvoyes));
+
+    // Mettre à jour la liste des fichiers
+    chargerListeFichiers();
+}
+
+// Fonction pour charger la liste des fichiers après le rechargement de la page
+function chargerListeFichiers() {
+    var listeFichiers = document.getElementById("listeFichiers");
+
+    // Supprimer le contenu actuel de la liste
+    listeFichiers.innerHTML = "";
+
+    // Charger la liste depuis le stockage local
+    var fichiersEnvoyes = JSON.parse(localStorage.getItem("fichiersEnvoyes")) || [];
+
+    // Mettre à jour la liste
+    for (var i = 0; i < fichiersEnvoyes.length; i++) {
+        var fichier = fichiersEnvoyes[i];
+
+        // Créer un conteneur pour chaque fichier avec un bouton de suppression
+        var fichierContainer = document.createElement("div");
+
+        // Contenu du fichier avec le nom
+        fichierContainer.textContent = fichier;
+
+        // Bouton de suppression
+        var boutonSupprimer = document.createElement("button");
+        boutonSupprimer.textContent = "Supprimer";
+        boutonSupprimer.setAttribute("data-index", i); // Ajouter l'index comme attribut pour identifier le fichier
+
+        // Ajouter un gestionnaire d'événements pour le bouton de suppression
+        boutonSupprimer.addEventListener("click", function (event) {
+            var index = event.target.getAttribute("data-index");
+            // Appeler la fonction de suppression avec l'index du fichier
+            supprimerFichier(index);
+        });
+
+        // Ajouter le bouton de suppression au conteneur du fichier
+        fichierContainer.appendChild(boutonSupprimer);
+
+        // Ajouter le conteneur du fichier à la liste
+        listeFichiers.appendChild(fichierContainer);
+    }
+}
+
+// Fonction pour supprimer un fichier de la liste
+function supprimerFichier(index) {
+    var fichiersEnvoyes = JSON.parse(localStorage.getItem("fichiersEnvoyes")) || [];
+
+    // Supprimer le fichier à l'index spécifié
+    fichiersEnvoyes.splice(index, 1);
+
+    // Mettre à jour le stockage local
+    localStorage.setItem("fichiersEnvoyes", JSON.stringify(fichiersEnvoyes));
+
+    // Recharger la liste mise à jour
+    chargerListeFichiers();
+}
+
+// Appeler la fonction de chargement lors du chargement de la page
+window.onload = chargerListeFichiers;
+
+        
