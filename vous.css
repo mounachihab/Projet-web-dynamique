@@ -1,0 +1,181 @@
+/* Définition des styles pour toutes les pages !!!!*/ 
+
+body {
+    background-color: #0a7677;
+    margin: 0; /* Aucune marge extérieure */
+    padding: 0; /* Aucun remplissage intérieur */
+    font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
+}
+/* Styles pour les boutons de direction */
+#boutons{
+    cursor: pointer;
+    padding-top: 6px;
+}
+
+/* Styles pour l'intro afficher dans une boite */
+
+#overlayContainer {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+#messageOverlay {
+    background: #fff;
+    width: 60%; /* largeur */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+
+/* Définition des styles pour la bannière */
+#banderole {
+    background-color: #a6cccc;
+    padding-bottom: 10px; /* Espacement en bas */
+    padding-top: 20px; /* Espacement en haut */
+    display: flex; /* Utilisation du modèle de boîte flexible */
+    justify-content: space-between; /* Espace équitable entre les éléments enfants */
+}
+
+/* Styles spécifiques pour le logo dans la bannière */
+#logo {
+    padding-left: 220px; /* Espacement à gauche */
+    cursor: pointer; /* Curseur pointer au survol */
+}
+
+/* Styles spécifiques pour le titre dans la bannière */
+#titre {
+    padding-top: 23px; /* Espacement en haut */
+    padding-right: 190px; /* Espacement à droite */
+}
+
+/* Styles pour la barre en dessous de la bannière */
+#couleur{
+    background-color: #585858;
+    padding: 10px; /* Remplissage intérieur */
+}
+
+/* Styles pour le nom avec lequel l'utilisateur est connecté */
+#nomCompte {
+    padding-top: 16px; /* Espacement en haut */
+}
+
+/* Styles pour le logo deconnexion */
+#deco {
+    cursor: pointer; /* Curseur pointer au survol */
+    float: right; /* Flotter à droite */
+    padding-right: 240px; /* Espacement à droite */
+    padding-top: 6px; /* Espacement en haut */
+}
+
+/* Styles pour le copyright */
+#copy {
+    background-color: #a6cccc;
+    clear: both; /* Annule le flottement à gauche et à droite, permettant à "copy" de se positionner sous les éléments précédents */
+    text-align: center; /* Alignement du texte au centre */
+    width: 100%; /* Utiliser toute la largeur disponible */    position: absolute; /* Position absolue par rapport au bas */
+    bottom: 0; /* Aligner en bas */
+     position: absolute;
+    bottom: 0;
+    left: 0; /* Ajustement pour démarrer depuis le bord gauche */
+    padding: 10px;
+}
+
+
+
+
+
+
+/*partie propre a la page "vous"*/
+
+/* Définition des styles pour le conteneur principal (celui où les bloc sont stocke) */
+#wrapper {
+    width: 1200px; /* Largeur fixe */
+    height: 1350px; /* Hauteur fixe */
+    min-width: 1200px; /* Largeur minimale */
+    margin: auto; /* Centrer horizontalement */
+    padding: 10px; /* Remplissage intérieur */
+    text-align: center; /* Alignement du texte au centre */
+}
+
+/* pr le style de la page avec photo */
+#pagephoto {
+    background-color: #FFF;
+    border-radius: 10px; /* Bordure arrondie */
+    width: 800px; /* Largeur fixe */
+    height: 700px; /* Hauteur fixe */
+    text-align: center; /* Alignement du texte au centre */
+    cursor: pointer; /* Curseur pointer au survol */
+    float: left; /* Flotter à gauche */
+    margin-top: 15px; /* Espacement en haut */
+}
+
+/* pr le style de la page avec  les docs */
+#vosdocs {
+    background-color: #FFF;
+    border-radius: 10px; /* Bordure arrondie */
+    width: 1200px; /* Largeur fixe */
+    height: 300px; /* Hauteur fixe */
+    text-align: center; /* Alignement du texte au centre */
+    cursor: pointer; /* Curseur pointer au survol */
+    float: left; /* Flotter à droite */
+    
+    margin-top: 30px; /* Espacement en haut */
+    margin-bottom: 30px;
+}
+
+/* pr le style de la page avec les formations*/
+
+#formations {
+    background-color: #FFF;
+    border-radius: 10px; /* Bordure arrondie */
+    width: 385px; /* Largeur fixe */
+    height: 700px; /* Hauteur fixe */
+    text-align: center; /* Alignement du texte au centre */
+    cursor: pointer; /* Curseur pointer au survol */
+    float: left; /* Flotter à droite */
+    margin-top: 15px; /* Espacement en haut */
+    margin-left: 15px; /* Espacement a gauche */
+
+}
+.button-container {
+            width: 200px; /* Ajustez la largeur selon vos besoins */
+            margin: 0 auto; /* Pour centrer les boutons dans le conteneur */
+}
+
+#conteneurSousBlocs {
+    display: flex;
+}
+
+.fixed-width-button {
+    width: 200px; /* Même largeur que le conteneur pour assurer la stabilité */
+}
+#listeFichiers {
+            margin-top: 10px;
+}
+
+#ssblocgauche {
+            width: 550px;
+            height:200px;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin: 10px;
+}
+
+#ssblocdroite {
+            width: 550px;
+            height: 200px;
+            margin-left: 15px;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin: 10px;
+}
