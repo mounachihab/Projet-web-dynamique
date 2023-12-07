@@ -1,214 +1,212 @@
-/* CSS COUMMUN POUR TOUTE LES PAGES*/
+<!DOCTYPE html>
+<html lang="fr">
+<!-- -->
 
-/* Définition des styles pour la page Accueil*/
-body {
-    background-color: #0a7677;
-    margin: 0; /* Aucune marge extérieure */
-    padding: 0; /* Aucun remplissage intérieur */
-    font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
-}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="accueil.css">
+    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"> </script>
+    <script type="text/javascript" src="accueil.js"></script>
+    <title>ECE In - Home</title>
+</head>
 
+<body>
+    <!-- Partie du logo -->
+    <div id="banderole">
+        <div id="logo">
+            <img src="logo.png"
+                 alt="logo ECE in"
+                 width="260"
+                 height=""
+                 onclick="afficherMessageIntro()"/>
+        </div>
 
+        <!-- si on appuie sur le logo : -->
+        <div id="overlayContainer">
+            <div id="messageOverlay">
+                <h3 style="color: #0a7677">
+                    <u>Qu'est ce qu'ECE in ?</u>
+                </h3>
+                <p style="text-align: left">
+                    Bienvenue sur le réseau social professionnel dédié à la communauté ECE Paris ! <br><br>
 
+                    Que vous soyez étudiant/e de licence, master ou doctorat, apprenti/e dans une entreprise, en quête d'un
+                    stage ou peut-être un/e enseignant/e ou employé/e de l’école à la recherche de partenaires pour un projet
+                    de recherche, ce site web est conçu pour répondre aux besoins de chacun. Notre plate-forme sociale offre
+                    une approche professionnelle, permettant à chacun de prendre en main sa vie professionnelle, de découvrir
+                    de nouvelles opportunités, et de se connecter avec d'autres passionnés partageant des objectifs similaires. <br><br>
 
+                    Votre espace personnel sur le site vous permettra de publier des statuts, des évènements, des photos,
+                    des vidéos, et même votre curriculum vitae.
+                </p>
+                <button onclick="cacherMessageIntro()">Fermer</button>
 
-/* Définition des styles pour la bannière */
-#banderole {
-    background-color: #a6cccc;
-    padding-bottom: 10px; /* Espacement en bas */
-    padding-top: 20px; /* Espacement en haut */
-    display: flex; /* Utilisation du modèle de boîte flexible */
-    justify-content: space-between; /* Espace équitable entre les éléments enfants */
-}
+            </div>
+        </div>
 
-/* Styles spécifiques pour le logo dans la bannière */
-#logo {
-    padding-left: 220px; /* Espacement à gauche */
-    cursor: pointer; /* Curseur pointer au survol */
-}
+        <div id="titre">
+            <h2>ECE In - Social Media Professionnel de l'ECE Paris</h2>
+        </div>
 
-/* Styles spécifiques pour le titre dans la bannière */
-#titre {
-    padding-top: 23px; /* Espacement en haut */
-    padding-right: 190px; /* Espacement à droite */
-}
+        <div id="nomCompte">
+            Nom compte
+        </div>
 
-/* Styles pour la barre en dessous de la bannière */
-#couleur{
-    background-color: #585858;
-    padding: 10px; /* Remplissage intérieur */
-}
+        <!-- Partie du boutons de reglage et du boutons de déconnexion -->
+        <div id="deco">
 
-/* Styles pour le nom avec lequel l'utilisateur est connecté */
-#nomCompte {
-    padding-top: 16px; /* Espacement en haut */
-}
+            <a href="reglages.html">
+            <img src="bouton_reglages.png"
+                 alt="reglages"
+                 width="54"
+                 height=""/>
+            </a>
 
-/* Styles pour le logo deconnexion */
-#deco {
-    cursor: pointer; /* Curseur pointer au survol */
-    float: right; /* Flotter à droite */
-    padding-right: 240px; /* Espacement à droite */
-    padding-top: 6px; /* Espacement en haut */
-}
+            <a href="connexion.html">
+                <img src="bouton_deconnexion.png"
+                     alt="deconnexion"
+                     width="50"
+                     height=""/>
+            </a>
+        </div>
 
+    </div>
 
+    <!-- Partie du bandeau de couleur -->
+    <div id="couleur"></div>
 
+    <!-- Partie du wrapper, avec toutes les infos de la page -->
+    <div id="wrapper">
+        <!-- Partie des boutons -->
+        <div id="boutons">
+            <a href="accueil.html"> <!-- lien vers accueil -->
+                <img src="bouton_accueil_1.png"
+                                 alt="accueil"
+                                 width="150"
+                                 height=""/>
+            </a>
 
+            <a href=""> <!-- lien vers mon reseau -->
+                <img src="bouton_mon_reseau_0.png"
+                     alt="mon resau"
+                     width="150"
+                     height=""/>
+            </a>
 
-/* Définition des styles pour le conteneur principal (celui où les bloc sont stocke) */
-#wrapper {
-    width: 1200px; /* Largeur fixe */
-    height: 1350px; /* Hauteur fixe */
-    min-width: 1200px; /* Largeur minimale */
-    margin: auto; /* Centrer horizontalement */
-    padding: 10px; /* Remplissage intérieur */
-    text-align: center; /* Alignement du texte au centre */
-}
+            <a href="vous.html"> <!-- lien vers vous -->
+                <img src="bouton_vous_0.png"
+                     alt="vous"
+                     width="150"
+                     height=""/>
+            </a>
 
-/* Styles pour les boutons de direction */
-#boutons{
-    cursor: pointer;
-    padding-top: 6px;
-}
+            <a href=""> <!-- lien vers notifications -->
+                <img src="bouton_notification_0.png"
+                     alt="notifications"
+                     width="150"
+                     height=""/>
+            </a>
 
-/* Styles pour le copyright */
-#copy {
-    background-color: #a6cccc;
-    clear: both; /* Annule le flottement à gauche et à droite, permettant à "copy" de se positionner sous les éléments précédents */
-    text-align: center; /* Alignement du texte au centre */
-}
+            <a href=""> <!-- lien vers messagerie -->
+                <img src="bouton_messagerie_0.png"
+                     alt="messagerie"
+                     width="150"
+                     height=""/>
+            </a>
 
-
-
-/* Styles pour l'intro afficher dans une boite */
-
-#overlayContainer {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 1;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-}
-
-#messageOverlay {
-    background: #fff;
-    width: 60%; /* largeur */
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-}
-
-
-
-
-
-
-
-
-
-/* POUR LA PAGE ACCUEIL */
-
-/* Styles pour les evenement de la semaine */
-#even_semaine {
-    background-color: #FFF;
-    border-radius: 10px; /* Bordure arrondie */
-    width: 797px; /* Largeur fixe */
-    height: 390px; /* Hauteur fixe */
-    text-align: center; /* Alignement du texte au centre */
-    cursor: pointer; /* Curseur pointer au survol */
-    float: left; /* Flotter à gauche */
-    margin-top: 15px; /* Espacement en haut */
-}
-
-/* Styles pour evenement de vous et entourage */
-#even_vous {
-    background-color: #FFF;
-    border-radius: 10px; /* Bordure arrondie */
-    width: 388px; /* Largeur fixe */
-    height: 794px; /* Hauteur fixe */
-    text-align: center; /* Alignement du texte au centre */
-    cursor: pointer; /* Curseur pointer au survol */
-    float: right; /* Flotter à droite */
-    margin-left: 15px; /* Espacement à gauche */
-    margin-top: 15px; /* Espacement en haut */
-    margin-bottom: 15px; /* Espacement en bas */
-}
-
-/* Styles pour le carrousel */
-#carrousel {
-    background-color: #FFF;
-    border-radius: 10px; /* Bordure arrondie */
-    width: 797px; /* Largeur fixe */
-    height: 390px; /* Hauteur fixe */
-    text-align: center; /* Alignement du texte au centre */
-    margin-top: 15px; /* Espacement en haut */
-    margin-bottom: 15px; /* Espacement en bas */
-    float: left; /* Flotter à gauche */
-    clear: left; /* Permet de s'assurer que le bloc est après les blocs précédents */
-}
-
-/* Styles pour l'ajour de photo */
-#photo {
-    background-color: #FFF;
-    border-radius: 10px; /* Bordure arrondie */
-    width: 392px; /* Largeur fixe */
-    height: 200px; /* Hauteur fixe */
-    text-align: center; /* Alignement du texte au centre */
-    cursor: pointer; /* Curseur pointer au survol */
-    float: left; /* Flotter à gauche */
-    clear: left; /* Permet de s'assurer que le bloc est après les blocs précédents */
-}
-
-/* Styles pour l'ajour de cv */
-#cv {
-    background-color: #FFF;
-    border-radius: 10px; /* Bordure arrondie */
-    width: 392px; /* Largeur fixe */
-    height: 200px; /* Hauteur fixe */
-    cursor: pointer; /* Curseur pointer au survol */
-    float: left; /* Flotter à gauche */
-    margin-left: 15px; /* Espacement à gauche */
-    margin-bottom: 15px; /* Espacement en bas */
-    text-align: left; /* Alignement du texte à gauche */
-}
-
-/* Styles pour le plan et le coordonnées*/
-#plan {
-    background-color: #FFF;
-    border-radius: 10px; /* Bordure arrondie */
-    width: 388px; /* Largeur fixe */
-    height: 200px; /* Hauteur fixe */
-    float: right; /* Flotter à droite */
-    text-align: left; /* Alignement du texte à gauche */
-}
+            <a href=""> <!-- lien vers emplois -->
+                <img src="bouton_emplois_0.png"
+                                 alt="emplois"
+                                 width="150"
+                                 height=""/>
+            </a>
 
 
+        </div>
 
+        <!-- Evenement semaine -->
+        <div id="even_semaine">
+            <div class="scrollable-container">
+                <h3>
+                    Évènements de la semaine
+                </h3>
 
-/* Styles pour le défilement des informations */
-.scrollable-container {
-    width: 393px; /*largeur de l'élément */
-    height: 390px; /* hauteur de l'élément */
-    overflow-y: scroll; /* barre de défilement verticale */
-    overflow-x: hidden; /* barre de défilement horizontale */
-}
+            </div>
+        </div>
 
+        <!-- Evenement vous+resaux -->
+        <div id="even_vous">
+            <div class="scrollable-container">
+                <h3>
+                    Évènements de vous et votre réseaux
+                </h3>
+            </div>
+        </div>
 
+        <!-- Carousel -->
+        <div id="bloc_carrousel">
+            <h3>
+                Les images de la semaine
+            </h3>
 
+            <div id="carrousel">
+                <ul>
+                    <li><img src="eve_1.jpeg" alt="Image 1" width="" height="250"/></li>
+                    <li><img src="eve_2.jpeg" alt="Image 2" width="" height="250"/></li>
+                    <li><img src="eve_3.png" alt="Image 3" width="" height="250"/></li>
+                    <li><img src="eve_4.png" alt="Image 4" width="" height="250"/></li>
+                </ul>
+            </div>
 
+            <!-- Bontons avant après -->
+            <button id="prev" class="carouselBtn">Précédent</button>
+            <button id="next" class="carouselBtn">&nbspSuivant&nbsp</button>
 
-/* Styles pour les paragraphes à l'intérieur des differents éléments */
-#cv p {
-    padding-left: 13px; /* Espacement à gauche du paragraphe */
-}
+        </div>
 
+        <!-- Publier Photo -->
+        <div id="photo">
+            <h3>
+                Publiez une photo
+            </h3>
+        </div>
 
+        <!-- Publier CV -->
+        <div id="cv">
+            <h3>
+                Publiez ou modifiez votre cv
+            </h3>
+        </div>
 
+        <!-- Coordonne -->
+        <div id="plan">
+            <h3>
+                Contactez-nous !
+            </h3>
+            <p>
+                <i>Email :</i> <a href="mailto : admin@ecein.com" style="color: #0a7677">admin@ecein.com</a> <br>
+                <i>Téléphone : </i><a href="+33 1 23 45 67 89" style="color: #0a7677">+33 1 23 45 67 89</a> <br>
+                <i>Adresse : </i> 10 Rue Sextius Michel, 75015 Paris
+            </p>
 
+            <!-- GG maps -->
+            <a href="https://www.google.com/maps/place/ECE+-+Ecole+d'ing%C3%A9nieurs+-+Campus+de+Paris/@48.8512252,2.285991,17z/data=!3m2!4b1!5s0x47e670049820700f:0x5e9c35374e6fe5df!4m6!3m5!1s0x47e6701b4f58251b:0x167f5a60fb94aa76!8m2!3d48.8512252!4d2.2885659!16s%2Fg%2F11dyjwlyp?entry=ttu">
+                <img src="plan_ece.jpg"
+                     alt="Carte de localisation"
+                     width="300"
+                     height=""/>
+            </a>
+
+        </div>
+    </div>
+
+    <!-- Copyright -->
+    <div id="copy">
+        <p>
+            &copy; 2023 ECE In. Tous droits réservés.
+        </p>
+    </div>
+
+</body>
+</html>
