@@ -1,5 +1,31 @@
 
 <?php
+//info pour la connection
+$db_host = '127.0.0.1';
+$db_user = 'root';
+$db_password = 'root';
+$db_db = 'ece';
+$db_port = 8889;
+
+// on se connecte
+$mysqli = new mysqli(
+    $db_host,
+    $db_user,
+    $db_password,
+    $db_db,
+    $db_port
+);
+
+// -----------------------------------------------------------------------------------------------
+// verification d'ouverture
+if ($mysqli->connect_error) { //si c'est pas le cas :
+    echo 'Errno : ' . $mysqli->connect_errno;
+    echo '<br>';
+    echo 'Error : ' . $mysqli->connect_error;
+    exit();
+}
+
+// -----------------------------------------------------------------------------------------------
 // Démarrer la session
 session_start();
 
@@ -11,6 +37,11 @@ if ($user_name == '') {
     header('Location: connexion.html');
     exit() ;
 }
+
+// recuperer les donners pour les afficher :
+$resultat = $mysqli->query("SELECT COUNT(ID) FROM utilisateurs");
+$data = $resultat->fetch_assoc();
+$nbr_membres = $data['COUNT(ID)'] ;
 
 ?>
 
@@ -35,12 +66,12 @@ if ($user_name == '') {
                  alt="logo ECE in"
                  width="260"
                  height=""
-                 onclick="afficherMessageIntro()"/>
+                 onclick="afficher_message_intro()"/>
         </div>
 
         <!-- si on appuie sur le logo : -->
-        <div id="overlayContainer">
-            <div id="messageOverlay">
+        <div id="container">
+            <div id="message_intro">
                 <h3 style="color: #0a7677">
                     <u>Qu'est ce qu'ECE in ?</u>
                 </h3>
@@ -56,7 +87,7 @@ if ($user_name == '') {
                     Votre espace personnel sur le site vous permettra de publier des statuts, des évènements, des photos,
                     des vidéos, et même votre curriculum vitae.
                 </p>
-                <button onclick="cacherMessageIntro()">Fermer</button>
+                <button onclick="cacher_message_intro()">Fermer</button>
 
             </div>
         </div>
@@ -65,9 +96,27 @@ if ($user_name == '') {
             <h2>ECE In - Social Media Professionnel de l'ECE Paris</h2>
         </div>
 
+        <div id="image_decembre_1">
+            <img id="image_dec_1"
+                 src=""
+                 width="250"
+                 height=""/>
+        </div>
+        <div id="image_decembre_2">
+            <img id="image_dec_2"
+                 src=""
+                 width="150"
+                 height=""/>
+        </div>
+
+        <div id="nbr_membre">
+            <b>Membres</b>
+            <?php echo $nbr_membres?>
+        </div>
+
         <div id="nomCompte">
             <?php echo "<img src='$photo' height='50' width=''>";?>
-
+            <p> </p>
             <?php echo $user_name; ?>
         </div>
 
@@ -98,7 +147,7 @@ if ($user_name == '') {
     <div id="wrapper">
         <!-- Partie des boutons -->
         <div id="boutons">
-            <a href="accueil.html"> <!-- lien vers accueil -->
+            <a href="accueil.php"> <!-- lien vers accueil -->
                 <img src="boutons/bouton_accueil_1.png"
                      alt="accueil"
                      width="150"
@@ -219,6 +268,14 @@ if ($user_name == '') {
             </a>
 
         </div>
+    </div>
+
+    <div id="retour_haut">
+        <img src="boutons/fleche_haut.png"
+             alt="retour en haut"
+             width="70"
+             height=""
+             onclick="retour_en_haut()"/>
     </div>
 
     <!-- Copyright -->

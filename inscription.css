@@ -11,9 +11,9 @@ body {
 /* Définition des styles pour le conteneur principal (celui où les bloc sont stocke) */
 #wrapper {
     background-color: #fff;
-    width: 900px; /* Largeur fixe */
+    max-width: 70%; /* Largeur max*/
     height: 580px; /* Hauteur fixe */
-    min-width: 900px; /* Largeur minimale */
+    min-height: 400px; /* Largeur minimale */
     margin: auto; /* Centrer horizontalement */
     text-align: center; /* Alignement du texte au centre */
     border-radius: 10px; /* Bordure arrondie */

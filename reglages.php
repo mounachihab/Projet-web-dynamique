@@ -35,7 +35,6 @@ $photo = $_SESSION['photo'];
 $id = $_SESSION['id'];
 
 // recuperer les donners pour les afficher :
-
 $resultat = $mysqli->query("SELECT nom FROM utilisateurs WHERE ID = '$id'");
 $data = $resultat->fetch_assoc();
 $nom = $data['nom'] ;
@@ -55,6 +54,15 @@ $civic = $data['civilite'] ;
 $resultat = $mysqli->query("SELECT email FROM utilisateurs WHERE ID = '$id'");
 $data = $resultat->fetch_assoc();
 $email = $data['email'] ;
+
+// recuperer les donners pour les afficher :
+$resultat = $mysqli->query("SELECT COUNT(ID) FROM utilisateurs");
+$data = $resultat->fetch_assoc();
+$nbr_membres = $data['COUNT(ID)'] ;
+
+if($date === "NULL") {
+    $date = 'YYYY';
+}
 ?>
 
 <!DOCTYPE html>
@@ -77,12 +85,12 @@ $email = $data['email'] ;
              alt="logo ECE in"
              width="260"
              height=""
-             onclick="afficherMessageIntro()"/>
+             onclick="afficher_message_intro()"/>
         </div>
 
         <!-- si on appuie sur le logo : -->
-        <div id="overlayContainer">
-            <div id="messageOverlay">
+        <div id="container">
+            <div id="message_intro">
                 <h3 style="color: #0a7677">
                     <u>Qu'est ce qu'ECE in ?</u>
                 </h3>
@@ -98,7 +106,7 @@ $email = $data['email'] ;
                     Votre espace personnel sur le site vous permettra de publier des statuts, des évènements, des photos,
                     des vidéos, et même votre curriculum vitae.
                 </p>
-                    <button onclick="cacherMessageIntro()">Fermer</button>
+                    <button onclick="cacher_message_intro()">Fermer</button>
             </div>
         </div>
 
@@ -106,8 +114,14 @@ $email = $data['email'] ;
             <h2>ECE In - Vos réglages</h2>
         </div>
 
+        <div id="nbr_membre">
+            <b>Membres</b>
+            <?php echo $nbr_membres?>
+        </div>
+
         <div id="nomCompte">
             <?php echo "<img src='$photo' height='50' width=''>";?>
+            <p> </p>
             <?php echo $user_name; ?>
         </div>
 
@@ -205,9 +219,9 @@ $email = $data['email'] ;
                 </div>
 
                 <div id="fromulaire_2">
-                    <label for="date">Date de naissance :</label>
+                    <label for="date">Année de naissance :</label>
                     <br>
-                    <input type="date" id="date" name="date" placeholder="<?php echo $date;?>">
+                    <input type="number" id="date" name="date" placeholder="<?php echo $date;?>" min="1910" max="2023" maxlength="4">
 
                     <br>
                     <br>
@@ -215,7 +229,7 @@ $email = $data['email'] ;
                     <label for="civilite">Civilité :</label>
                     <br>
                     <select name="civilite" id="civilite">
-                        <option value="NULL"> </option>
+                        <option value="NULL"> <?php echo $civic; ?> </option>
                         <option value="Mme">Mme</option>
                         <option value="Mr">Mr</option>
                     </select>

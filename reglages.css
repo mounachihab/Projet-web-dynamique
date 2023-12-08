@@ -15,22 +15,12 @@ body {
 /* Définition des styles pour la bannière */
 #banderole {
     background-color: #a6cccc;
-    padding-bottom: 10px; /* Espacement en bas */
-    padding-top: 20px; /* Espacement en haut */
+    padding-bottom: 1%; /* Espacement en bas */
+    padding-top: 1%; /* Espacement en haut */
     display: flex; /* Utilisation du modèle de boîte flexible */
-    justify-content: space-between; /* Espace équitable entre les éléments enfants */
-}
-
-/* Styles spécifiques pour le logo dans la bannière */
-#logo {
-    padding-left: 220px; /* Espacement à gauche */
-    cursor: pointer; /* Curseur pointer au survol */
-}
-
-/* Styles spécifiques pour le titre dans la bannière */
-#titre {
-    padding-top: 23px; /* Espacement en haut */
-    padding-right: 190px; /* Espacement à droite */
+    align-items: center;
+    text-align: center;
+    justify-content: space-evenly;
 }
 
 /* Styles pour la barre en dessous de la bannière */
@@ -39,29 +29,59 @@ body {
     padding: 10px; /* Remplissage intérieur */
 }
 
+/* Styles spécifiques pour le logo dans la bannière */
+#logo {
+    cursor: pointer; /* Curseur pointer au survol */
+    height: 120px;
+    width: 260px;
+}
+
+/* Styles spécifiques pour le titre dans la bannière */
+#titre {
+    height: 120px;
+    width: 710px;
+    align-items: center;
+    display: flex;
+    text-align: center;
+}
+
+#nbr_membre {
+    height: 120px;
+    width: 70px;
+    align-items: center;
+    display: flex;
+    text-align: center;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    align-content: center;
+}
+
 /* Styles pour le nom avec lequel l'utilisateur est connecté */
 #nomCompte {
-    padding-top: 16px; /* Espacement en haut */
+    float : right;
+    height: 120px;
+    width: 110px;
+    align-items: center;
 }
 
 /* Styles pour le logo deconnexion */
 #deco {
     cursor: pointer; /* Curseur pointer au survol */
-    float: right; /* Flotter à droite */
-    padding-right: 215px; /* Espacement à droite */
-    padding-top: 6px; /* Espacement en haut */
+    height: 120px;
+    width: 110px;
+    align-items: center;
+    display: flex;
 }
-
 
 
 /*-----------------------------------------------------------------------------------------*/
 /* Définition des styles pour le conteneur principal (celui où les bloc sont stocke) */
 #wrapper {
-    width: 1200px; /* Largeur fixe */
-    height: 750px; /* Hauteur fixe */
-    min-width: 1200px; /* Largeur minimale */
+    max-width: 1200px; /* Largeur max*/
+    height: 100%; /* Hauteur fixe */
+    min-height: 150px; /* Largeur minimale */
     margin: auto; /* Centrer horizontalement */
-    padding: 10px; /* Remplissage intérieur */
+    padding: 2%; /* Remplissage intérieur */
     text-align: center; /* Alignement du texte au centre */
 }
 
@@ -82,7 +102,7 @@ body {
 /*-----------------------------------------------------------------------------------------*/
 /* Styles pour l'introduction afficher dans une boite quand on appuie sur le logo */
 
-#overlayContainer {
+#container {
     display: none;
     position: fixed;
     top: 0;
@@ -96,7 +116,7 @@ body {
     text-align: center;
 }
 
-#messageOverlay {
+#message_intro {
     background: #fff;
     width: 60%; /* largeur */
     padding: 20px;
@@ -253,4 +273,37 @@ a {
 select {
     padding: 7px 27px;
     margin: 4px 0;
+}
+
+
+@media screen and (max-width: 1250px) {
+    #wrapper {
+        max-width: 680px; /* Largeur fixe */
+    }
+    #bloc_supprimer {
+        width: 100%; /* Largeur */
+        margin-right: 0; /* Espacement à droite */
+    }
+    #bloc_mdp {
+        width: 100%; /* Largeur */
+    }
+    #bloc_email {
+        width: 100%; /* Largeur */
+    }
+    #bloc_information {
+        width: 100%; /* Largeur */
+        height: 455px;
+    }
+    #fromulaire_1 {
+        text-align: center;
+        margin-left: 10px;
+        float: none;
+        width: auto;
+    }
+    #fromulaire_2 {
+        text-align: center;
+        margin-left: 10px;
+        float: none;
+        width: auto;
+    }
 }
