@@ -84,6 +84,7 @@ if ($mysqli) {
             if ($new_name != ''){
                 $_SESSION['user_name'] = $new_name;
             }
+
             $_SESSION['id'] = $id;
 
             // Redirection vers la page d'accueil

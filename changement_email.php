@@ -54,7 +54,7 @@ if ($mysqli) {
     if ($mysqli->query($sql) === TRUE) {
         echo "Données ajoutées avec succès";
         // Redirection vers la page d'accueil
-        header('Location: reglages.php');
+        header('Location: reglages.php?');
         exit();
     } else {
         header('Location: reglages.php');

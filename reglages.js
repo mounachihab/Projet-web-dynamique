@@ -1,13 +1,15 @@
 // Pour l'intro dans le logo
-function afficherMessageIntro() {
+function afficher_message_intro() {
     // Afficher la boîte de dialogue
-    document.getElementById("overlayContainer").style.display = "flex";
+    document.getElementById("container").style.display = "flex";
 }
 
-function cacherMessageIntro() {
+function cacher_message_intro() {
     // Cacher la boîte de dialogue
-    document.getElementById("overlayContainer").style.display = "none";
+    document.getElementById("container").style.display = "none";
 }
+
+
 
 
 // Pour supprimer le compte :
@@ -15,3 +17,4 @@ function redirigerVersPage() {
     // Redirection vers supprimer
     window.location.href = "supprimer.php";
 }
+
