@@ -109,15 +109,148 @@ body {
 /*-----------------------------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------------------------*/
 
-#bloc_reglage {
+#bloc_information {
     background-color: #FFF;
     border-radius: 10px; /* Bordure arrondie */
     width: 1200px; /* Largeur fixe */
-    height: 500px; /* Hauteur fixe */
+    height: 285px; /* Hauteur fixe */
     text-align: center; /* Alignement du texte au centre */
-    cursor: pointer; /* Curseur pointer au survol */
     float: right; /* Flotter à droite */
     margin-left: 15px; /* Espacement à gauche */
     margin-top: 15px; /* Espacement en haut */
-    margin-bottom: 15px; /* Espacement en bas */
+}
+
+#fromulaire_1 {
+    border-radius: 10px; /* Bordure arrondie */
+    width: 433px; /* Largeur fixe */
+    height: 165px; /* Hauteur fixe */
+    text-align: left;
+    margin-left: 150px;
+    float: left; /* Flotter à gauche */
+    margin-top: 2px; /* Espacement en haut */
+    clear: left; /* Permet de s'assurer que le bloc est après les blocs précédents */
+}
+
+#fromulaire_2 {
+    border-radius: 10px; /* Bordure arrondie */
+    width: 433px; /* Largeur fixe */
+    height: 165px; /* Hauteur fixe */
+    text-align: left;
+    margin-left: 70px;
+    float: right; /* Flotter à droite */
+    margin-top: 2px; /* Espacement en haut */
+}
+
+/*-----------------------------------------------------------------------------------------*/
+#bloc_email {
+    background-color: #FFF;
+    border-radius: 10px; /* Bordure arrondie */
+    width: 593px; /* Largeur fixe */
+    height: 185px; /* Hauteur fixe */
+    text-align: center; /* Alignement du texte au centre */
+    float: left; /* Flotter à gauche */
+    margin-top: 15px; /* Espacement en haut */
+    clear: left; /* Permet de s'assurer que le bloc est après les blocs précédents */
+}
+
+/*-----------------------------------------------------------------------------------------*/
+#bloc_mdp {
+    background-color: #FFF;
+    border-radius: 10px; /* Bordure arrondie */
+    width: 592px; /* Largeur fixe */
+    height: 185px; /* Hauteur fixe */
+    text-align: center; /* Alignement du texte au centre */
+    float: right; /* Flotter à droite */
+    margin-top: 15px; /* Espacement en haut */
+}
+
+/*-----------------------------------------------------------------------------------------*/
+#bloc_supprimer {
+    background-color: #FFF;
+    border-radius: 10px; /* Bordure arrondie */
+    width: 600px; /* Largeur fixe */
+    height: 150px; /* Hauteur fixe */
+    text-align: center; /* Alignement du texte au centre */
+    float: right; /* Flotter à droite */
+    margin-right: 300px; /* Espacement à droite */
+    margin-top: 30px; /* Espacement en haut */
+    margin-bottom: 30px; /* Espacement en bas */
+    clear: left; /* Permet de s'assurer que le bloc est après les blocs précédents */
+}
+
+#bloc_supprimer p {
+    text-align: left ;
+    margin-left: 15px;
+}
+
+
+
+/*-----------------------------------------------------------------------------------------*/
+/*-----------------------------------------------------------------------------------------*/
+/* Pour le formulaire : */
+
+#fromulaire_1 form {
+    max-width: 350px;
+    margin: 0 auto;
+}
+#fromulaire_1 input {
+    width: 35%;
+    padding: 7px;
+    margin: 4px 0;
+}
+
+/*-----------------------------------------------------------------------------------------*/
+#fromulaire_2 form {
+    max-width: 350px;
+    margin: 0 auto;
+}
+
+#fromulaire_2 input {
+    width: 35%;
+    padding: 7px;
+    margin: 4px 0;
+}
+
+/*-----------------------------------------------------------------------------------------*/
+#bloc_mdp form {
+    max-width: 350px;
+    margin: 0 auto;
+}
+
+#bloc_mdp input {
+    padding: 7px 27px;
+    margin: 4px 0;
+}
+
+/*-----------------------------------------------------------------------------------------*/
+#bloc_email form {
+    max-width: 350px;
+    margin: 0 auto;
+}
+
+#bloc_email input {
+    padding: 7px 27px;
+    margin: 4px 0;
+
+}
+
+
+/*-----------------------------------------------------------------------------------------*/
+input[type="submit"] {
+    width: 170px;
+    background-color: #0a7677;
+    color: white;
+    cursor: pointer;
+    padding: 7px;
+}
+
+/*-----------------------------------------------------------------------------------------*/
+a {
+    text-align: right;
+}
+
+
+select {
+    padding: 7px 27px;
+    margin: 4px 0;
 }
