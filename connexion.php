@@ -1,5 +1,4 @@
 <?php
-
 //info pour la connection
 $db_host = '127.0.0.1';
 $db_user = 'root';
@@ -16,7 +15,7 @@ $mysqli = new mysqli(
     $db_port
 );
 
-
+// -----------------------------------------------------------------------------------------------
 // verification d'ouverture
 if ($mysqli->connect_error) { //si c'est pas le cas :
     echo 'Errno : ' . $mysqli->connect_errno;
@@ -25,7 +24,7 @@ if ($mysqli->connect_error) { //si c'est pas le cas :
     exit();
 }
 
-
+// -----------------------------------------------------------------------------------------------
 //sinon
 echo 'Success: A proper connection to MySQL was made.';
 echo '<br>';
@@ -33,21 +32,17 @@ echo 'Host information: ' . $mysqli->host_info;
 echo '<br>';
 echo 'Protocol version: ' . $mysqli->protocol_version;
 
-
-
-
+// -----------------------------------------------------------------------------------------------
 // Récupérer les données du formulaire
 $email = isset($_POST["email"]) ? $mysqli->real_escape_string($_POST["email"]) : "";
 $password = isset($_POST["password"]) ? $mysqli->real_escape_string($_POST["password"]) : "";
-echo "mdp : $password";
-echo "email : $email" ;
 
+// -----------------------------------------------------------------------------------------------
 //Si la BDD existe
 if ($mysqli) {
     // Requête pour récupérer le mot de passe associé à l'email
     $sql = "SELECT mdp FROM utilisateurs WHERE email = '$email'";
     $result = $mysqli->query($sql);
-
 
     if (!$result) {
         die('Erreur dans la requête SQL : ' . $mysqli->error);
@@ -57,23 +52,41 @@ if ($mysqli) {
     $mdp_test = $data['mdp'];
 
 
-    if ($mdp_test == $password) {
+    // -----------------------------------------------------------------------------------------------
+    // Pour pouvoir envoyer l'ID aux autres pages
+    $res = $mysqli->query("SELECT ID FROM utilisateurs WHERE email = '$email'");
+    $data_res = $res->fetch_assoc();
+    $id = $data_res['ID'] ;
+
+    // -----------------------------------------------------------------------------------------------
+    // Pour pouvoir avoir le nom grace à l'ID
+    $resultat1 = $mysqli->query("SELECT prenom FROM utilisateurs WHERE ID = '$id'");
+    $data1 = $resultat1->fetch_assoc();
+    $user_name = $data1['prenom'] ;
+
+    $result = $mysqli->query("SELECT photo FROM utilisateurs WHERE email = '$email'");
+    $data_result = $result->fetch_assoc();
+    $photo = $data_result['photo'] ;
+
+    // -----------------------------------------------------------------------------------------------
+    if ($mdp_test === $password) {
         echo "Mot de passe correct. Redirection vers la page d'accueil...";
-        header('Location: accueil.html');
+
+        // Démarrer la session
+        session_start();
+
+        // Stocker des informations sur l'utilisateur dans la session
+        $_SESSION['user_name'] = $user_name;
+        $_SESSION['id'] = $id;
+        $_SESSION['photo'] = $photo;
+        // Redirection vers la page d'accueil
+        header('Location: accueil.php');
+        exit();
+
     } else {
         echo "<h3>Erreur de mot de passe !</h3>";
-        echo "$mdp_test" ;
-        echo "$email" ;
+        header('Location: connexion.html');
     }
 
-    // Affichage des autres données (ID, nom, prénom, etc.)
-    $sql = "SELECT * FROM utilisateurs";
-    $result = $mysqli->query($sql);
-
-    if (!$result) {
-        die('Erreur dans la requête SQL : ' . $mysqli->error);
-    }
     $mysqli->close();
 }
-
-?>

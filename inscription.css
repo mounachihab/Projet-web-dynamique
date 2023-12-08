@@ -6,18 +6,18 @@ body {
     font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
 }
 
-
+/*-----------------------------------------------------------------------------------------*/
+/*-----------------------------------------------------------------------------------------*/
 /* Définition des styles pour le conteneur principal (celui où les bloc sont stocke) */
 #wrapper {
     background-color: #fff;
     width: 900px; /* Largeur fixe */
-    height: 475px; /* Hauteur fixe */
+    height: 580px; /* Hauteur fixe */
     min-width: 900px; /* Largeur minimale */
     margin: auto; /* Centrer horizontalement */
     text-align: center; /* Alignement du texte au centre */
     border-radius: 10px; /* Bordure arrondie */
 }
-
 
 /* Styles pour la barre en dessous de la bannière */
 #baniere{
@@ -39,9 +39,11 @@ body {
 }
 
 
+/*-----------------------------------------------------------------------------------------*/
+/*-----------------------------------------------------------------------------------------*/
 /* Pour le formulaire : */
 form {
-    max-width: 300px;
+    max-width: 270px;
     margin: 0 auto;
 }
 

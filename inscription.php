@@ -34,6 +34,7 @@ echo '<br>';
 echo 'Protocol version: ' . $mysqli->protocol_version;
 
 
+// -----------------------------------------------------------------------------------------------
 // Récupérer les données du formulaire
 $email = isset($_POST["email"]) ? $mysqli->real_escape_string($_POST["email"]) : "";
 $nom = isset($_POST["lastname"]) ? $mysqli->real_escape_string($_POST["lastname"]) : "";
@@ -41,6 +42,7 @@ $prenom = isset($_POST["firstname"]) ? $mysqli->real_escape_string($_POST["first
 $password = isset($_POST["password"]) ? $mysqli->real_escape_string($_POST["password"]) : "";
 
 
+// -----------------------------------------------------------------------------------------------
 //Si la BDD existe
 if ($mysqli) {
     // Requête pour récupérer le mot de passe associé à l'email
@@ -54,14 +56,13 @@ if ($mysqli) {
     $data = $result->fetch_assoc();
     $mail_bdb = $data['email'];
 
-    // si le mail existe deja
+    // -----------------------------------------------------------------------------------------------
+    // si le mail n'existe pas
     if ($email != $mail_bdb) {
         echo "Nouvel untilisateur";
 
-        // ajout dans la base de donnée
-        $sql = "INSERT INTO utilisateurs (nom, prenom, email, mdp, photo) VALUES ('$nom','$prenom' ,'$email', '$password','inconnu.png')";
-
-
+        // ajout dans la base de donnée utilisateur
+        $sql = "INSERT INTO utilisateurs (nom, prenom, email, mdp, photo) VALUES ('$nom','$prenom' ,'$email', '$password','pp_ece/inconnu.jpeg')";
         // Exécution de la requête
         if ($mysqli->query($sql) === TRUE) {
             echo "Données ajoutées avec succès";
@@ -69,16 +70,35 @@ if ($mysqli) {
             echo "Erreur lors de l'ajout des données : " . $mysqli->error;
         }
 
+        // -----------------------------------------------------------------------------------------------
+        // on récupère quelle que données utiles
         $res = $mysqli->query("SELECT ID FROM utilisateurs WHERE email = '$email'");
         $data_res = $res->fetch_assoc();
         $id = $data_res['ID'] ;
 
+        $result = $mysqli->query("SELECT photo FROM utilisateurs WHERE email = '$email'");
+        $data_result = $result->fetch_assoc();
+        $photo = $data_result['photo'] ;
+
+
+        // -----------------------------------------------------------------------------------------------
+        // ajout dans la base de donnée informations
+        $sql = "INSERT INTO informations (ID) VALUES ('$id')";
+        // Exécution de la requête
+        if ($mysqli->query($sql) === TRUE) {
+            echo "Données ajoutées avec succès";
+        } else {
+            echo "Erreur lors de l'ajout des données : " . $mysqli->error;
+        }
+
+        // -----------------------------------------------------------------------------------------------
         // Démarrer la session
         session_start();
 
         // Stocker des informations sur l'utilisateur dans la session
         $_SESSION['user_name'] = $prenom ;
         $_SESSION['id'] = $id;
+        $_SESSION['photo'] = $photo;
         // Redirection vers la page d'accueil
         header('Location: accueil.php');
         exit();

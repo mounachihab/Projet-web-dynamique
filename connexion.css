@@ -7,6 +7,8 @@ body {
 }
 
 
+/*-----------------------------------------------------------------------------------------*/
+/*-----------------------------------------------------------------------------------------*/
 /* Définition des styles pour le conteneur principal (celui où les bloc sont stocke) */
 #wrapper {
     background-color: #fff;
@@ -39,17 +41,21 @@ body {
 }
 
 
+/*-----------------------------------------------------------------------------------------*/
+/*-----------------------------------------------------------------------------------------*/
 /* Pour le formulaire : */
 form {
     max-width: 270px;
     margin: 0 auto;
 }
+
 input {
     width: 90%;
     padding: 10px;
     margin: 8px 0;
     box-sizing: border-box;
 }
+
 input[type="submit"] {
     width: 50%;
     background-color: #0a7677;
