@@ -96,3 +96,7 @@ function affiche_image_date() {
 
 // Appeler la fonction au chargement de la page
 window.onload = affiche_image_date;
+
+
+
+

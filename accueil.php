@@ -194,20 +194,23 @@ $nbr_membres = $data['COUNT(ID)'] ;
 
         <!-- Evenement semaine -->
         <div id="even_semaine">
-            <div class="scrollable-container">
+            <div class="scrollable-container_x">
                 <h3>
-                    Évènements de la semaine
+                    Le évènements à venir
                 </h3>
+
+                <?php include 'evenements.php'; ?>
 
             </div>
         </div>
 
         <!-- Evenement vous+resaux -->
         <div id="even_vous">
-            <div class="scrollable-container">
-                <h3>
-                    Évènements de vous et votre réseaux
-                </h3>
+            <h3>
+                Les évènements de votre réseaux
+            </h3>
+            <div class="scrollable-container_y">
+                <?php include 'feed.php'; ?>
             </div>
         </div>
 
@@ -219,10 +222,7 @@ $nbr_membres = $data['COUNT(ID)'] ;
 
             <div id="carrousel">
                 <ul>
-                    <li><img src="even/eve_1.jpeg" alt="Image 1" width="" height="250"/></li>
-                    <li><img src="even/eve_2.jpeg" alt="Image 2" width="" height="250"/></li>
-                    <li><img src="even/eve_3.png" alt="Image 3" width="" height="250"/></li>
-                    <li><img src="even/eve_4.png" alt="Image 4" width="" height="250"/></li>
+                    <?php include 'carrousel.php'; ?>
                 </ul>
             </div>
 
@@ -258,9 +258,9 @@ $nbr_membres = $data['COUNT(ID)'] ;
             </p>
 
             <!-- GG maps -->
-            <a href="https://www.google.com/maps/place/ECE+-+Ecole+d'ing%C3%A9nieurs+-+Campus+de+Paris/@48.8512252,
-            2.285991,17z/data=!3m2!4b1!5s0x47e670049820700f:0x5e9c35374e6fe5df!4m6!3m5!1s0x47e6701b4f58251b:0x167f5a60f
-            b94aa76!8m2!3d48.8512252!4d2.2885659!16s%2Fg%2F11dyjwlyp?entry=ttu">
+            <a href="https://www.google.com/maps/place/ECE+-+Ecole+d'ing%C3%A9nieurs+-+Campus+de+Paris/@48.8511956,
+            2.2858646,16.89z/data=!3m1!5s0x47e670049820700f:0x5e9c35374e6fe5df!4m6!3m5!1s0x47e6701b4f58251b:
+            0x167f5a60fb94aa76!8m2!3d48.8512252!4d2.2885659!16s%2Fg%2F11dyjwlyp?entry=ttu">
                 <img src="boutons/plan_ece.jpg"
                      alt="Carte de localisation"
                      width="300"
@@ -275,6 +275,7 @@ $nbr_membres = $data['COUNT(ID)'] ;
              alt="retour en haut"
              width="70"
              height=""
+             style="cursor: pointer;"
              onclick="retour_en_haut()"/>
     </div>
 
@@ -287,3 +288,5 @@ $nbr_membres = $data['COUNT(ID)'] ;
 
 </body>
 </html>
+
+

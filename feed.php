@@ -1,0 +1,100 @@
+<?php
+//info pour la connection
+$db_host = '127.0.0.1';
+$db_user = 'root';
+$db_password = 'root';
+$db_db = 'ece';
+$db_port = 8889;
+
+// on se connecte
+$mysqli = new mysqli(
+    $db_host,
+    $db_user,
+    $db_password,
+    $db_db,
+    $db_port
+);
+
+// -----------------------------------------------------------------------------------------------
+// verification d'ouverture
+if ($mysqli->connect_error) { //si c'est pas le cas :
+    exit();
+}
+
+// -----------------------------------------------------------------------------------------------
+//sino
+
+
+// Accéder aux informations sur l'utilisateur
+$id = $_SESSION['id'];
+
+
+// -----------------------------------------------------------------------------------------------
+//Si la BDD existe
+if ($mysqli) {
+    // Requête pour récupérer les infos des evenements (ordre chrono et limite de 7 evenements
+    $sql = "SELECT publications.*,
+               utilisateurs.nom AS nom_utilisateur,
+               utilisateurs.prenom,
+               utilisateurs.photo AS photo_utilisateur,
+               (SELECT COUNT(*) FROM likes WHERE likes.ID_publication = publications.ID_publication) AS nombre_likes
+        FROM publications
+        JOIN utilisateurs ON publications.ID_createur = utilisateurs.ID
+        LEFT JOIN reseau_ami ON utilisateurs.ID = reseau_ami.ID_ami
+        WHERE (reseau_ami.ID = $id OR utilisateurs.ID = $id)
+        GROUP BY publications.ID_publication
+        ORDER BY publications.date DESC, publications.heure DESC
+        LIMIT 10";
+    $result = $mysqli->query($sql);
+
+    // Affichage des événements
+    while ($row = $result->fetch_assoc()) {
+        echo "<div class='bloc_vous'>";
+
+        echo "<a href=''>
+                        <img src=" . htmlspecialchars($row['photo_utilisateur']) . "
+                             alt='utilisateur'
+                             width=''
+                             height='40'/>
+                    </a>";
+        echo "&nbsp";
+        echo htmlspecialchars($row['prenom']);
+        echo "&nbsp";
+        echo htmlspecialchars($row['nom_utilisateur']);
+        echo "<br>";
+
+        echo "<a href=''>
+                        <img style='border: 1px solid black;' src=" . htmlspecialchars($row['photo']) . "
+                             alt='evenement'
+                             width=''
+                             height='210'/>
+                    </a>";
+        echo "<br>";
+
+        $id_publi = $row['ID_publication'] ;
+        $coeur="" ;
+        //On regarde si la publication à été like par l'ultilisateur :
+        $resultat = $mysqli->query("SELECT * FROM likes WHERE (ID_likeur = $id AND ID_publication = $id_publi)");
+
+        // si c'est le cas :
+        if ($data = $resultat->fetch_assoc()){
+            $coeur = 'boutons/coeur_1.png';
+        }
+        // sinon :
+        else {
+            $coeur = 'boutons/coeur_0.png';
+        }
+
+        echo "<img style='cursor: pointer;' src=$coeur
+                 alt='evenement'
+                 width=''
+                 height='30'/>";
+        echo htmlspecialchars($row['nombre_likes']);
+        echo "</div>";
+    }
+
+
+    $mysqli->close();
+}
+
+?>
