@@ -44,7 +44,7 @@ if ($mysqli) {
         echo "<div class='bloc_semaine'>";
         echo  htmlspecialchars($row['type']) ;
         echo "<br>";
-        echo "<a href=''>
+        echo "<a href='afficher_even.php'>
                         <img style='border: 1px solid black;' src=" . htmlspecialchars($row['photo']) . "
                              alt='evenement'
                              width=''

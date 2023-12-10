@@ -202,41 +202,67 @@ if($date === "NULL") {
             </h3>
 
             <form action="changement_infos.php" method="post">
-                <div id="fromulaire_1">
-                    <label for="nom">Nom :</label>
-                    <br>
-                    <input type="text" id="nom" name="nom" placeholder="<?php echo $nom;?>">
 
-                    <br>
-                    <br>
+                <label for="nom">Nom :</label>
+                <br>
+                <input type="text" id="nom" name="nom" placeholder="<?php echo $nom;?>">
 
-                    <label for="prenom">Prénom :</label>
-                    <br>
-                    <input type="text" id="prenom" name="prenom" placeholder="<?php echo $prenom;?>">
+                <br>
+                <br>
 
-                    <br>
+                <label for="prenom">Prénom :</label>
+                <br>
+                <input type="text" id="prenom" name="prenom" placeholder="<?php echo $prenom;?>">
 
-                </div>
+                <br>
+                <br>
 
-                <div id="fromulaire_2">
-                    <label for="date">Année de naissance :</label>
-                    <br>
-                    <input type="number" id="date" name="date" placeholder="<?php echo $date;?>" min="1910" max="2023" maxlength="4">
+                <label for="date">Année de naissance :</label>
+                <br>
+                <input type="number" id="date" name="date" placeholder="<?php echo $date;?>" min="1910" max="2023" maxlength="4">
 
-                    <br>
-                    <br>
+                <br>
+                <br>
 
-                    <label for="civilite">Civilité :</label>
-                    <br>
-                    <select name="civilite" id="civilite">
-                        <option value="NULL"> <?php echo $civic; ?> </option>
-                        <option value="Mme">Mme</option>
-                        <option value="Mr">Mr</option>
-                    </select>
+                <label for="civilite">Civilité :</label>
+                <br>
+                <select name="civilite" id="civilite">
+                    <option value="NULL"> <?php echo $civic; ?> </option>
+                    <option value="Mme">Mme</option>
+                    <option value="Mr">Mr</option>
+                </select>
 
-                    <br>
+                <br>
+                <br>
 
-                </div>
+                <input type="submit" value="Enregistrer">
+            </form>
+        </div>
+
+        <!-- Partie du bloc pour les questions -->
+        <div id="bloc_question">
+            <h3>
+                Questions pour la récupération du mot de passe
+            </h3>
+
+            <form action="changement_question.php" method="post">
+
+                <label for="question">Questions :</label>
+                <br>
+                <select name="question" id="question">
+                    <option value="Q1">Le nom de jeune fille de votre mère ?</option>
+                    <option value="Q2">Le nom de votre première peluche ?</option>
+                    <option value="Q3">Le nom de votre premier animal de compagnie ?</option>
+                </select>
+
+                <br>
+                <br>
+
+                <label for="reponse">Réponse</label>
+                <br>
+                <input type="text" id="reponse" name="reponse" required>
+
+                <br><br>
 
                 <input type="submit" value="Enregistrer">
             </form>

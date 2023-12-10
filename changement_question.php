@@ -1,10 +1,11 @@
 <?php
 
+
 // Démarrer la session
 session_start();
 
 // Accéder aux informations sur l'utilisateur
-$id =  $_SESSION['id'];
+$id = $_SESSION['id'];
 
 
 //info pour la connection
@@ -42,36 +43,24 @@ echo 'Protocol version: ' . $mysqli->protocol_version;
 
 // -----------------------------------------------------------------------------------------------
 // Récupérer les données du formulaire
-$new_email = isset($_POST["email"]) ? $mysqli->real_escape_string($_POST["email"]) : "";
+$question = isset($_POST["question"]) ? $mysqli->real_escape_string($_POST["question"]) : "";
+$reponse = isset($_POST["reponse"]) ? $mysqli->real_escape_string($_POST["reponse"]) : "";
 
 // -----------------------------------------------------------------------------------------------
 //Si la BDD existe
 if ($mysqli) {
+    // Requête pour changer le mdp à l'aide de l'ID
+    $sql = "UPDATE informations SET $question = '$reponse' WHERE ID = '$id'";
 
-    $resultat = $mysqli->query("SELECT ID FROM utilisateurs WHERE email = '$new_email'");
-    $data = $resultat->fetch_assoc();
-    $res = $data['ID'] ;
-
-    echo "res : $res" ;
-
-    if($res === ''){
-        // Requête pour changer le mail à l'aide de l'ID
-        $sql = "UPDATE utilisateurs SET email = '$new_email' WHERE ID = '$id'";
-
-        // -----------------------------------------------------------------------------------------------
-        if ($mysqli->query($sql) === TRUE) {
-            echo "Données ajoutées avec succès";
-            // Redirection vers la page d'accueil
-            //header('Location: reglages.php?');
-            exit();
-        } else {
-            //header('Location: reglages.php');
-            echo "Erreur lors de l'ajout des données : " . $mysqli->error;
-        }
-    }
-    else{
-        //header('Location: reglages.php');
-        echo "Erreur lors de l'ajout des données" . $mysqli->error;
+    // -----------------------------------------------------------------------------------------------
+    if ($mysqli->query($sql) === TRUE) {
+        echo "Données ajoutées avec succès";
+        // Redirection vers la page d'accueil
+        header('Location: reglages.php');
+        exit();
+    } else {
+        header('Location: reglages.php');
+        echo "Erreur lors de l'ajout des données : " . $mysqli->error;
     }
 
     $mysqli->close();

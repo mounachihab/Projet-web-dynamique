@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fr">
+<!-- -->
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="mdp_perdu_form.css">
+  <title>ECE In - Mot de passe lost</title>
+</head>
+
+<body>
+<br>
+<br>
+
+<div id="wrapper">
+  <div id="baniere">
+    <h3>
+      Récupération du mot de passe
+    </h3>
+  </div>
+
+  <br>
+
+  <form action="changement_question.php" method="post">
+    <label for="email">Votre e-mail :</label>
+    <input type="email" id="email" name="email" required>
+
+    <br>
+    <br>
+
+    <label for="question">Question :</label>
+    <br>
+    <select name="question" id="question">
+      <option value="Q1">Le nom de jeune fille de votre mère ?</option>
+      <option value="Q2">Le nom de votre première peluche ?</option>
+      <option value="Q3">Le nom de votre premier animal de compagnie ?</option>
+    </select>
+
+    <br>
+    <br>
+
+    <label for="reponse">Votre réponse :</label>
+    <input type="text" id="reponse" name="reponse" required>
+
+    <br>
+    <br>
+
+    <input type="submit" value="Nouveau mot de passe">
+
+  </form>
+  <br>
+
+
+</div>
+
+<br>
+<br>
+
+
+<!-- Copyright -->
+<div id="copy">
+  <p>
+    &copy; 2023 ECE In. Tous droits réservés.
+  </p>
+</div>
+</body>
+</html>

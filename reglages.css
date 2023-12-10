@@ -132,33 +132,23 @@ body {
 #bloc_information {
     background-color: #FFF;
     border-radius: 10px; /* Bordure arrondie */
-    width: 1200px; /* Largeur fixe */
-    height: 285px; /* Hauteur fixe */
+    width: 593px; /* Largeur fixe */
+    height: 435px; /* Hauteur fixe */
     text-align: center; /* Alignement du texte au centre */
-    float: right; /* Flotter à droite */
-    margin-left: 15px; /* Espacement à gauche */
-    margin-top: 15px; /* Espacement en haut */
-}
-
-#fromulaire_1 {
-    border-radius: 10px; /* Bordure arrondie */
-    width: 433px; /* Largeur fixe */
-    height: 165px; /* Hauteur fixe */
-    text-align: left;
-    margin-left: 150px;
     float: left; /* Flotter à gauche */
-    margin-top: 2px; /* Espacement en haut */
+    margin-top: 15px; /* Espacement en haut */
     clear: left; /* Permet de s'assurer que le bloc est après les blocs précédents */
 }
 
-#fromulaire_2 {
+/*-----------------------------------------------------------------------------------------*/
+#bloc_question {
+    background-color: #FFF;
     border-radius: 10px; /* Bordure arrondie */
-    width: 433px; /* Largeur fixe */
-    height: 165px; /* Hauteur fixe */
-    text-align: left;
-    margin-left: 70px;
+    width: 592px; /* Largeur fixe */
+    height: 435px; /* Hauteur fixe */
+    text-align: center; /* Alignement du texte au centre */
     float: right; /* Flotter à droite */
-    margin-top: 2px; /* Espacement en haut */
+    margin-top: 15px; /* Espacement en haut */
 }
 
 /*-----------------------------------------------------------------------------------------*/
@@ -205,54 +195,24 @@ body {
 
 
 
+
+
+
 /*-----------------------------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------------------------*/
 /* Pour le formulaire : */
 
-#fromulaire_1 form {
-    max-width: 350px;
-    margin: 0 auto;
-}
-#fromulaire_1 input {
-    width: 35%;
-    padding: 7px;
-    margin: 4px 0;
-}
-
 /*-----------------------------------------------------------------------------------------*/
-#fromulaire_2 form {
+form {
     max-width: 350px;
     margin: 0 auto;
 }
 
-#fromulaire_2 input {
-    width: 35%;
-    padding: 7px;
-    margin: 4px 0;
-}
-
-/*-----------------------------------------------------------------------------------------*/
-#bloc_mdp form {
-    max-width: 350px;
-    margin: 0 auto;
-}
-
-#bloc_mdp input {
+input {
     padding: 7px 27px;
     margin: 4px 0;
 }
 
-/*-----------------------------------------------------------------------------------------*/
-#bloc_email form {
-    max-width: 350px;
-    margin: 0 auto;
-}
-
-#bloc_email input {
-    padding: 7px 27px;
-    margin: 4px 0;
-
-}
 
 
 /*-----------------------------------------------------------------------------------------*/

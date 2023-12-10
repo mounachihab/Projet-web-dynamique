@@ -13,8 +13,8 @@ body {
 #wrapper {
     background-color: #fff;
     max-width: 70%; /* Largeur max*/
-    height: 200px; /* Hauteur fixe */
-    min-height: 400px; /* Largeur minimale */
+    height: 290px; /* Hauteur fixe */
+    min-height: 450px; /* Largeur minimale */
     margin: auto; /* Centrer horizontalement */
     text-align: center; /* Alignement du texte au centre */
     border-radius: 10px; /* Bordure arrondie */
@@ -56,9 +56,15 @@ input {
 }
 
 input[type="submit"] {
-    width: 50%;
+    width: 60%;
     background-color: #0a7677;
     color: white;
     cursor: pointer;
 }
 
+select {
+    width: 90%;
+    padding: 10px;
+    margin: 8px 0;
+    box-sizing: border-box;
+}

@@ -237,6 +237,14 @@ $nbr_membres = $data['COUNT(ID)'] ;
             <h3>
                 Publiez une photo
             </h3>
+
+            <a href="">
+                <img src="boutons/photo_0.png"
+                alt="Publier photo"
+                width="90"
+                height=""/>
+            </a>
+
         </div>
 
         <!-- Publier CV -->
@@ -244,6 +252,13 @@ $nbr_membres = $data['COUNT(ID)'] ;
             <h3>
                 Publiez ou modifiez votre cv
             </h3>
+
+            <a href="">
+                <img src="boutons/cv_0.png"
+                     alt="Publier photo"
+                     width="90"
+                     height=""/>
+            </a>
         </div>
 
         <!-- Coordonne -->

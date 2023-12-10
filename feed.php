@@ -32,7 +32,7 @@ $id = $_SESSION['id'];
 // -----------------------------------------------------------------------------------------------
 //Si la BDD existe
 if ($mysqli) {
-    // Requête pour récupérer les infos des evenements (ordre chrono et limite de 7 evenements
+    // Requête pour récupérer les infos des evenements (ordre chrono et limite de 10 evenements)
     $sql = "SELECT publications.*,
                utilisateurs.nom AS nom_utilisateur,
                utilisateurs.prenom,
@@ -63,7 +63,7 @@ if ($mysqli) {
         echo htmlspecialchars($row['nom_utilisateur']);
         echo "<br>";
 
-        echo "<a href=''>
+        echo "<a href='afficher_publi.php'>
                         <img style='border: 1px solid black;' src=" . htmlspecialchars($row['photo']) . "
                              alt='evenement'
                              width=''
