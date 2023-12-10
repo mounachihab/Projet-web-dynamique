@@ -117,6 +117,10 @@ body {
     cursor: pointer; /* Curseur pointer au survol */
     float: left; /* Flotter à gauche */
     margin-top: 15px; /* Espacement en haut */
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* Ajout de cette ligne */
+
 }
 
 /* pr le style de la page avec  les docs */
@@ -165,17 +169,64 @@ body {
 
 #ssblocgauche {
             width: 550px;
-            height:200px;
+            height:180px;
             border: 1px solid #ddd;
             padding: 10px;
             margin: 10px;
 }
+#ssblocgauche h3 {
+    margin: 0; /* Supprimer la marge par défaut du titre h3 */
+}
 
 #ssblocdroite {
             width: 550px;
-            height: 200px;
+            height: 180px;
             margin-left: 15px;
             border: 1px solid #ddd;
             padding: 10px;
             margin: 10px;
 }
+
+#conteneurFormations {
+    display: flex;
+    flex-direction: column; /* Ajout de cette ligne */
+
+}
+
+#ssbloc_haut {
+            width: 340px;
+            height: 175px;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin: 10px;
+            margin-bottom: 0;
+}
+#ssbloc_milieu {
+            width: 340px;
+            height:175px;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin: 10px;
+}
+
+#ssbloc_bas {
+            width: 340px;
+            height:160px;
+            padding: 10px;
+            margin: 10px;
+            border: 1px solid #ddd;
+            display: flex; /* Utilisation du modèle de boîte flexible */
+            flex-direction: column; /* Empiler les éléments verticalement */
+            align-items: center; /* Centrer verticalement le contenu */
+}
+#ajouterformationformulaire {
+    display: inline-block; /* Assurez-vous que le formulaire n'occupe que l'espace nécessaire */
+}
+#ssbloc_haut h3 {
+    margin: 0; /* Supprimer la marge par défaut du titre h3 */
+}
+
+#ssbloc_milieu h3 {
+    margin: 0; /* Supprimer la marge par défaut du titre h3 */
+}
+
