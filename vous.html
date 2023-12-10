@@ -114,66 +114,111 @@
 
         </div>
         <!--pr la page avec photo nom prenom etc -->
-        <div id ="pagephoto">
-            <h3> Mettre photo etc</h3>
+        <div id="pagephoto" >
+            <h2> Mettre photo etc</h2>
+            
             
         </div>
 
 
         <!--pr la page a droite avec la liste des formations etc -->
         <div id ="formations">
-            <div id="listeFormations"><!--les fomations ajoutées s ajoutent ici -->
-                <h3>
-                    Liste formations :
-                </h3>
-
+            <div id="conteneurFormations"><!--les fomations ajoutées s ajoutent ici -->
+                <h2>
+                    Vos formations/projets :
+                </h2>
             
+                <div id="ssbloc_haut">
+                    <div id="listeFormations">
+                        <h3>Liste des formations :</h3>
+                    </div>
+                </div>
 
-            </div>
-            <button onclick="toggleformulaire()">Ajouter une Formation</button>
+                <div id="ssbloc_milieu">
+                    <div id="listeProjets">
+                        <h3>Liste des projets :</h3>
+                    </div>
+                </div>
+                
+                <div id="ssbloc_bas">    
+                    <button onclick="toggleformulaire()">Ajouter une Formation</button>
 
-             <form id="ajouterformationformulaire" style="display: none;">
-                  <table>
-                       <tr>
-                            <td><label for="ecole">École:</label></td>
-                            <td><input type="text" id="ecole" required></td>
-                       </tr>
-                       <tr>
-                            <td><label for="competence">Compétences acquises:</label></td>
-                            <td><input type="text" id="competence" required></td>
-                       </tr>
-                       <tr>
-                            <td><label for="diplome">Diplôme:</label></td>
-                            <td><input type="text" id="diplome" required></td>
-                       </tr>
-                       <tr>
-                            <td><label for="domaine">Domaine d'étude:</label></td>
-                            <td><input type="text" id="domaine" required></td>
-                       </tr>
-                       <tr>
-                            <td><label for="dateDebut">Date de début:</label></td>
-                            <td><input type="date" id="dateDebut" required></td>
-                       </tr>
-                       <tr>
-                            <td><label for="dateFin">Date de fin:</label></td>
-                            <td><input type="date" id="dateFin" required></td>
-                       </tr>
-                       <tr>
-                            <td><label for="description">Description:</label></td>
-                            <td><textarea id="description" rows="4"></textarea></td>
-                       </tr>   
-                  </table>
-                  <button type="button" onclick="ajouterformations()">Ajouter une formation </button>
-             </form>  
-             
+                     <form id="ajouterformationformulaire" style="display: none;">
+                          <table>
+                               <tr>
+                                    <td><label for="ecole">École:</label></td>
+                                    <td><input type="text" id="ecole" required></td>
+                               </tr>
+                               <tr>
+                                    <td><label for="competence">Compétences acquises:</label></td>
+                                    <td><input type="text" id="competence" required></td>
+                               </tr>
+                               
+                               <tr>
+                                    <td><label for="domaine">Domaine d'étude:</label></td>
+                                    <td><input type="text" id="domaine" required></td>
+                               </tr>
+                               <tr>
+                                    <td><label for="dateDebut">Date de début:</label></td>
+                                    <td><input type="date" id="dateDebut" required></td>
+                               </tr>
+                               <tr>
+                                    <td><label for="dateFin">Date de fin:</label></td>
+                                    <td><input type="date" id="dateFin" required></td>
+                               </tr>
+                               <!--<tr>
+                                    <td><label for="description">Description:</label></td>
+                                    <td><textarea id="description" rows="4"></textarea></td>
+                               </tr> -->  
+                          </table>
+                          <button type="button" onclick="ajouterformations()">Envoyer </button>
+                     </form> 
+                     <!--<button onclick="toggleformulaireProjet()">Ajouter un Projet</button>
+
+                     <form id="ajouterProjetformulaire" style="display: none;">
+                          <table>
+                               <tr>
+                                    <td><label for="lieu">Lieu:</label></td>
+                                    <td><select id="lieu">
+                                            <option value="ecoleEce">Ecole ECE</option>
+                                            <option value="etranger">A l'étranger</option>
+                                            <option value="entreprise">En entreprise</option>
+                                        </select></td>
+                               </tr>
+                               <tr>
+                                    <td><label for="competence">Compétences acquises:</label></td>
+                                    <td><input type="text" id="competence" required></td>
+                               </tr>
+                               
+                               <tr>
+                                    <td><label for="domaine">Domaine d'études:</label></td>
+                                    <td><input type="text" id="domaine" required></td>
+                               </tr>
+                               <tr>
+                                    <td><label for="dateDebut">Date de début:</label></td>
+                                    <td><input type="date" id="dateDebut" required></td>
+                               </tr>
+                               <tr>
+                                    <td><label for="dateFin">Date de fin:</label></td>
+                                    <td><input type="date" id="dateFin" required></td>
+                               </tr>
+                               <tr>
+                                    <td><label for="description">Description:</label></td>
+                                    <td><textarea id="description" rows="4"></textarea></td>
+                               </tr>   
+                          </table>
+                          <button type="button" onclick="ajouterProjet()">Envoyer </button>
+                     </form>-->
+                </div>      
+            </div> 
           
 
         </div>
         <!--pr la page en bas avec les documents etc -->
         <div id="vosdocs">
-            <h3>
+            <h2>
                 Vos documents :
-            </h3>
+            </h2>
             <div id="conteneurSousBlocs">    
                 
                     <!-- Sous-bloc à gauche -->
@@ -210,17 +255,8 @@
                         </tr>
                         </table>
                     </form>
-                </div>    
-                    <!--
-                    <form id="deposercv"><table>
-                        <tr>
-                            <td><label for="cvdepot">Déposer mon CV (PDF uniquement):</label></td>
-                        </tr>
-                            <td><input type="file" id="cvFile" accept=".pdf" /><button type="bouttondeposer" onclick="deposerCV()">Déposer mon CV</button></td>
-                                
-                        </tr>
-                    </table>
-                    </form>  -->          
+                </div>   
+               
                                     
            
             
@@ -239,3 +275,4 @@
 
 </body>
 </html>
+
