@@ -85,11 +85,7 @@ function afficherlisteformations() {
     }
 }
 
-// Appeler chargerFormations au chargement de la page
-window.onload = function () {
-    chargerFormations();
-    afficherlisteformations(); 
-};
+
 
 function afficherFormulaire() {
     console.log("Affichage du formulaire");
@@ -253,61 +249,110 @@ function supprimerFichier(index) {
     chargerListeFichiers();
 }
 
-// Appeler la fonction de chargement lors du chargement de la page
-window.onload = chargerListeFichiers;
 
-// Fonction pour ajouter un projet dans la liste
-    function ajouterProjet() {
-        const lieu = document.getElementById('lieu').value;
-        const domaine = document.getElementById('domaine').value;
-        const competences = document.getElementById('competences').value;
-        const dateDebut = document.getElementById('dateDebut').value;
-        const dateFin = document.getElementById('dateFin').value;
 
-        // Créer un objet de projet
-        const nouveauProjet = {
-            lieu: lieu,
-            domaine: domaine,
-            competences: competences,
-            dateDebut: dateDebut,
-            dateFin: dateFin,
-        };
 
-        // Ajouter le projet à la liste
-        projets.push(nouveauProjet);
+let projets=[];
 
-        // Afficher la liste mise à jour
-        afficherListeProjets();
-        sauvegarderProjets(); // Sauvegarde des données
-        // Masquer le formulaire
-        const formulaire = document.getElementById('ajouterProjetFormulaire');
-        formulaire.style.display = 'none';
-    }
         
 // Fonction pour afficher chaque projet dans la liste
-    function afficherListeProjets() {
-        const listeProjets = document.getElementById('listeProjets');
+function afficherListeProjets() {
+    const listeProjetsDiv = document.getElementById('listeProjets');
 
-        // Effacer le contenu actuel de la liste
-        listeProjets.innerHTML = '';
+    // Effacer le contenu actuel de la liste
+    listeProjetsDiv.innerHTML = '';
 
-        // Parcourir tous les projets
-        for (let i = 0; i < projets.length; i++) {
-            const projet = projets[i];
+    // Parcourir tous les projets
+    for (let i = 0; i < projets.length; i++) {
+        const projet = projets[i];
 
-            // Créer un élément de liste pour chaque projet
-            const item = document.createElement('div');
-            item.innerHTML = `
-                <strong>${projet.lieu}</strong><br>
-                <small>${projet.domaine}</small><br>
-                <small>${projet.dateDebut} - ${projet.dateFin}</small>
-                <button onclick="supprimerProjet(${i})">Supprimer</button>
-            `;
+        // Créer un élément de liste pour chaque projet
+        const item = document.createElement('div');
+        item.innerHTML = `
+            <strong>${projet.lieu}</strong><br>
+            <small>${projet.domaine}</small><br>
+            <small>${projet.dateDebut} - ${projet.dateFin}</small>
+            <button onclick="supprimerProjet(${i})">Supprimer</button>
+        `;
 
-            // Ajouter l'élément de liste à la listeProjets
-            listeProjets.appendChild(item);
+        // Ajouter l'élément de liste à la listeProjets
+        listeProjetsDiv.appendChild(item);
+    }
+}
+      
+
+// Fonction pour supprimer un projet de la liste
+    function supprimerProjet(index) {
+        projets.splice(index, 1);
+        afficherListeProjets();
+        sauvegarderProjets();
+    }
+
+    // Fonction pour sauvegarder les projets dans le stockage local
+    function sauvegarderProjets() {
+        localStorage.setItem('projets', JSON.stringify(projets));
+    }
+
+    // Fonction pour charger les projets depuis le stockage local
+    function chargerProjets() {
+        const donnees = localStorage.getItem('projets');
+        if (donnees) {
+            projets = JSON.parse(donnees);
         }
-    }        
+    }
+
+    // Fonction pour afficher ou masquer le formulaire en fonction de son état actuel
+function toggleFormulaireProjet(idFormulaire) {
+        const formulaire = document.getElementById(idFormulaire);
+        formulaire.style.display = (formulaire.style.display === 'none' || formulaire.style.display === '') ? 'block' : 'none';
+}
+
+function ajouterProjet(event) {
+    event.preventDefault(); // Empêche le rechargement de la page
+    
+    // Débogage
+    console.log('Avant la création de l\'objet nouveauProjet');
+    const lieu = document.getElementById('lieu').value;
+    const domaine = document.getElementById('domaine').value;
+    const dateDebut = document.getElementById('dateDebut').value;
+    const dateFin = document.getElementById('dateFin').value;
+
+    // Débogage
+    console.log('Valeurs des champs :', lieu, domaine, dateDebut, dateFin);
+
+    // Créer un objet de projet
+    const nouveauProjet = {
+        lieu: lieu,
+        domaine: domaine,
+        dateDebut: dateDebut,
+        dateFin: dateFin,
+    };
+
+    // Ajouter le projet à la liste
+    projets.push(nouveauProjet);
+
+    // Afficher la liste mise à jour
+    afficherListeProjets();
+    sauvegarderProjets(); // Sauvegarde des données
+
+    // Masquer le formulaire
+    const formulaire = document.getElementById('ajouterProjetFormulaire');
+    formulaire.style.display = 'none';
+
+    return false; // Empêche la soumission du formulaire
+}
+
+    // Appeler chargerProjets au chargement de la page
+    window.onload = function () {
+        chargerProjets();
+        afficherListeProjets();
+        chargerFormations();
+        afficherlisteformations(); 
+        chargerListeFichiers();
+    };
+    
+    // Ajouter l'écouteur d'événements pour le bouton "Envoyer Projet"
+document.getElementById('envoyerProjetBtn').addEventListener('click', ajouterProjet);  
 
 
         
