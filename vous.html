@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="vous.css">
-    <script type="text/javascript" src="vous.js"></script>
+    <script type="text/javascript" src="vous.js" defer></script>
     <title>ECE In - Votre profil</title>
 </head>
 
@@ -129,15 +129,15 @@
                 </h2>
             
                 <div id="ssbloc_haut">
-                    <div id="listeFormations">
+                    
                         <h3>Liste des formations :</h3>
-                    </div>
+                        <div id="listeFormations"></div>
                 </div>
 
                 <div id="ssbloc_milieu">
-                    <div id="listeProjets">
+                    
                         <h3>Liste des projets :</h3>
-                    </div>
+                        <div id="listeProjets"></div>
                 </div>
                 
                 <div id="ssbloc_bas">    
@@ -173,9 +173,9 @@
                           </table>
                           <button type="button" onclick="ajouterformations()">Envoyer </button>
                      </form> 
-                     <!--<button onclick="toggleformulaireProjet()">Ajouter un Projet</button>
+                    <button onclick="toggleFormulaireProjet('ajouterProjetFormulaire')">Ajouter un Projet</button>
 
-                     <form id="ajouterProjetformulaire" style="display: none;">
+                     <form id="ajouterProjetFormulaire" style="display: none;"onsubmit="ajouterProjet(event);">
                           <table>
                                <tr>
                                     <td><label for="lieu">Lieu:</label></td>
@@ -202,13 +202,11 @@
                                     <td><label for="dateFin">Date de fin:</label></td>
                                     <td><input type="date" id="dateFin" required></td>
                                </tr>
-                               <tr>
-                                    <td><label for="description">Description:</label></td>
-                                    <td><textarea id="description" rows="4"></textarea></td>
-                               </tr>   
+                                  
                           </table>
-                          <button type="button" onclick="ajouterProjet()">Envoyer </button>
-                     </form>-->
+                          <button type="button" id="envoyerProjetBtn" onclick="ajouterProjet()">Envoyer</button>
+
+                     </form>
                 </div>      
             </div> 
           
@@ -275,4 +273,3 @@
 
 </body>
 </html>
-
