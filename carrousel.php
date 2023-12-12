@@ -36,6 +36,7 @@ if ($mysqli) {
     $sql = "SELECT photo FROM evenements LIMIT 6";
     $result = $mysqli->query($sql);
 
+
     // Affichage des événements
     while ($row = $result->fetch_assoc()) {
         echo "<li><img src=" . htmlspecialchars($row['photo']) . " alt='Image 1' width='' height='250'/></li>";

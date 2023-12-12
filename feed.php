@@ -43,7 +43,7 @@ if ($mysqli) {
         FROM publications
         JOIN utilisateurs ON publications.ID_createur = utilisateurs.ID
         LEFT JOIN reseau_ami ON utilisateurs.ID = reseau_ami.ID_ami
-        WHERE (reseau_ami.ID = $id OR utilisateurs.ID = $id)
+        WHERE (reseau_ami.ID = $id OR utilisateurs.ID = $id OR utilisateurs.ID = 16)
         GROUP BY publications.ID_publication
         ORDER BY publications.date DESC, publications.heure DESC
         LIMIT 10";

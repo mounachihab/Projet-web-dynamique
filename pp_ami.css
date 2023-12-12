@@ -1,0 +1,223 @@
+/* CSS COUMMUN POUR TOUTE LES PAGES*/
+
+/* Définition des styles pour la page Accueil*/
+body {
+    background-color: #0a7677;
+    margin: 0; /* Aucune marge extérieure */
+    padding: 0; /* Aucun remplissage intérieur */
+    font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
+}
+
+
+/*-----------------------------------------------------------------------------------------*/
+/* Définition des styles pour la bannière */
+#banderole {
+    background-color: #a6cccc;
+    padding-bottom: 1%; /* Espacement en bas */
+    padding-top: 1%; /* Espacement en haut */
+    display: flex; /* Utilisation du modèle de boîte flexible */
+    align-items: center;
+    text-align: center;
+    justify-content: space-evenly;
+}
+
+/* Styles pour la barre en dessous de la bannière */
+#couleur{
+    background-color: #585858;
+    padding: 10px; /* Remplissage intérieur */
+}
+
+/* Styles spécifiques pour le logo dans la bannière */
+#logo {
+    cursor: pointer; /* Curseur pointer au survol */
+    height: 120px;
+    width: 260px;
+}
+
+/* Styles spécifiques pour le titre dans la bannière */
+#titre {
+    height: 120px;
+    width: 710px;
+    align-items: center;
+    display: flex;
+    text-align: center;
+}
+
+#nbr_membre {
+    height: 120px;
+    width: 70px;
+    align-items: center;
+    display: flex;
+    text-align: center;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    align-content: center;
+}
+
+/* Styles pour le nom avec lequel l'utilisateur est connecté */
+#nomCompte {
+    float : right;
+    height: 120px;
+    width: 110px;
+    align-items: center;
+}
+
+/* Styles pour le logo deconnexion */
+#deco {
+    cursor: pointer; /* Curseur pointer au survol */
+    height: 120px;
+    width: 110px;
+    align-items: center;
+    display: flex;
+}
+
+
+/*-----------------------------------------------------------------------------------------*/
+/* Définition des styles pour le conteneur principal (celui où les bloc sont stocke) */
+#wrapper {
+    max-width: 1200px; /* Largeur max*/
+    height: 100%; /* Hauteur fixe */
+    min-height: 550px; /* Largeur minimale */
+    margin: auto; /* Centrer horizontalement */
+    padding: 2%; /* Remplissage intérieur */
+    text-align: center; /* Alignement du texte au centre */
+}
+
+/* Styles pour les boutons de direction */
+#boutons{
+    cursor: pointer;
+    padding-top: 6px;
+}
+
+#test {
+    clear: both;
+    height: 10px;
+}
+
+/* Styles pour le copyright */
+#copy {
+    margin-top: auto;
+    background-color: #a6cccc;
+    clear: both; /* Annule le flottement à gauche et à droite, permettant à "copy" de se positionner sous les éléments précédents */
+    text-align: center; /* Alignement du texte au centre */
+}
+
+
+/*-----------------------------------------------------------------------------------------*/
+/* Styles pour l'introduction afficher dans une boite quand on appuie sur le logo */
+
+#container {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+#message_intro {
+    background: #fff;
+    width: 60%; /* largeur */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+/*-----------------------------------------------------------------------------------------*/
+/*-----------------------------------------------------------------------------------------*/
+/* POUR les images du mois de decembre*/
+#image_decembre_1 {
+    position: absolute;
+    margin-top: 13%;
+    margin-left: 80%;
+}
+
+#image_decembre_2 {
+    position: absolute;
+    margin-top: 15%;
+    margin-right: 90%;
+}
+
+
+
+
+/*-----------------------------------------------------------------------------------------*/
+/*-----------------------------------------------------------------------------------------*/
+
+form {
+    display: flex;
+}
+
+button {
+    background-color: #0a7677;
+    color: white;
+    height: 25px;
+    width: 70px;
+    margin-left: 10px;
+}
+input {
+    margin-left: 10px;
+    width: 820px;
+    border-radius: 10px; /* Bordure arrondie */
+    padding-top: 3px;
+    padding-bottom: 3px;
+    border: 1px solid black;
+    padding-left: 10px;
+}
+
+
+/*-----------------------------------------------------------------------------------------*/
+/*-----------------------------------------------------------------------------------------*/
+/* POUR LA PAGE pp_ami */
+
+#information{
+    background-color: #FFF;
+    border-radius: 10px; /* Bordure arrondie */
+    width: 797px; /* Largeur fixe */
+    height: 396px; /* Hauteur fixe */
+    text-align: center; /* Alignement du texte au centre */
+    float: left; /* Flotter à gauche */
+    margin-top: 15px; /* Espacement en haut */
+    overflow-x: auto;
+    white-space: nowrap;
+    display: flex;
+}
+
+#btn{
+    background-color: #FFF;
+    border-radius: 10px; /* Bordure arrondie */
+    width: 388px; /* Largeur fixe */
+    height: 396px; /* Hauteur fixe */
+    text-align: center; /* Alignement du texte au centre */
+    float: right; /* Flotter à droite */
+    margin-left: 15px; /* Espacement à gauche */
+    margin-top: 15px; /* Espacement en haut */
+}
+
+#description{
+    background-color: #FFF;
+    border-radius: 10px; /* Bordure arrondie */
+    width: 1200px; /* Largeur fixe */
+    height: 384px; /* Hauteur fixe */
+    text-align: center; /* Alignement du texte au centre */
+    margin-top: 15px; /* Espacement en haut */
+    margin-bottom: 30px; /* Espacement en bas */
+    float: left; /* Flotter à gauche */
+    clear: left; /* Permet de s'assurer que le bloc est après les blocs précédents */
+}
+
+
+.publication{
+    background-color: #FFF;
+    border-radius: 10px; /* Bordure arrondie */
+    width: 1200px; /* Largeur fixe */
+    height: 384px; /* Hauteur fixe */
+    text-align: center; /* Alignement du texte au centre */
+    float: left; /* Flotter à gauche */
+    clear: left; /* Permet de s'assurer que le bloc est après les blocs précédents */
+}
