@@ -33,10 +33,12 @@ $id = $_SESSION['id'];
 //Si la BDD existe
 if ($mysqli) {
     // Requête pour récupérer les infos des evenements (ordre chrono et limite de 10 evenements)
-    $sql = "SELECT publications.*,
+    $sql = "SELECT publications.ID_publication,
+               publications.*,
                utilisateurs.nom AS nom_utilisateur,
                utilisateurs.prenom,
                utilisateurs.photo AS photo_utilisateur,
+               utilisateurs.ID AS ID_posteur,
                (SELECT COUNT(*) FROM likes WHERE likes.ID_publication = publications.ID_publication) AS nombre_likes
         FROM publications
         JOIN utilisateurs ON publications.ID_createur = utilisateurs.ID
@@ -51,8 +53,12 @@ if ($mysqli) {
     while ($row = $result->fetch_assoc()) {
         echo "<div class='bloc_vous'>";
 
-        echo "<a href=''>
-                        <img src=" . htmlspecialchars($row['photo_utilisateur']) . "
+        $ID_posteur = $row['ID_posteur'] ;
+
+        echo "<div id='bloc1'>";
+        echo "<a href='pp_ami.php?id=$ID_posteur'>
+                        <img style='border: 1px solid black;'
+                             src=" . htmlspecialchars($row['photo_utilisateur']) . "
                              alt='utilisateur'
                              width=''
                              height='40'/>
@@ -62,16 +68,13 @@ if ($mysqli) {
         echo "&nbsp";
         echo htmlspecialchars($row['nom_utilisateur']);
         echo "<br>";
+        echo "</div>";
 
-        echo "<a href='afficher_publi.php'>
-                        <img style='border: 1px solid black;' src=" . htmlspecialchars($row['photo']) . "
-                             alt='evenement'
-                             width=''
-                             height='210'/>
-                    </a>";
-        echo "<br>";
+        echo "<hr style='border: 1px solid #0a7677'/>";
 
         $id_publi = $row['ID_publication'] ;
+
+
         $coeur="" ;
         //On regarde si la publication à été like par l'ultilisateur :
         $resultat = $mysqli->query("SELECT * FROM likes WHERE (ID_likeur = $id AND ID_publication = $id_publi)");
@@ -79,17 +82,34 @@ if ($mysqli) {
         // si c'est le cas :
         if ($data = $resultat->fetch_assoc()){
             $coeur = 'boutons/coeur_1.png';
+            $etat = '1' ;
         }
         // sinon :
         else {
             $coeur = 'boutons/coeur_0.png';
+            $etat = '0' ;
         }
 
-        echo "<img style='cursor: pointer;' src=$coeur
+        $_SESSION['ID_publication'] = $row['ID_publication'];
+
+        echo "<div id='bloc2'>";
+        echo "<a href='afficher_publi.php?id=$id_publi&coeur=$coeur'>
+                        <img style='border: 1px solid black;' 
+                             src=" . htmlspecialchars($row['photo']) . "
+                             alt='evenement'
+                             width=''
+                             height='210'/>
+                    </a>";
+        echo "<br>";
+        echo "</div>";
+
+        echo "<div id='bloc3'>";
+        echo "<a href='ajouter_like.php?id=$id_publi&etat=$etat' > <img id='position' style='cursor: pointer;' src=$coeur
                  alt='evenement'
                  width=''
-                 height='30'/>";
+                 height='30'/></a>";
         echo htmlspecialchars($row['nombre_likes']);
+        echo "</div>";
         echo "</div>";
     }
 

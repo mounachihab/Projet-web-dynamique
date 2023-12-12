@@ -41,28 +41,48 @@ if ($mysqli) {
 
     // Affichage des événements
     while ($row = $result->fetch_assoc()) {
+        $date_event = $row['date'];
+        $date = new DateTime($date_event);
+        $format = new IntlDateFormatter('fr_FR', IntlDateFormatter::LONG, IntlDateFormatter::NONE);
+        $date_affich = $format->format($date->getTimestamp());
+
         echo "<div class='bloc_semaine'>";
-        echo  htmlspecialchars($row['type']) ;
-        echo "<br>";
-        echo "<a href='afficher_even.php'>
-                        <img style='border: 1px solid black;' src=" . htmlspecialchars($row['photo']) . "
-                             alt='evenement'
-                             width=''
-                             height='230'/>
-                    </a>";
-        echo "<br>";
 
-        echo "<img src='boutons/lieu_0.png'
-                 alt='lieu'
-                 width=''
-                 height='30'/>";
-        echo htmlspecialchars($row['lieu']);
+            echo "<div id='bloc4'>";
+                echo  htmlspecialchars($row['type']) ;
+            echo "</div>";
 
-        echo "<img src='boutons/calandar_0.png'
-                 alt='calandar'
-                 width=''
-                 height='30'/>";
-        echo htmlspecialchars($row['date']);
+        echo "<hr style='border: 1px solid #0a7677'/>";
+
+            $id_event = $row['ID_event'];
+
+            echo "<div id='bloc5'>";
+                echo "<a href='afficher_even.php?id=$id_event'>
+                                <img style='border: 1px solid black;' src=" . htmlspecialchars($row['photo']) . "
+                                     alt='evenement'
+                                     width=''
+                                     height='230'/>
+                            </a>";
+                echo "<br>";
+            echo "</div>";
+
+            echo "<div id='bloc6'>";
+                echo "<img src='boutons/lieu_0.png'
+                         alt='lieu'
+                         width=''
+                         height='30'/>";
+                echo "&nbsp";
+                echo htmlspecialchars($row['lieu']);
+
+                echo "&nbsp";
+                echo "&nbsp";
+                echo "<img src='boutons/calandar_0.png'
+                         alt='calandar'
+                         width=''
+                         height='30'/>";
+                echo "&nbsp";
+                echo $date_affich ;
+            echo "</div>";
         echo "</div>";
     }
 

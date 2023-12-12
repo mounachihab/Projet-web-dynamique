@@ -25,33 +25,39 @@ if ($mysqli->connect_error) { //si c'est pas le cas :
 //sinon
 session_start() ;
 $ID_publication = isset($_GET["id"]) ? $mysqli->real_escape_string($_GET["id"]) : "";
-$etat = isset($_GET["etat"]) ? $mysqli->real_escape_string($_GET["etat"]) : "";
+$coeur = isset($_GET["etat"]) ? $mysqli->real_escape_string($_GET["etat"]) : "";
 $id = $_SESSION['id'] ;
 
 // -----------------------------------------------------------------------------------------------
 //Si la BDD existe
 if ($mysqli) {
 
-    if($etat === '1'){
+    echo "coeur $coeur";
+
+    if($coeur === 'boutons/coeur_1.png'){
         // si c'est deja like, on supprime le like
         // Requête
         $sql = "DELETE FROM likes WHERE (ID_likeur = '$id' AND ID_publication = $ID_publication);";
+        $coeur = "boutons/coeur_0.png";
+        echo "test test";
     }
     else {
         //sinon on en ajoute un
         // Requête
         $sql = "INSERT INTO likes (ID_likeur,ID_publication) VALUES ($id,$ID_publication);";
+        $coeur = "boutons/coeur_1.png";
     }
 
+    echo "deux $coeur";
 
     // -----------------------------------------------------------------------------------------------
     if ($mysqli->query($sql) === TRUE) {
-        // Redirection vers la page d'accueil
-        header('Location: accueil.php#position' . $position2);
+        // Redirection
+        header("Location: afficher_publi.php?id=$ID_publication&coeur=$coeur");
 
     } else {
-        header('Location: accueil.php');
         echo "Erreur lors de l'ajout des données : " . $mysqli->error;
+        header("Location: afficher_publi.php?id=$ID_publication&coeur=$coeur");
     }
 
 

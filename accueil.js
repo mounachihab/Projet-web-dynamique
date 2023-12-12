@@ -2,12 +2,12 @@
 
 // Pour l'intro dans le logo
 function afficher_message_intro() {
-    // Afficher la boîte de dialogue
+    // Afficher l'intro
     document.getElementById("container").style.display = "flex";
 }
 
 function cacher_message_intro() {
-    // Cacher la boîte de dialogue
+    // Cacher l'intro
     document.getElementById("container").style.display = "none";
 }
 
@@ -98,5 +98,10 @@ function affiche_image_date() {
 window.onload = affiche_image_date;
 
 
+// Pour revenir a la position du like
+var position = document.getElementById('positionElement');
+var position2 = position.getBoundingClientRect().top;
 
-
+// Rediriger
+window.location.href = 'accueil.php#position' + position2;
+position.scrollIntoView({ behavior: 'smooth', block: 'start' });

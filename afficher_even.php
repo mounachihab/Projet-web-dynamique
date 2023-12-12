@@ -33,36 +33,53 @@ session_start();
 $user_name = $_SESSION['user_name'];
 $photo = $_SESSION['photo'];
 $id = $_SESSION['id'];
+$id_event = isset($_GET["id"]) ? $mysqli->real_escape_string($_GET["id"]) : "";
 
-// recuperer les donners pour les afficher :
-$resultat = $mysqli->query("SELECT nom FROM utilisateurs WHERE ID = '$id'");
-$data = $resultat->fetch_assoc();
-$nom = $data['nom'] ;
-
-$resultat = $mysqli->query("SELECT prenom FROM utilisateurs WHERE ID = '$id'");
-$data = $resultat->fetch_assoc();
-$prenom = $data['prenom'] ;
-
-$resultat = $mysqli->query("SELECT date FROM informations WHERE ID = '$id'");
-$data = $resultat->fetch_assoc();
-$date = $data['date'] ;
-
-$resultat = $mysqli->query("SELECT civilite FROM informations WHERE ID = '$id'");
-$data = $resultat->fetch_assoc();
-$civic = $data['civilite'] ;
-
-$resultat = $mysqli->query("SELECT email FROM utilisateurs WHERE ID = '$id'");
-$data = $resultat->fetch_assoc();
-$email = $data['email'] ;
+if ($user_name == '') {
+    header('Location: connexion.html');
+    exit() ;
+}
 
 // recuperer les donners pour les afficher :
 $resultat = $mysqli->query("SELECT COUNT(ID) FROM utilisateurs");
 $data = $resultat->fetch_assoc();
 $nbr_membres = $data['COUNT(ID)'] ;
 
-if($date === "NULL") {
-    $date = 'YYYY';
-}
+$resultat = $mysqli->query("SELECT ID_createur FROM evenements WHERE ID_event=$id_event");
+$data = $resultat->fetch_assoc();
+$id_publieur = $data['ID_createur'] ;
+
+// Les infos lié à la publication :
+$resultat1 = $mysqli->query("SELECT photo FROM utilisateurs where ID='$id_publieur'");
+$data1 = $resultat1->fetch_assoc();
+$photo_publieur = $data1['photo'] ;
+
+// Les infos lié à la publication :
+$resultat = $mysqli->query("SELECT prenom FROM utilisateurs where ID='$id_publieur'");
+$data = $resultat->fetch_assoc();
+$prenom_publieur = $data['prenom'] ;
+
+// Les infos lié à la publication :
+$resultat = $mysqli->query("SELECT nom FROM utilisateurs where ID='$id_publieur'");
+$data = $resultat->fetch_assoc();
+$nom_publieur = $data['nom'] ;
+
+$resultat = $mysqli->query("SELECT descriptions FROM evenements where ID_event='$id_event'");
+$data = $resultat->fetch_assoc();
+$comment = $data['descriptions'] ;
+
+$resultat = $mysqli->query("SELECT lieu FROM evenements where ID_event='$id_event'");
+$data = $resultat->fetch_assoc();
+$lieu = $data['lieu'] ;
+
+$resultat = $mysqli->query("SELECT date FROM evenements where ID_event='$id_event'");
+$data = $resultat->fetch_assoc();
+$date = $data['date'] ;
+
+$resultat = $mysqli->query("SELECT photo FROM evenements where ID_event='$id_event'");
+$data = $resultat->fetch_assoc();
+$photo_event = $data['photo'] ;
+
 ?>
 
 <!DOCTYPE html>
@@ -72,9 +89,10 @@ if($date === "NULL") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="reglages.css">
-    <script type="text/javascript" src="reglages.js"></script>
-    <title>ECE In - Évenement</title>
+    <link rel="stylesheet" href="publication.css">
+    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"> </script>
+    <script type="text/javascript" src="accueil.js"></script>
+    <title>ECE In - Home</title>
 </head>
 
 <body>
@@ -107,11 +125,25 @@ if($date === "NULL") {
                 des vidéos, et même votre curriculum vitae.
             </p>
             <button onclick="cacher_message_intro()">Fermer</button>
+
         </div>
     </div>
 
     <div id="titre">
-        <h2>ECE In - Evenement</h2>
+        <h2>ECE In - Publication</h2>
+    </div>
+
+    <div id="image_decembre_1">
+        <img id="image_dec_1"
+             src=""
+             width="250"
+             height=""/>
+    </div>
+    <div id="image_decembre_2">
+        <img id="image_dec_2"
+             src=""
+             width="150"
+             height=""/>
     </div>
 
     <div id="nbr_membre">
@@ -195,7 +227,62 @@ if($date === "NULL") {
         </a>
     </div>
 
+    <div id="bloc">
+        <div id="personne">
+            <a href="pp_ami.php?id=<?php echo $id_publieur; ?>">
+                <img style="border: 1px solid black;" src="<?php echo $photo_publieur; ?>" width="50" alt="publication"/>
+            </a>
 
+
+            <div id="info">
+                <?php
+                echo $prenom_publieur;
+                echo "&nbsp" ;
+                echo $nom_publieur;
+                ?>
+
+                <br>
+                <?php
+                echo "<i style='font-size: 13px'>" ;
+                echo "Évènement prévu le " ;
+
+                $date1 = new DateTime($date);
+                $format = new IntlDateFormatter('fr_FR', IntlDateFormatter::LONG, IntlDateFormatter::NONE);
+                $date_affich = $format->format($date1->getTimestamp());
+
+                echo $date_affich;
+                echo " à " ;
+                echo $lieu;
+                echo "</i>" ;
+                ?>
+
+            </div>
+
+        </div>
+
+        <hr/>
+
+        <div id="photo">
+            <img src="<?php echo $photo_event; ?>" height="450" alt="publication"/>
+        </div>
+
+
+        <hr/>
+        <div id="commentaire">
+            <?php
+                if($comment != ''){
+                    echo "<div id='encadrement'>";
+                    echo $comment;
+                    echo "</div>";
+                }
+                echo "<br>";
+            ?>
+        </div>
+    </div>
+
+</div>
+
+<div id="test">
 
 </div>
 
@@ -207,3 +294,4 @@ if($date === "NULL") {
 </div>
 </body>
 </html>
+<?php

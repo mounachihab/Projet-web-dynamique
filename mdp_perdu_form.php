@@ -83,16 +83,19 @@ if ($mysqli) {
         $_SESSION['user_name'] = $user_name;
         $_SESSION['id'] = $id;
         $_SESSION['photo'] = $photo;
+
         // Redirection vers la page d'accueil
         header('Location: new_mdp.php');
-        exit();
+
 
     } else {
         echo "<h3>Erreur de reponse !</h3>";
         header('Location: mdp_perdu_form.html');
+
     }
 
     $mysqli->close();
+    exit();
 }
 
 ?>

@@ -154,35 +154,35 @@ $nbr_membres = $data['COUNT(ID)'] ;
                      height=""/>
             </a>
 
-            <a href=""> <!-- lien vers mon reseau -->
+            <a href="mon_reseau.php"> <!-- lien vers mon reseau -->
                 <img src="boutons/bouton_mon_reseau_0.png"
                      alt="mon resau"
                      width="150"
                      height=""/>
             </a>
 
-            <a href="vous.html"> <!-- lien vers vous -->
+            <a href="vous.php"> <!-- lien vers vous -->
                 <img src="boutons/bouton_vous_0.png"
                      alt="vous"
                      width="150"
                      height=""/>
             </a>
 
-            <a href=""> <!-- lien vers notifications -->
+            <a href="notifications.php"> <!-- lien vers notifications -->
                 <img src="boutons/bouton_notification_0.png"
                      alt="notifications"
                      width="150"
                      height=""/>
             </a>
 
-            <a href=""> <!-- lien vers messagerie -->
+            <a href="messagerie.php"> <!-- lien vers messagerie -->
                 <img src="boutons/bouton_messagerie_0.png"
                      alt="messagerie"
                      width="150"
                      height=""/>
             </a>
 
-            <a href=""> <!-- lien vers emplois -->
+            <a href="emplois.php"> <!-- lien vers emplois -->
                 <img src="boutons/bouton_emplois_0.png"
                      alt="emplois"
                      width="150"
@@ -196,7 +196,7 @@ $nbr_membres = $data['COUNT(ID)'] ;
         <div id="even_semaine">
             <div class="scrollable-container_x">
                 <h3>
-                    Le évènements à venir
+                    Les évènements à venir
                 </h3>
 
                 <?php include 'evenements.php'; ?>
@@ -219,17 +219,19 @@ $nbr_membres = $data['COUNT(ID)'] ;
             <h3>
                 Les images de la semaine
             </h3>
+            <div id="cadre">
+                <div id="carrousel">
+                    <ul>
+                        <?php include 'carrousel.php'; ?>
+                    </ul>
+                </div>
 
-            <div id="carrousel">
-                <ul>
-                    <?php include 'carrousel.php'; ?>
-                </ul>
+                    <!-- Bontons avant après -->
+                <div id="btn">
+                    <button id="prev" class="carouselBtn">Précédent</button>
+                    <button id="next" class="carouselBtn">&nbspSuivant&nbsp</button>
+                </div>
             </div>
-
-            <!-- Bontons avant après -->
-            <button id="prev" class="carouselBtn">Précédent</button>
-            <button id="next" class="carouselBtn">&nbspSuivant&nbsp</button>
-
         </div>
 
         <!-- Publier Photo -->
