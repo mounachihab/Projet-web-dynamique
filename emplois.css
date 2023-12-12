@@ -159,7 +159,7 @@ body {
 
 
 /*-----------------------------------------------------------------------------------------*/
-
+/*-----------------------------------------------------------------------------------------*/
 
 #bloc_information {
     background-color: #FFF;
@@ -369,9 +369,9 @@ select {
     width: 1200px; /*largeur du cadre blanc*/
     height: 755px; /*hauteur du cadre blanc*/
     cursor: pointer; /*changement de l'interface de la souris lorsqu'elle passe sur le bloc*/
-    margin-left: auto; /*ajout d'une marge de 10px à gauche du cadre blanc*/
-    margin-top: 10px; /*ajout d'une marge de 10px en haut du cadre blanc*/
-    padding-top: 20px; /*ajout d'un vide de 20px en haut du cadre blanc*/
+    margin-left: auto;
+    margin-top: 10px;
+    padding-top: 20px;
 }
 
 
@@ -403,27 +403,28 @@ select {
 
 /*Partie filtrage des emplois*/
 #Blocfiltre{
-    border: 2px solid black; /* Bordure noire de 2 pixels */
-    padding: 10px; /* Marge intérieure pour espacer le texte de la bordure */
+    border: 2px solid black;
+    padding: 10px;
     display: inline-block;
-    margin-bottom: 20px; /* Ajout de marge en bas pour séparer les sections */
+    margin-bottom: 20px;
 
-    background-color: #a6cccc; /* Couleur de fond */
-    border-radius: 10px; /* Coins arrondis */
-    margin: 15px; /* Marge extérieure */
-    padding: 20px; /* Remplissage intérieur */
-    float: left; /* Aligner à gauche */
-    box-sizing: border-box; /* Inclure la bordure et le rembourrage dans la largeur/hauteur */
+    background-color: #a6cccc;
+    border-radius: 10px;
+    margin: 15px;
+    padding: 20px;
+    float: left;
+    box-sizing: border-box;
     margin-top: 5px;
 }
+
 
 /*Partie ajouter un emploi*/
 #BlocAjoute{
     border: 2px solid black;
-    padding: 5px; /* Marge intérieure pour espacer le texte de la bordure*/
+    padding: 5px;
     display: inline-block;
     border-radius : 10px ;
-    margin-bottom: 5px; /* Ajout de marge en bas pour séparer les sections*/
+    margin-bottom: 5px;
 
     background-color: #a6cccc;
     border-radius: 10px;
@@ -458,8 +459,8 @@ select {
 
 /*Boutons "Supprimer cet emploi", "Filtrer" et "Ajouter un emploi"*/
 button {
-    background-color: #0a7677; /* Couleur de fond */
-    color: #fff; /* Couleur du texte */
+    background-color: #0a7677;
+    color: #fff;
     padding: 10px;
     border: none;
     border-radius: 5px;
@@ -516,10 +517,10 @@ button {
 
 /*ajouter une barre pour descendre dans la liste des emplois*/
 .scrollable-container {
-    width: 700px; /* Définissez la largeur de l'élément */
-    max-height: 400px; /* Définissez la hauteur de l'élément */
-    overflow-y: scroll; /* Ajoutez une barre de défilement verticale */
-    overflow-x: hidden; /* Masquez la barre de défilement horizontale */
+    width: 700px;
+    max-height: 400px;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 
@@ -540,9 +541,7 @@ button {
     padding-bottom: 10px;
 }
 
-.offre-emploi:hover {
-    transform: scale(1.05);
-}
+
 
 .offre-emploi h3 {
     color: #0a7677;
@@ -550,9 +549,7 @@ button {
     margin-bottom: 10px;
 }
 
-.offre-emploi p {
-    margin: 0;
-}
+
 
 
 
@@ -575,11 +572,11 @@ button {
     max-width: 80%;
     max-height: 80%;
     overflow-y: auto;
-    z-index: 1;
+    z-index: 1; /*permet de faire apparaitre la fenêtre en premier plan*/
 }
 
 
-/* Style pour le fond obscurcissant lors de l'affichage de la boîte modale */
+/* Rendre la page plus sombre lorsqu'on affiche la boite modal */
 .modal-overlay {
     display: none;
     position: fixed;
@@ -588,13 +585,13 @@ button {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
-    z-index: 0;
+    z-index: 0; /*mettre la page derière la fenêtre en mode sombre*/
 }
 
-/* Style pour le bouton de fermeture de la boîte modale */
+/*Bouton de fermeture de la boîte modale */
 .modal-close {
     cursor: pointer;
-    position: absolute;
+    position: absolute; /*mettre la croix de fermeture en haut à droite*/
     top: 10px;
     right: 10px;
     font-size: 18px;
