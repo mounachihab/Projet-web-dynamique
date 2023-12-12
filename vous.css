@@ -1,20 +1,26 @@
 /* Définition des styles pour toutes les pages !!!!*/ 
-
 body {
+
     background-color: #0a7677;
     margin: 0; /* Aucune marge extérieure */
     padding: 0; /* Aucun remplissage intérieur */
     font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
+
+
 }
+
 /* Styles pour les boutons de direction */
 #boutons{
+
     cursor: pointer;
     padding-top: 6px;
+
 }
 
-/* Styles pour l'intro afficher dans une boite */
 
+/* Styles pour l'intro afficher dans une boite */
 #overlayContainer {
+
     display: none;
     position: fixed;
     top: 0;
@@ -26,15 +32,20 @@ body {
     justify-content: center;
     align-items: center;
     text-align: center;
+
 }
 
+
 #messageOverlay {
+
     background: #fff;
     width: 60%; /* largeur */
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+
 }
+
 
 
 /* Définition des styles pour la bannière */
@@ -44,41 +55,57 @@ body {
     padding-top: 20px; /* Espacement en haut */
     display: flex; /* Utilisation du modèle de boîte flexible */
     justify-content: space-between; /* Espace équitable entre les éléments enfants */
+
 }
+
 
 /* Styles spécifiques pour le logo dans la bannière */
 #logo {
+
     padding-left: 220px; /* Espacement à gauche */
     cursor: pointer; /* Curseur pointer au survol */
 }
 
+
 /* Styles spécifiques pour le titre dans la bannière */
 #titre {
+
     padding-top: 23px; /* Espacement en haut */
     padding-right: 190px; /* Espacement à droite */
+
 }
+
 
 /* Styles pour la barre en dessous de la bannière */
 #couleur{
+
     background-color: #585858;
     padding: 10px; /* Remplissage intérieur */
+
 }
+
 
 /* Styles pour le nom avec lequel l'utilisateur est connecté */
 #nomCompte {
+
     padding-top: 16px; /* Espacement en haut */
+
 }
+
 
 /* Styles pour le logo deconnexion */
 #deco {
+
     cursor: pointer; /* Curseur pointer au survol */
     float: right; /* Flotter à droite */
     padding-right: 240px; /* Espacement à droite */
     padding-top: 6px; /* Espacement en haut */
+
 }
 
 /* Styles pour le copyright */
 #copy {
+
     background-color: #a6cccc;
     clear: both; /* Annule le flottement à gauche et à droite, permettant à "copy" de se positionner sous les éléments précédents */
     text-align: center; /* Alignement du texte au centre */
@@ -88,17 +115,15 @@ body {
     bottom: 0;
     left: 0; /* Ajustement pour démarrer depuis le bord gauche */
     padding: 10px;
+
 }
-
-
-
-
 
 
 /*partie propre a la page "vous"*/
 
 /* Définition des styles pour le conteneur principal (celui où les bloc sont stocke) */
 #wrapper {
+
     width: 1200px; /* Largeur fixe */
     height: 1350px; /* Hauteur fixe */
     min-width: 1200px; /* Largeur minimale */
@@ -109,6 +134,7 @@ body {
 
 /* pr le style de la page avec photo */
 #pagephoto {
+
     background-color: #FFF;
     border-radius: 10px; /* Bordure arrondie */
     width: 800px; /* Largeur fixe */
@@ -125,6 +151,7 @@ body {
 
 /* pr le style de la page avec  les docs */
 #vosdocs {
+
     background-color: #FFF;
     border-radius: 10px; /* Bordure arrondie */
     width: 1200px; /* Largeur fixe */
@@ -135,11 +162,13 @@ body {
     
     margin-top: 30px; /* Espacement en haut */
     margin-bottom: 30px;
+
 }
 
 /* pr le style de la page avec les formations*/
 
 #formations {
+
     background-color: #FFF;
     border-radius: 10px; /* Bordure arrondie */
     width: 385px; /* Largeur fixe */
@@ -152,81 +181,210 @@ body {
 
 }
 .button-container {
-            width: 200px; /* Ajustez la largeur selon vos besoins */
-            margin: 0 auto; /* Pour centrer les boutons dans le conteneur */
+
+    width: 200px; /* Ajustez la largeur selon vos besoins */
+    margin: 0 auto; /* Pour centrer les boutons dans le conteneur */
 }
 
 #conteneurSousBlocs {
+
     display: flex;
 }
 
 .fixed-width-button {
+
     width: 200px; /* Même largeur que le conteneur pour assurer la stabilité */
 }
+
 #listeFichiers {
-            margin-top: 10px;
+
+    margin-top: 10px;
 }
 
+
 #ssblocgauche {
-            width: 550px;
-            height:180px;
-            border: 1px solid #ddd;
-            padding: 10px;
-            margin: 10px;
+
+    width: 550px;
+    height:180px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin: 10px;
+
 }
+
+
 #ssblocgauche h3 {
+
     margin: 0; /* Supprimer la marge par défaut du titre h3 */
+
 }
 
 #ssblocdroite {
-            width: 550px;
-            height: 180px;
-            margin-left: 15px;
-            border: 1px solid #ddd;
-            padding: 10px;
-            margin: 10px;
+
+    width: 550px;
+    height: 180px;
+    margin-left: 15px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin: 10px;
+
 }
 
 #conteneurFormations {
+
     display: flex;
     flex-direction: column; /* Ajout de cette ligne */
 
 }
 
 #ssbloc_haut {
-            width: 340px;
-            height: 175px;
-            border: 1px solid #ddd;
-            padding: 10px;
-            margin: 10px;
-            margin-bottom: 0;
+
+    width: 340px;
+    height: 170px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin: 10px;
+    margin-bottom: 0;
+
 }
+
 #ssbloc_milieu {
-            width: 340px;
-            height:175px;
-            border: 1px solid #ddd;
-            padding: 10px;
-            margin: 10px;
+
+    width: 340px;
+    height:170px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin: 10px;
+
 }
 
 #ssbloc_bas {
-            width: 340px;
-            height:160px;
-            padding: 10px;
-            margin: 10px;
-            border: 1px solid #ddd;
-            display: flex; /* Utilisation du modèle de boîte flexible */
-            flex-direction: column; /* Empiler les éléments verticalement */
-            align-items: center; /* Centrer verticalement le contenu */
+
+    width: 340px;
+    height:175px;
+    padding: 10px;
+    margin: 10px;
+    border: 1px solid #ddd;
+    display: flex; /* Utilisation du modèle de boîte flexible */
+    flex-direction: column; /* Empiler les éléments verticalement */
+    align-items: center; /* Centrer verticalement le contenu */
+
 }
+
 #ajouterformationformulaire {
+
     display: inline-block; /* Assurez-vous que le formulaire n'occupe que l'espace nécessaire */
 }
+
 #ssbloc_haut h3 {
+
     margin: 0; /* Supprimer la marge par défaut du titre h3 */
 }
 
 #ssbloc_milieu h3 {
+
     margin: 0; /* Supprimer la marge par défaut du titre h3 */
+}
+
+#hautpagephoto{
+
+    width: 755px;
+    height:100px;
+
+    /*border: 1px solid #ddd;*/
+
+    padding: 10px;
+    margin: 10px;
+    display: flex; /* Utilisation de flexbox pour aligner les éléments horizontalement */
+    align-items: center; /* Aligner les éléments verticalement au centre */
+
+}
+
+#hautpagephoto h3{
+
+    margin: 0; /* Supprimer la marge par défaut du titre h3 */
+}
+
+#statut{
+
+    width: 755px;
+    height:150px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin: 10px;
+
+}
+
+#statut h3{
+
+    margin: 0; /* Supprimer la marge par défaut du titre h3 */
+
+}
+
+#publication{
+
+    width: 755px;
+    height:250px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin: 10px;
+
+}
+
+#publication h3{
+
+    margin: 0; /* Supprimer la marge par défaut du titre h3 */
+
+}
+
+
+#conteneurPhotos {
+
+    display: flex;
+    flex-direction: column; /* Ajout de cette ligne */
+
+}
+
+
+#profilphoto{
+
+    width: 120px;
+    height: auto;
+    margin-right: 10px;
+
+}
+
+.prenom{
+
+    margin-left: 5px; /* Espacement à droite de la photo */
+    margin-top: -60px; /* Ajustez la valeur selon vos besoins pour déplacer le texte vers le haut */
+    margin-bottom: 5px;
+
+}
+
+
+.nom{
+
+    margin-left: 5px; /* Espacement à droite de la photo */
+    margin-bottom: 5px;
+    
+}
+
+
+
+.email{
+
+    margin-left: 5px; /* Espacement à droite de la photo */
+    margin-bottom: 5px;
+    clear: both; /* Force le positionnement en dessous des éléments précédents */
+    
+}
+
+
+
+#infos{
+
+    flex-direction: column; /* Changer la direction à la colonne */
+
 }
 
