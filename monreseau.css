@@ -1,0 +1,106 @@
+body {
+    background-color: #0a7677;
+    margin: 0;
+    padding: 0;
+    font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
+}
+
+#wrapper {
+    width: 1200px;
+    height: 1350px;
+    min-width: 1200px;
+    margin: auto;
+    padding: 10px;
+    text-align: center;
+}
+
+#banderole {
+    background-color: #a6cccc;
+    padding-bottom: 10px;
+    padding-top: 20px ;
+    display: flex;
+    justify-content: space-between ;
+}
+
+#logo {
+    padding-left: 80px;
+}
+
+#titre {
+    padding-top: 17px ;
+    padding-right: 100px;
+}
+
+#couleur{
+    background-color: #585858;
+    padding: 10px;
+}
+
+#deco {
+    cursor: pointer;
+    float: right;
+    padding-right: 90px;
+    padding-top: 6px;
+}
+
+#boutons{
+    cursor: pointer;
+    padding-top: 6px;
+}
+
+#copy {
+    background-color: #a6cccc;
+    clear: both; /* Annule le flottement à gauche et à droite, permettant à "copy" de se positionner sous les éléments précédents */
+    text-align: center; /* Alignement du texte au centre */
+}
+
+
+
+#amis {
+    background-color: #FFF;
+    border-radius : 10px ;
+    width: 870px;
+    height: 1100px;
+    text-align: center;
+    cursor: pointer;
+    float : left ;
+    padding: 5px;
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#reseau {
+    background-color: #FFF;
+    border-radius : 10px ;
+    width: 300px;
+    height: 1100px;
+    text-align: center;
+    float: right;
+    padding: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    
+}
+
+
+
+#copy {
+    background-color: #96bed2;
+    clear: both;
+    margin: auto;
+}
+
+.scrollable-container {
+    width: 868px; /*largeur de l'élément */
+    height: 1100px; /* hauteur de l'élément */
+    overflow-y: scroll; /* barre de défilement verticale */
+    overflow-x: hidden; /* barre de défilement horizontale */
+}
+
+.scrollable-container2 {
+    width: 295px; /*largeur de l'élément */
+    height: 1100px; /* hauteur de l'élément */
+    overflow-y: scroll; /* barre de défilement verticale */
+    overflow-x: hidden; /* barre de défilement horizontale */
+}
