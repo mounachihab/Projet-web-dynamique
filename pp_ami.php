@@ -70,6 +70,9 @@ $resultat = $mysqli->query("SELECT civilite FROM informations WHERE ID=$id_pp");
 $data = $resultat->fetch_assoc();
 $pp_civic = $data['civilite'] ;
 
+$resultat = $mysqli->query("SELECT admin FROM informations where ID='$id'");
+$data = $resultat->fetch_assoc();
+$admin = $data['admin'] ;
 ?>
 
 <!DOCTYPE html>
@@ -82,7 +85,7 @@ $pp_civic = $data['civilite'] ;
     <link rel="stylesheet" href="pp_ami.css">
     <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"> </script>
     <script type="text/javascript" src="accueil.js"></script>
-    <title>ECE In - Home</title>
+    <title>ECE In - Profil</title>
 </head>
 
 <body>
@@ -120,7 +123,7 @@ $pp_civic = $data['civilite'] ;
     </div>
 
     <div id="titre">
-        <h2>ECE In - Publication</h2>
+        <h2>ECE In - Profil</h2>
     </div>
 
     <div id="image_decembre_1">
@@ -181,35 +184,35 @@ $pp_civic = $data['civilite'] ;
                  height=""/>
         </a>
 
-        <a href=""> <!-- lien vers mon reseau -->
+        <a href="mon_reseau.php"> <!-- lien vers mon reseau -->
             <img src="boutons/bouton_mon_reseau_0.png"
                  alt="mon resau"
                  width="150"
                  height=""/>
         </a>
 
-        <a href="vous.html"> <!-- lien vers vous -->
+        <a href="vous.php"> <!-- lien vers vous -->
             <img src="boutons/bouton_vous_0.png"
                  alt="vous"
                  width="150"
                  height=""/>
         </a>
 
-        <a href=""> <!-- lien vers notifications -->
+        <a href="notifications.php"> <!-- lien vers notifications -->
             <img src="boutons/bouton_notification_0.png"
                  alt="notifications"
                  width="150"
                  height=""/>
         </a>
 
-        <a href=""> <!-- lien vers messagerie -->
+        <a href="messagerie.php"> <!-- lien vers messagerie -->
             <img src="boutons/bouton_messagerie_0.png"
                  alt="messagerie"
                  width="150"
                  height=""/>
         </a>
 
-        <a href=""> <!-- lien vers emplois -->
+        <a href="emplois.php"> <!-- lien vers emplois -->
             <img src="boutons/bouton_emplois_0.png"
                  alt="emplois"
                  width="150"
@@ -236,6 +239,12 @@ $pp_civic = $data['civilite'] ;
             année de naissance :
             <?php echo $pp_date ;?>
         </div>
+
+        <?php
+        if($admin === 'YES'){
+            echo "<a href='supp_admin.php?id=$id_pp&btn=2'><button type='submit'>Supprimer l'utilisateur</button></a>";
+        }
+        ?>
 
     </div>
 

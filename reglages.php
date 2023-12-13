@@ -154,44 +154,44 @@ if($date === "NULL") {
         <div id="boutons">
             <a href="accueil.php"> <!-- lien vers accueil -->
                 <img src="boutons/bouton_accueil_0.png"
-                   alt="accueil"
-                   width="150"
-                   height=""/>
+                     alt="accueil"
+                     width="150"
+                     height=""/>
             </a>
 
-            <a href=""> <!-- lien vers mon reseau -->
+            <a href="mon_reseau.php"> <!-- lien vers mon reseau -->
                 <img src="boutons/bouton_mon_reseau_0.png"
-                   alt="mon resau"
-                   width="150"
-                   height=""/>
+                     alt="mon resau"
+                     width="150"
+                     height=""/>
             </a>
 
-            <a href="vous.html"> <!-- lien vers vous -->
+            <a href="vous.php"> <!-- lien vers vous -->
                 <img src="boutons/bouton_vous_0.png"
-                   alt="vous"
-                   width="150"
-                   height=""/>
+                     alt="vous"
+                     width="150"
+                     height=""/>
             </a>
 
-            <a href=""> <!-- lien vers notifications -->
+            <a href="notifications.php"> <!-- lien vers notifications -->
                 <img src="boutons/bouton_notification_0.png"
-                   alt="notifications"
-                   width="150"
-                   height=""/>
+                     alt="notifications"
+                     width="150"
+                     height=""/>
             </a>
 
-            <a href=""> <!-- lien vers messagerie -->
+            <a href="messagerie.php"> <!-- lien vers messagerie -->
                 <img src="boutons/bouton_messagerie_0.png"
-                   alt="messagerie"
-                   width="150"
-                   height=""/>
+                     alt="messagerie"
+                     width="150"
+                     height=""/>
             </a>
 
-            <a href=""> <!-- lien vers emplois -->
+            <a href="emplois.php"> <!-- lien vers emplois -->
                 <img src="boutons/bouton_emplois_0.png"
-                   alt="emplois"
-                   width="150"
-                   height=""/>
+                     alt="emplois"
+                     width="150"
+                     height=""/>
             </a>
         </div>
 

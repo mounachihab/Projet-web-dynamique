@@ -53,7 +53,7 @@ if ($mysqli) {
     // -----------------------------------------------------------------------------------------------
     if ($mysqli->query($sql) === TRUE) {
         // Redirection
-        header("Location: afficher_publi.php?id=$ID_publication&coeur=$coeur");
+        header("Location: afficher_publi.php?id=$ID_publication&coeur=$coeur#position" . $position2);
 
     } else {
         echo "Erreur lors de l'ajout des données : " . $mysqli->error;

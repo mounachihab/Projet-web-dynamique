@@ -85,6 +85,15 @@ $resultat = $mysqli->query("SELECT COUNT(ID_likeur) FROM likes WHERE ID_publicat
 $data = $resultat->fetch_assoc();
 $like = $data['COUNT(ID_likeur)'] ;
 
+$resultat = $mysqli->query("SELECT descriptions FROM publications where ID_publication=$id_publication");
+$data = $resultat->fetch_assoc();
+$description = $data['descriptions'] ;
+
+$resultat = $mysqli->query("SELECT admin FROM informations where ID='$id'");
+$data = $resultat->fetch_assoc();
+$admin = $data['admin'] ;
+
+
 ?>
 
 <!DOCTYPE html>
@@ -97,7 +106,7 @@ $like = $data['COUNT(ID_likeur)'] ;
     <link rel="stylesheet" href="publication.css">
     <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"> </script>
     <script type="text/javascript" src="accueil.js"></script>
-    <title>ECE In - Home</title>
+    <title>ECE In - Publication</title>
 </head>
 
 <body>
@@ -196,35 +205,35 @@ $like = $data['COUNT(ID_likeur)'] ;
                  height=""/>
         </a>
 
-        <a href=""> <!-- lien vers mon reseau -->
+        <a href="mon_reseau.php"> <!-- lien vers mon reseau -->
             <img src="boutons/bouton_mon_reseau_0.png"
                  alt="mon resau"
                  width="150"
                  height=""/>
         </a>
 
-        <a href="vous.html"> <!-- lien vers vous -->
+        <a href="vous.php"> <!-- lien vers vous -->
             <img src="boutons/bouton_vous_0.png"
                  alt="vous"
                  width="150"
                  height=""/>
         </a>
 
-        <a href=""> <!-- lien vers notifications -->
+        <a href="notifications.php"> <!-- lien vers notifications -->
             <img src="boutons/bouton_notification_0.png"
                  alt="notifications"
                  width="150"
                  height=""/>
         </a>
 
-        <a href=""> <!-- lien vers messagerie -->
+        <a href="messagerie.php"> <!-- lien vers messagerie -->
             <img src="boutons/bouton_messagerie_0.png"
                  alt="messagerie"
                  width="150"
                  height=""/>
         </a>
 
-        <a href=""> <!-- lien vers emplois -->
+        <a href="emplois.php"> <!-- lien vers emplois -->
             <img src="boutons/bouton_emplois_0.png"
                  alt="emplois"
                  width="150"
@@ -261,6 +270,12 @@ $like = $data['COUNT(ID_likeur)'] ;
                 echo "</i>" ;
                 ?>
 
+                <?php
+                if($admin === 'YES'){
+                    echo "<a href='supp_admin.php?id=$id_publication&btn=1'><button type='submit'>Supprimer la publication</button></a>";
+                }
+                ?>
+
             </div>
 
         </div>
@@ -269,6 +284,8 @@ $like = $data['COUNT(ID_likeur)'] ;
 
         <div id="photo">
             <img src="<?php echo $photo_publication; ?>" height="450" alt="publication"/>
+            <br>
+            <?php echo $description; ?>
         </div>
 
         <hr/>
@@ -276,7 +293,7 @@ $like = $data['COUNT(ID_likeur)'] ;
         <div id="action">
 
             <a href="ajouter_like2.php?id=<?php echo $id_publication; ?>&etat=<?php echo $coeur; ?>">
-                <img src="<?php echo $coeur; ?>" height="60" alt="coeur"/>
+                <img id="position" src="<?php echo $coeur; ?>" height="60" alt="coeur"/>
             </a>
             &nbsp
             <?php echo $like ?>
@@ -287,7 +304,7 @@ $like = $data['COUNT(ID_likeur)'] ;
             </div>
             <?php
             echo "<form action='ajout_commentaire.php?publi=" . $id_publication . "&id=" . $id_publication . "&coeur=" . $coeur . "' method='post'>
-        <input name='commentaire' placeholder='Votre commentaire'>  
+        <input name='commentaire' placeholder='Votre commentaire' required maxlength='200'>  
       </form>";
             ?>
 

@@ -80,6 +80,10 @@ $resultat = $mysqli->query("SELECT photo FROM evenements where ID_event='$id_eve
 $data = $resultat->fetch_assoc();
 $photo_event = $data['photo'] ;
 
+$resultat = $mysqli->query("SELECT admin FROM informations where ID='$id'");
+$data = $resultat->fetch_assoc();
+$admin = $data['admin'] ;
+
 ?>
 
 <!DOCTYPE html>
@@ -92,7 +96,7 @@ $photo_event = $data['photo'] ;
     <link rel="stylesheet" href="publication.css">
     <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"> </script>
     <script type="text/javascript" src="accueil.js"></script>
-    <title>ECE In - Home</title>
+    <title>ECE In - Évènement</title>
 </head>
 
 <body>
@@ -130,7 +134,7 @@ $photo_event = $data['photo'] ;
     </div>
 
     <div id="titre">
-        <h2>ECE In - Publication</h2>
+        <h2>ECE In - Évènement</h2>
     </div>
 
     <div id="image_decembre_1">
@@ -191,35 +195,35 @@ $photo_event = $data['photo'] ;
                  height=""/>
         </a>
 
-        <a href=""> <!-- lien vers mon reseau -->
+        <a href="mon_reseau.php"> <!-- lien vers mon reseau -->
             <img src="boutons/bouton_mon_reseau_0.png"
                  alt="mon resau"
                  width="150"
                  height=""/>
         </a>
 
-        <a href="vous.html"> <!-- lien vers vous -->
+        <a href="vous.php"> <!-- lien vers vous -->
             <img src="boutons/bouton_vous_0.png"
                  alt="vous"
                  width="150"
                  height=""/>
         </a>
 
-        <a href=""> <!-- lien vers notifications -->
+        <a href="notifications.php"> <!-- lien vers notifications -->
             <img src="boutons/bouton_notification_0.png"
                  alt="notifications"
                  width="150"
                  height=""/>
         </a>
 
-        <a href=""> <!-- lien vers messagerie -->
+        <a href="messagerie.php"> <!-- lien vers messagerie -->
             <img src="boutons/bouton_messagerie_0.png"
                  alt="messagerie"
                  width="150"
                  height=""/>
         </a>
 
-        <a href=""> <!-- lien vers emplois -->
+        <a href="emplois.php"> <!-- lien vers emplois -->
             <img src="boutons/bouton_emplois_0.png"
                  alt="emplois"
                  width="150"
@@ -254,6 +258,14 @@ $photo_event = $data['photo'] ;
                 echo " à " ;
                 echo $lieu;
                 echo "</i>" ;
+                ?>
+
+                <?php
+                    if($admin === 'YES'){
+                        echo "<a href='supp_admin.php?id=$id_event&btn=0'>
+                                    <button type='submit'>Supprimer l'évènement</button>
+                              </a>";
+                    }
                 ?>
 
             </div>

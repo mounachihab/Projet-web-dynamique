@@ -33,7 +33,7 @@ $id = $_SESSION['id'];
 //Si la BDD existe
 if ($mysqli) {
     // Requête pour récupérer les photos des eveneements
-    $sql = "SELECT photo FROM evenements LIMIT 6";
+    $sql = "SELECT photo FROM evenements WHERE DATEDIFF(NOW(), evenements.date) <= 7";
     $result = $mysqli->query($sql);
 
 
@@ -47,8 +47,7 @@ if ($mysqli) {
             FROM publications
             JOIN utilisateurs ON publications.ID_createur = utilisateurs.ID
              JOIN reseau_ami ON utilisateurs.ID = reseau_ami.ID_ami 
-             WHERE reseau_ami.ID = $id
-             LIMIT 5";
+             WHERE (reseau_ami.ID = $id OR publications.ID_createur = '16') AND (DATEDIFF(NOW(), publications.date) <= 7)";
     $result2 = $mysqli->query($sql2);
 
     // Affichage des événements

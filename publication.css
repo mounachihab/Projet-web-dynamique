@@ -168,11 +168,11 @@ body {
     margin-top: 10px;
     border-radius: 10px; /* Bordure arrondie */
     width: 1200px; /* Largeur fixe */
-    height: 470px; /* Hauteur fixe */
+    height: 480px; /* Hauteur fixe */
     text-align: center; /* Alignement du texte au centre */
     float: left; /* Flotter à gauche */
     clear: both;
-    padding-top: 15px;
+    padding-top: 5px;
 }
 
 #action {
@@ -233,6 +233,14 @@ button {
     height: 25px;
     width: 70px;
     margin-left: 10px;
+}
+
+#info button{
+    background-color: #0a7677;
+    color: white;
+    height: 25px;
+    width: 160px;
+    margin-left: 580px;
 }
 input {
     margin-left: 10px;

@@ -48,10 +48,35 @@ if (mysqli_query($mysqli, $sql_delete)) {
 }
 
 // -----------------------------------------------------------------------------------------------
-// table information
-$sql_delete = "DELETE FROM informations WHERE ID = '$id';";
-//execution :
-if (mysqli_query($mysqli, $sql_delete)) {
+// Supprimez les données de la table 'informations'
+$sql_delete_informations = "DELETE FROM informations WHERE ID=$id";
+$result_informations = mysqli_query($mysqli, $sql_delete_informations);
+
+// Supprimez les données de la table 'reseau_ami'
+$sql_delete_reseau_ami = "DELETE FROM reseau_ami WHERE ID_ami=$id OR ID=$id";
+$result_reseau_ami = mysqli_query($mysqli, $sql_delete_reseau_ami);
+
+// Supprimez les données de la table 'publications'
+$sql_delete_publications = "DELETE FROM publications WHERE ID_createur=$id";
+$result_publications = mysqli_query($mysqli, $sql_delete_publications);
+
+// Supprimez les données de la table 'likes'
+$sql_delete_likes = "DELETE FROM likes WHERE ID_likeur=$id";
+$result_likes = mysqli_query($mysqli, $sql_delete_likes);
+
+// Supprimez les données de la table 'evenements'
+$sql_delete_evenements = "DELETE FROM evenements WHERE ID_createur=$id";
+$result_evenements = mysqli_query($mysqli, $sql_delete_evenements);
+
+// Supprimez les données de la table 'commentaires'
+$sql_delete_commentaires = "DELETE FROM commentaires WHERE ID=$id";
+$result_commentaires = mysqli_query($mysqli, $sql_delete_commentaires);
+
+$sql_delete_commentaires = "DELETE FROM commentaires WHERE ID=$id";
+$result_utilisateur = mysqli_query($mysqli, $sql_delete_commentaires);
+
+// verif de l'execution :
+if ($result_utilisateur && $result_informations && $result_reseau_ami && $result_publications && $result_likes && $result_evenements && $result_commentaires) {
     echo "Données supprimées avec succès.";
 } else {
     echo "Erreur lors de la suppression des données : " . mysqli_error($mysqli);

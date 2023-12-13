@@ -105,3 +105,5 @@ var position2 = position.getBoundingClientRect().top;
 // Rediriger
 window.location.href = 'accueil.php#position' + position2;
 position.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+
