@@ -75,9 +75,9 @@ if ($mysqli) {
     }
 
     // si c'est un utilisateur à supprimer
-    if($btn === '2'){
+    elseif($btn === '2'){
         // Supprimez les données de la table 'informations'
-        $sql_delete_informations = "DELETE FROM utilisateur WHERE ID=$id_publi";
+        $sql_delete_informations = "DELETE FROM utilisateurs WHERE ID=$id_publi";
         $result_utilisateur = mysqli_query($mysqli, $sql_delete_informations);
 
         // Supprimez les données de la table 'informations'
@@ -111,6 +111,34 @@ if ($mysqli) {
             echo "Erreur lors de la suppression des données : " . mysqli_error($mysqli);
         }
         header('Location: accueil.php');
+    }
+    // si c'est un commentaire à supprimer
+    elseif($btn === '4'){
+
+        $result = $mysqli->query("SELECT ID_publication FROM commentaires WHERE ID_comm=$id_publi");
+        $data = $result->fetch_assoc();
+        $id_publication = $data['ID_publication'] ;
+
+        $sql = "DELETE FROM commentaires WHERE ID_comm=$id_publi" ;
+
+        if (mysqli_query($mysqli, $sql)) {
+            echo "Données supprimées avec succès.";
+        } else {
+            echo "Erreur lors de la suppression des données : " . mysqli_error($mysqli);
+        }
+
+
+        $result = $mysqli->query("SELECT ID_likes FROM likes WHERE ID_publication=$id_publi AND ID_likeur=$id");
+        $data = $result->fetch_assoc();
+        $coeur = $data['ID_likes'] ;
+
+        if($coeur === ''){
+            $coeur = "boutons/coeur_0.png";
+        }
+        else {
+            $coeur = "boutons/coeur_1.png";
+        }
+        header("Location: afficher_publi.php?id=$id_publication&coeur=$coeur");
     }
 
     $mysqli -> close();

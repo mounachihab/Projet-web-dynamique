@@ -102,6 +102,14 @@ body {
     text-align: center; /* Alignement du texte au centre */
 }
 
+/*-----------------------------------------------------------------------------------------*/
+/* Style du boutons pour revenir en hait de la page */
+#retour_haut {
+    float: right;
+    padding-right: 15px;
+}
+
+
 
 /*-----------------------------------------------------------------------------------------*/
 /* Styles pour l'introduction afficher dans une boite quand on appuie sur le logo */
@@ -161,12 +169,15 @@ button {
     margin-left: 10px;
 }
 
+
+
 #information button {
     background-color: #0a7677;
     color: white;
     height: 25px;
     width: 160px;
     margin-left: 10px;
+    cursor: pointer;
 }
 
 input {
@@ -192,9 +203,10 @@ input {
     text-align: center; /* Alignement du texte au centre */
     float: left; /* Flotter à gauche */
     margin-top: 15px; /* Espacement en haut */
-    overflow-x: auto;
     white-space: nowrap;
     display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
 }
 
 #btn{
@@ -206,6 +218,21 @@ input {
     float: right; /* Flotter à droite */
     margin-left: 15px; /* Espacement à gauche */
     margin-top: 15px; /* Espacement en haut */
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+#btn button {
+    background-color: #0a7677;
+    color: white;
+    height: 25px;
+    width: 160px;
+    cursor: pointer;
+
 }
 
 #description{
@@ -225,8 +252,362 @@ input {
     background-color: #FFF;
     border-radius: 10px; /* Bordure arrondie */
     width: 1200px; /* Largeur fixe */
-    height: 384px; /* Hauteur fixe */
+    height:auto; /* Hauteur fixe */
     text-align: center; /* Alignement du texte au centre */
     float: left; /* Flotter à gauche */
-    clear: left; /* Permet de s'assurer que le bloc est après les blocs précédents */
+    margin-top: 15px; /* Espacement en haut */
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+
+#pp_photo{
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    height: 300px;
+    width: 300px;
+}
+
+#bloc1{
+    margin: 20px;
+    height: 150px;
+    width: 300px;
+    text-align: left;
+}
+
+#annee{
+    margin-left: 20px;
+    margin-right: 20px;
+    height: 20px;
+    width: 300px;
+}
+
+#job{
+    margin-top: -170px;
+    margin-left: 20px;
+    height: 150px;
+    width: 380px;
+    text-align: left;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+#popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 30px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 999;
+    border-radius: 10px;
+}
+
+#overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 998;
+}
+
+
+#yesBtn {
+    background-color: #0a7677;
+    margin-bottom: 20px;
+    border: none;
+}
+
+#noBtn {
+    background-color: #0a7677;
+    border: none;
+    margin-left: 10px;
+}
+
+
+
+
+
+
+
+
+
+/* POUR AFFICHER LES PUBLICATIONS*/
+/*-----------------------------------------------------------------------------------------*/
+
+#popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 30px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 999;
+    border-radius: 10px;
+}
+
+#overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 998;
+}
+
+
+#yesBtn {
+    background-color: #0a7677;
+    margin-bottom: 20px;
+    border: none;
+}
+
+#noBtn {
+    background-color: #0a7677;
+    border: none;
+    margin-left: 10px;
+}
+
+
+
+
+
+
+#popup2 {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 30px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 999;
+    border-radius: 10px;
+}
+
+#overlay2 {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 998;
+}
+
+
+#yesBtn2 {
+    background-color: #0a7677;
+    margin-bottom: 20px;
+    border: none;
+}
+
+#noBtn2 {
+    background-color: #0a7677;
+    border: none;
+    margin-left: 10px;
+}
+
+
+
+
+
+
+#popup3 {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 30px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 999;
+    border-radius: 10px;
+}
+
+#overlay3 {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 998;
+}
+
+
+#yesBtn3 {
+    background-color: #0a7677;
+    margin-bottom: 20px;
+    border: none;
+}
+
+#noBtn3 {
+    background-color: #0a7677;
+    border: none;
+    margin-left: 10px;
+}
+
+
+
+
+
+
+
+
+
+
+
+#bloc {
+    background-color: #FFF;
+    border-radius: 10px; /* Bordure arrondie */
+    width: 1200px; /* Largeur fixe */
+    height:auto; /* Hauteur fixe */
+    text-align: center; /* Alignement du texte au centre */
+    float: left; /* Flotter à gauche */
+    margin-top: 15px; /* Espacement en haut */
+    align-items: center;
+}
+
+#personne {
+    background-color: #a6cccc;
+    text-align: left;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    width: 1120px;
+    padding-left: 80px;
+    height: 80px;
+    float: left;
+    display: flex;
+    align-items: center;
+}
+
+#info{
+    text-align: left;
+    float: left; /* Flotter à gauche */
+    margin-left: 30px;
+}
+
+#photo {
+    margin-top: 10px;
+    border-radius: 10px; /* Bordure arrondie */
+    width: 1200px; /* Largeur fixe */
+    height: 480px; /* Hauteur fixe */
+    text-align: center; /* Alignement du texte au centre */
+    float: left; /* Flotter à gauche */
+    clear: both;
+    padding-top: 5px;
+}
+
+#action {
+    margin-bottom: 10px;
+    border-radius: 10px; /* Bordure arrondie */
+    width: 1120px; /* Largeur fixe */
+    height: 60px; /* Hauteur fixe */
+    float: left; /* Flotter à gauche */
+    clear: both;
+    text-align: left;
+    padding-left: 80px;
+    display: flex;
+    align-items: center;
+}
+
+#mon_comm {
+    text-align: left;
+    float: left; /* Flotter à gauche */
+    margin-left: 30px;
+}
+
+#commentaire {
+    margin-top: 15px;
+    border-radius: 10px; /* Bordure arrondie */
+    width: 1060px; /* Largeur fixe */
+    height: auto; /* Hauteur fixe */
+    text-align: left;
+    padding-left: 80px;
+    float: left; /* Flotter à gauche */
+    clear: both;
+}
+
+#comm2 {
+    display: flex;
+    align-items: center;
+    clear: both;
+}
+
+#encadrement {
+    margin-left: 10px;
+    height: auto;
+    border: 1px solid black;
+    border-radius: 10px; /* Bordure arrondie */
+    width: 960px; /* Largeur fixe */
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-left: 10px;
+}
+
+form {
+    display: flex;
+}
+
+button {
+    background-color: #0a7677;
+    color: white;
+    height: 25px;
+    width: 70px;
+    margin-left: 10px;
+}
+
+#commentaire button{
+    background-color: #0a7677;
+    color: white;
+    height: 25px;
+    width: 210px;
+}
+#info button{
+    background-color: #0a7677;
+    color: white;
+    height: 25px;
+    width: 160px;
+    margin-left: 580px;
+}
+input {
+    margin-left: 10px;
+    width: 820px;
+    border-radius: 10px; /* Bordure arrondie */
+    padding-top: 3px;
+    padding-bottom: 3px;
+    border: 1px solid black;
+    padding-left: 10px;
 }

@@ -72,7 +72,7 @@ $result_evenements = mysqli_query($mysqli, $sql_delete_evenements);
 $sql_delete_commentaires = "DELETE FROM commentaires WHERE ID=$id";
 $result_commentaires = mysqli_query($mysqli, $sql_delete_commentaires);
 
-$sql_delete_commentaires = "DELETE FROM commentaires WHERE ID=$id";
+$sql_delete_commentaires = "DELETE FROM utilisateurs WHERE ID=$id";
 $result_utilisateur = mysqli_query($mysqli, $sql_delete_commentaires);
 
 // verif de l'execution :

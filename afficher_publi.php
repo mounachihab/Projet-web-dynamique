@@ -244,7 +244,7 @@ $admin = $data['admin'] ;
     <div id="bloc">
         <div id="personne">
             <a href="pp_ami.php?id=<?php echo $id_publieur; ?>">
-                <img style="border: 1px solid black;" src="<?php echo $photo_publieur; ?>" width="50" alt="publication"/>
+                <img style="border: 1px solid black;border-radius: 10px;" src="<?php echo $photo_publieur; ?>" width="50" alt="publication"/>
             </a>
 
 
@@ -272,7 +272,15 @@ $admin = $data['admin'] ;
 
                 <?php
                 if($admin === 'YES'){
-                    echo "<a href='supp_admin.php?id=$id_publication&btn=1'><button type='submit'>Supprimer la publication</button></a>";
+                    echo "<button onclick='openPopup()'>Supprimer la pulication</button>
+
+                        <div id='overlay'></div>
+                        
+                        <div id='popup'>
+                            <p>Voulez-vous vraiment supprimer cette pulication ?</p>
+                            <button id='yesBtn' onclick='redirectToPage($id_publication,1)'>Supprimer</button>
+                            <button id='noBtn' onclick='closePopup()'>Non</button>
+                        </div>";
                 }
                 ?>
 
@@ -299,7 +307,7 @@ $admin = $data['admin'] ;
             <?php echo $like ?>
 
             <div id="mon_comm">
-                <a href="pp_ami.php?id=<?php echo $id; ?>"> <img style="border: 1px solid black;" src="<?php echo $photo; ?>" height="40" alt="publication"/> </a>
+                <a href="pp_ami.php?id=<?php echo $id; ?>"> <img style="border: 1px solid black;border-radius: 10px;" src="<?php echo $photo; ?>" height="40" alt="publication"/> </a>
 
             </div>
             <?php
@@ -324,12 +332,31 @@ $admin = $data['admin'] ;
                 $data = $resultat->fetch_assoc();
                 $pp_profil_comm = $data['photo'] ;
 
-                echo "<a href='pp_ami.php?id=$id_commentateur'> <img style='border: 1px solid black;' src='" . $pp_profil_comm . "' height='50' alt='photo de prfl'/> </a>";
+                echo "<a href='pp_ami.php?id=$id_commentateur'> <img style='border: 1px solid black;border-radius: 10px;' src='" . $pp_profil_comm . "' height='50' alt='photo de prfl'/> </a>";
                 echo "<div id='encadrement'>";
                 echo $row['comm'] ;
+
                 echo "<br>";
 
+                $resultat = $mysqli->query("SELECT ID_comm FROM commentaires where ID=$id_commentateur AND ID_publication=$id_publication");
+                $data = $resultat->fetch_assoc();
+                $id_comm = $data['ID_comm'] ;
+
+
                 echo "</div>";
+                if($admin === 'YES'){
+                    echo "<button onclick='openPopup2()'>Supprimer le commentaire</button>
+
+                        <div id='overlay2'></div>
+                        
+                        <div id='popup2'>
+                            <p>Voulez-vous vraiment supprimer ce commentaire ?</p>
+                            <button id='yesBtn2' onclick='redirectToPage2($id_comm,4)'>Supprimer</button>
+                            <button id='noBtn2' onclick='closePopup2()'>Non</button>
+                        </div>";
+                }
+
+
                 echo "</div>";
                 echo "<br>";
             }

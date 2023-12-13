@@ -39,7 +39,6 @@ if ($mysqli) {
         // Requête
         $sql = "DELETE FROM likes WHERE (ID_likeur = '$id' AND ID_publication = $ID_publication);";
         $coeur = "boutons/coeur_0.png";
-        echo "test test";
     }
     else {
         //sinon on en ajoute un

@@ -1,4 +1,3 @@
-
 <?php
 //info pour la connection
 $db_host = '127.0.0.1';
@@ -73,6 +72,7 @@ $pp_civic = $data['civilite'] ;
 $resultat = $mysqli->query("SELECT admin FROM informations where ID='$id'");
 $data = $resultat->fetch_assoc();
 $admin = $data['admin'] ;
+
 ?>
 
 <!DOCTYPE html>
@@ -145,7 +145,7 @@ $admin = $data['admin'] ;
     </div>
 
     <div id="nomCompte">
-        <?php echo "<img src='$photo' height='50' width=''>";?>
+        <?php echo "<img style='border-radius: 10px;' src='$photo' height='50' width=''>";?>
         <p> </p>
         <?php echo $user_name; ?>
     </div>
@@ -222,35 +222,79 @@ $admin = $data['admin'] ;
 
     <div id="information">
         <div id="pp_photo">
-            <img src="<?php echo $pp_photo ;?>" height="300">
+            <img style="border-radius: 50px;" src="<?php echo $pp_photo ;?>" height="300">
         </div>
 
         <div id="bloc1">
-            <h3>
+            <h2>
                 <?php echo $pp_civic ;?>
                 <?php echo $pp_prenom ;?>
                 <?php echo $pp_nom ;?>
-            </h3>
-                mail :
+            </h2>
+                Mail :
                 <?php echo $pp_email ;?>
         </div>
 
         <div id="annee">
-            année de naissance :
+            Année de naissance :
             <?php echo $pp_date ;?>
         </div>
 
-        <?php
-        if($admin === 'YES'){
-            echo "<a href='supp_admin.php?id=$id_pp&btn=2'><button type='submit'>Supprimer l'utilisateur</button></a>";
-        }
-        ?>
+        <div id="job">
+            <h3>
+                Current job : &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                <?php
+                if($admin === 'YES'){
+                    echo "<button onclick='openPopup()'>Supprimer l'utilisateur</button>
 
+                        <div id='overlay'></div>
+                        
+                        <div id='popup'>
+                            <p>Voulez-vous vraiment supprimer cet utilisateur ?</p>
+                            <button id='yesBtn' onclick='redirectToPage($id_pp,2)'>Supprimer</button>
+                            <button id='noBtn' onclick='closePopup()'>Non</button>
+                        </div>";
+                }
+                ?>
+            </h3>
+        </div>
     </div>
 
+    <?php
+    $resultat = $mysqli->query("SELECT ID_relation FROM reseau_ami where ID='$id' AND ID_ami='$id_pp'");
+
+    if($data = $resultat->fetch_assoc()){
+    $amitie = 1;
+    }
+    else {
+    $amitie = 0;
+    }
+    ?>
 
     <div id="btn">
+        <a href="ajout_ami2.php?id_ami=<?php echo $id_pp; ?>&amitie=<?php echo $amitie; ?>">
+            <button type="submit">
+                <?php
+                $resultat = $mysqli->query("SELECT ID_relation FROM reseau_ami where ID='$id' AND ID_ami='$id_pp'");
 
+                    if($data = $resultat->fetch_assoc()){
+                        echo "Retirer de mes amis";
+                        $amitie = 1;
+                    }
+                    else {
+                        echo "Ajouter en ami";
+                        $amitie = 0;
+                    }
+                ?>
+            </button>
+        </a>
+
+        <br>
+        <a href="">
+            <button type="submit">
+                Envoyer un message
+            </button>
+        </a>
     </div>
 
 
@@ -258,13 +302,11 @@ $admin = $data['admin'] ;
 
     </div>
 
-
-    <div class="publication"></div>
-
-</div>
-
+    <?php include 'pp_publi.php' ;?>
 
 </div>
+
+
 
 <!-- Copyright -->
 <div id="copy">
@@ -272,6 +314,16 @@ $admin = $data['admin'] ;
         &copy; 2023 ECE In. Tous droits réservés.
     </p>
 </div>
+<div id="retour_haut">
+    <img src="boutons/fleche_haut.png"
+         alt="retour en haut"
+         width="70"
+         height=""
+         style="cursor: pointer;"
+         onclick="retour_en_haut()"/>
+</div>
+
+
 </body>
 </html>
-<?php
+

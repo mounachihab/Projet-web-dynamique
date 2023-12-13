@@ -234,7 +234,7 @@ $admin = $data['admin'] ;
     <div id="bloc">
         <div id="personne">
             <a href="pp_ami.php?id=<?php echo $id_publieur; ?>">
-                <img style="border: 1px solid black;" src="<?php echo $photo_publieur; ?>" width="50" alt="publication"/>
+                <img style="border: 1px solid black;border-radius: 10px;" src="<?php echo $photo_publieur; ?>" width="50" alt="publication"/>
             </a>
 
 
@@ -262,9 +262,15 @@ $admin = $data['admin'] ;
 
                 <?php
                     if($admin === 'YES'){
-                        echo "<a href='supp_admin.php?id=$id_event&btn=0'>
-                                    <button type='submit'>Supprimer l'évènement</button>
-                              </a>";
+                        echo "<button onclick='openPopup()'>Supprimer l'évènement</button>
+
+                        <div id='overlay'></div>
+                        
+                        <div id='popup'>
+                            <p>Voulez-vous vraiment supprimer cet évènement ?</p>
+                            <button id='yesBtn' onclick='redirectToPage($id_event,0)'>Supprimer</button>
+                            <button id='noBtn' onclick='closePopup()'>Non</button>
+                        </div>";
                     }
                 ?>
 

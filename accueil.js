@@ -107,3 +107,55 @@ window.location.href = 'accueil.php#position' + position2;
 position.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
 
+
+
+// Fonctions pour verifictaion de supprimer :
+function openPopup() {
+    document.getElementById('popup').style.display = 'block';
+    document.getElementById('overlay').style.display = 'block';
+}
+
+function closePopup() {
+    document.getElementById('popup').style.display = 'none';
+    document.getElementById('overlay').style.display = 'none';
+}
+
+function redirectToPage(id_publi,btn) {
+    // Remplacez "URL_DE_REDIRECTION" par l'URL réelle vers laquelle vous souhaitez rediriger l'utilisateur.
+    window.location.href = `supp_admin.php?id=${id_publi}&btn=${btn}`;
+}
+
+
+
+function openPopup2() {
+    document.getElementById('popup2').style.display = 'block';
+    document.getElementById('overlay2').style.display = 'block';
+}
+
+function closePopup2() {
+    document.getElementById('popup2').style.display = 'none';
+    document.getElementById('overlay2').style.display = 'none';
+}
+
+function redirectToPage2(id_publi,btn) {
+    // Remplacez "URL_DE_REDIRECTION" par l'URL réelle vers laquelle vous souhaitez rediriger l'utilisateur.
+    window.location.href = `supp_admin.php?id=${id_publi}&btn=${btn}`;
+}
+
+
+
+
+function openPopup3() {
+    document.getElementById('popup3').style.display = 'block';
+    document.getElementById('overlay3').style.display = 'block';
+}
+
+function closePopup3() {
+    document.getElementById('popup3').style.display = 'none';
+    document.getElementById('overlay3').style.display = 'none';
+}
+function redirectToPage(id_publi,btn) {
+    // Remplacez "URL_DE_REDIRECTION" par l'URL réelle vers laquelle vous souhaitez rediriger l'utilisateur.
+    window.location.href = `supp_admin.php?id=${id_publi}&btn=${btn}`;
+}
+

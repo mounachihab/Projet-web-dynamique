@@ -57,7 +57,7 @@ if ($mysqli) {
 
         echo "<div id='bloc1'>";
         echo "<a href='pp_ami.php?id=$ID_posteur'>
-                        <img style='border: 1px solid black;'
+                        <img style='border: 1px solid black;border-radius: 10px;'
                              src=" . htmlspecialchars($row['photo_utilisateur']) . "
                              alt='utilisateur'
                              width=''

@@ -314,7 +314,15 @@ if($date === "NULL") {
                 Si vous désirez supprimer votre compte de manière totale et définitive, appuyez sur le bouton qui suit.
             </p>
 
-        <button onclick="redirigerVersPage()"> Supprimer mon compte </button>
+            <button onclick='openPopup()'>Supprimer le compte</button>
+
+            <div id='overlay'></div>
+
+            <div id='popup'>
+                <p>Voulez-vous vraiment supprimer votre compte ?</p>
+                <button id='yesBtn' onclick='redirectToPage()'>Supprimer</button>
+                <button id='noBtn' onclick='closePopup()'>Non</button>
+            </div>
 
         </div>
     </div>
