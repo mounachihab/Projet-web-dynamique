@@ -138,7 +138,7 @@ body {
     background-color: #FFF;
     border-radius: 10px; /* Bordure arrondie */
     width: 800px; /* Largeur fixe */
-    height: 700px; /* Hauteur fixe */
+    height: 750px; /* Hauteur fixe */
     text-align: center; /* Alignement du texte au centre */
     cursor: pointer; /* Curseur pointer au survol */
     float: left; /* Flotter à gauche */
@@ -155,7 +155,7 @@ body {
     background-color: #FFF;
     border-radius: 10px; /* Bordure arrondie */
     width: 1200px; /* Largeur fixe */
-    height: 300px; /* Hauteur fixe */
+    height: 250px; /* Hauteur fixe */
     text-align: center; /* Alignement du texte au centre */
     cursor: pointer; /* Curseur pointer au survol */
     float: left; /* Flotter à droite */
@@ -172,7 +172,7 @@ body {
     background-color: #FFF;
     border-radius: 10px; /* Bordure arrondie */
     width: 385px; /* Largeur fixe */
-    height: 700px; /* Hauteur fixe */
+    height: 750px; /* Hauteur fixe */
     text-align: center; /* Alignement du texte au centre */
     cursor: pointer; /* Curseur pointer au survol */
     float: left; /* Flotter à droite */
@@ -180,10 +180,20 @@ body {
     margin-left: 15px; /* Espacement a gauche */
 
 }
+
+#listeFormations{
+    text-align: left;
+}
+
+#listeProjets{
+    text-align: left;
+}
+
 .button-container {
 
     width: 200px; /* Ajustez la largeur selon vos besoins */
     margin: 0 auto; /* Pour centrer les boutons dans le conteneur */
+    margin-bottom: 10px;
 }
 
 #conteneurSousBlocs {
@@ -205,7 +215,7 @@ body {
 #ssblocgauche {
 
     width: 550px;
-    height:180px;
+    height:140px;
     border: 1px solid #ddd;
     padding: 10px;
     margin: 10px;
@@ -222,7 +232,7 @@ body {
 #ssblocdroite {
 
     width: 550px;
-    height: 180px;
+    height: 140px;
     margin-left: 15px;
     border: 1px solid #ddd;
     padding: 10px;
@@ -324,7 +334,7 @@ body {
 #publication{
 
     width: 755px;
-    height:250px;
+    height:300px;
     border: 1px solid #ddd;
     padding: 10px;
     margin: 10px;
@@ -351,6 +361,7 @@ body {
     width: 120px;
     height: auto;
     margin-right: 10px;
+    
 
 }
 
@@ -385,6 +396,8 @@ body {
 #infos{
 
     flex-direction: column; /* Changer la direction à la colonne */
+    text-align: left;
 
 }
+
 
