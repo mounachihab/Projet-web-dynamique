@@ -16,29 +16,69 @@ if (!$db_found) {
     exit;
 }
 
-$id=3;
+$id=3; //a modifier
+
 $sql="SELECT * FROM utilisateurs WHERE ID=$id";
 $result = mysqli_query($db_handle, $sql);
 // Vérifier s'il y a une erreur lors de l'exécution de la requête SQL
 if (!$result) {
-    echo "Erreur lors de l'exécution de la requête : " . mysqli_error($db_handle);
+    echo "Erreur lors de l'exécution de la requête utilisateurs : " . mysqli_error($db_handle);
     exit;
 }
 
+$sql_statut="SELECT * FROM statut WHERE ID=$id";
+$result_statut = mysqli_query($db_handle, $sql_statut);
 
-if ($db_found) {  //verifie si le nombre de lignes est superieur à 0, cela veu dire qu il ya au moins une ligne de resultats
+// Vérifier s'il y a une erreur lors de l'exécution de la requête SQL
+if (!$result_statut) {
+    echo "Erreur lors de l'exécution de la requête statut: " . mysqli_error($db_handle);
+    exit;
+}
+
+$sql_formations="SELECT * FROM formations WHERE ID=$id";
+$result_formations = mysqli_query($db_handle, $sql_formations);
+
+// Vérifier s'il y a une erreur lors de l'exécution de la requête SQL
+if (!$result_formations) {
+    echo "Erreur lors de l'exécution de la requête formations: " . mysqli_error($db_handle);
+    exit;
+}
+
+if ($db_found) {  
     $utilisateur = mysqli_fetch_assoc($result);
     $nom = $utilisateur['nom'];
     $prenom = $utilisateur['prenom'];
     $email = $utilisateur['email'];
     $mdp = $utilisateur['mdp'];
     $photo = $utilisateur['photo'];
+
+    $statut=mysqli_fetch_assoc($result_statut);
+    $tonstatut = $statut['tonstatut'];
+
+    $formations=mysqli_fetch_assoc($result_formations);
+    $tesformations = $statut['tesformations'];
 } else {
     echo "Utilisateur non trouvé.";
     exit;
 }
 
+// Vérifier si le formulaire du statut a été soumis
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Récupérer la nouvelle valeur du statut depuis le formulaire
+    $nouveau_statut = mysqli_real_escape_string($db_handle, $_POST['nouveau_statut']);
 
+    // Mettre à jour la table statut avec le nouveau statut
+    $sql_update_statut = "UPDATE statut SET tonstatut = '$nouveau_statut' WHERE ID = $id";
+    $result_update_statut = mysqli_query($db_handle, $sql_update_statut);
+
+    if (!$result_update_statut) {
+        echo "Erreur lors de la mise à jour du statut : " . mysqli_error($db_handle);
+    } else {
+        // Rafraîchir la page pour afficher le nouveau statut
+        header("Location: {$_SERVER['PHP_SELF']}");
+        exit();
+    }
+}
 
 ?>
 
@@ -163,18 +203,32 @@ if ($db_found) {  //verifie si le nombre de lignes est superieur à 0, cela veu 
                 <h2> Votre profil :</h2>
                 <div id="hautpagephoto">
                     
-                    <img id="profilphoto" src="<?php echo $photo; ?>" alt="Photo de profil"  >
+                    <img id="profilphoto" src="<?php echo $photo; ?>" alt="Photo de profil"  style="border-radius: 10px;">
                     <div id="infos">
                         <div class="prenom"><?php echo $prenom  ?></div> 
                         <div class="nom"><?php echo $nom  ?></div> 
                         <div class="email"><?php echo $email ; ?></div>  
                     </div>
 
-
-
-
                 </div>
-                <div id="statut"><h3>Votre statut :</h3></div>
+                <div id="statut">
+                    <h3>Votre statut :</h3><br>
+                    <?php echo $tonstatut  ?>
+                    <button onclick="toggleStatutForm()">Modifier votre statut </button>
+                    <!-- Formulaire de modification du statut -->
+                    <form id="champ_statut" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>" style="display: none;">
+                        
+                            <label for="nouveau_statut"></label>
+                            <input type="text" name="nouveau_statut" id="nouveau_statut" placeholder="Nouveau statut">
+                            <button type="submit" onclick="soumettreStatutForm()">Soumettre</button>
+
+                    </form>     
+                            
+                    
+                </div>
+
+
+
                 <div id="publication"><h3>Vos publications :</h3></div>
             </div>    
         </div>
@@ -200,7 +254,7 @@ if ($db_found) {  //verifie si le nombre de lignes est superieur à 0, cela veu 
                 </div>
                 
                 <div id="ssbloc_bas">    
-                    <button onclick="toggleformulaire()">Ajouter une Formation</button>
+                    <button class="button-container" onclick="toggleformulaire()">Ajouter une Formation</button>
 
                      <form id="ajouterformationformulaire" style="display: none;">
                           <table>
@@ -232,7 +286,7 @@ if ($db_found) {  //verifie si le nombre de lignes est superieur à 0, cela veu 
                           </table>
                           <button type="button" onclick="ajouterformations()">Envoyer </button>
                      </form> 
-                    <button onclick="toggleFormulaireProjet('ajouterProjetFormulaire')">Ajouter un Projet</button>
+                    <button class="button-container" onclick="toggleFormulaireProjet('ajouterProjetFormulaire')">Ajouter un Projet</button>
 
                     <form id="ajouterProjetFormulaire" style="display: none;"onsubmit="ajouterProjet(event);">
                           <table>
@@ -250,16 +304,16 @@ if ($db_found) {  //verifie si le nombre de lignes est superieur à 0, cela veu 
                                </tr>
                                
                                <tr>
-                                    <td><label for="domaine">Domaine d'études:</label></td>
-                                    <td><input type="text" id="domaine" required></td>
+                                    <td><label for="domaineProjet">Domaine d'études:</label></td>
+                                    <td><input type="text" id="domaineProjet" required></td>
                                </tr>
                                <tr>
-                                    <td><label for="dateDebut">Date de début:</label></td>
-                                    <td><input type="date" id="dateDebut" required></td>
+                                    <td><label for="dateDebutProjet">Date de début:</label></td>
+                                    <td><input type="date" id="dateDebutProjet" required></td>
                                </tr>
                                <tr>
-                                    <td><label for="dateFin">Date de fin:</label></td>
-                                    <td><input type="date" id="dateFin" required></td>
+                                    <td><label for="dateFinProjet">Date de fin:</label></td>
+                                    <td><input type="date" id="dateFinProjet" required></td>
                                </tr>
                                   
                           </table>
