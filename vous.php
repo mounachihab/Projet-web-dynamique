@@ -35,8 +35,7 @@ if (!$result_statut) {
     exit;
 }
 
-$sql_formations="SELECT * FROM formations WHERE ID=$id";
-$result_formations = mysqli_query($db_handle, $sql_formations);
+
 
 // Vérifier s'il y a une erreur lors de l'exécution de la requête SQL
 if (!$result_formations) {
