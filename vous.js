@@ -46,7 +46,7 @@ function ajouterformations(){
     formations.push(nouvelleFormation);
 
     // Afficher la liste mise à jour
-    afficherlisteformations(); // Correction de la casse ici
+    afficherlisteformations();
     sauvegarderFormations(); // Ajout de la sauvegarde des données
     // Masquer le formulaire
     const formulaire = document.getElementById('ajouterformationformulaire');
@@ -67,13 +67,19 @@ function afficherlisteformations() {
     // Effacer le contenu actuel de la liste
     listeFormations.innerHTML = '';
 
+    // Créer une liste non ordonnée
+    const ul = document.createElement('ul');
+    
+
+
     // Parcourir toutes les formations
     for (let i = 0; i < formations.length; i++) {
         const formation = formations[i];
 
         // Créer un élément de liste pour chaque formation
-        const item = document.createElement('div');
-        item.innerHTML = `
+        const li = document.createElement('li');
+
+        li.innerHTML = `
             <strong>${formation.ecole}</strong><br>
             <small>${formation.domaine}</small><br>
             <small>${formation.dateDebut} - ${formation.dateFin}</small>
@@ -81,8 +87,10 @@ function afficherlisteformations() {
         `;
 
         // Ajouter l'élément de liste à la listeFormations
-        listeFormations.appendChild(item);
+        ul.appendChild(li);
     }
+    // Ajouter la liste non ordonnée à la div listeFormations
+    listeFormations.appendChild(ul);
 }
 
 
@@ -262,13 +270,16 @@ function afficherListeProjets() {
     // Effacer le contenu actuel de la liste
     listeProjetsDiv.innerHTML = '';
 
+    // Créer une liste non ordonnée
+    const ul = document.createElement('ul');
+
     // Parcourir tous les projets
     for (let i = 0; i < projets.length; i++) {
         const projet = projets[i];
 
         // Créer un élément de liste pour chaque projet
-        const item = document.createElement('div');
-        item.innerHTML = `
+        const li = document.createElement('li');
+        li.innerHTML = `
             <strong>${projet.lieu}</strong><br>
             <small>${projet.domaine}</small><br>
             <small>${projet.dateDebut} - ${projet.dateFin}</small>
@@ -276,8 +287,10 @@ function afficherListeProjets() {
         `;
 
         // Ajouter l'élément de liste à la listeProjets
-        listeProjetsDiv.appendChild(item);
+        ul.appendChild(li);
     }
+    // Ajouter la liste non ordonnée à la div listeFormations
+    listeProjets.appendChild(ul);
 }
       
 
@@ -352,7 +365,45 @@ function ajouterProjet(event) {
     };
     
     // Ajouter l'écouteur d'événements pour le bouton "Envoyer Projet"
-document.getElementById('envoyerProjetBtn').addEventListener('click', ajouterProjet);  
+document.getElementById('envoyerProjetBtn').addEventListener('click', ajouterProjet);
 
+
+
+
+   function afficherStatutForm() {
+        const statutForm = document.getElementById('champ_statut');
+        statutForm.style.display = 'block';
+    }
+
+    function cacherStatutForm() {
+        const statutForm = document.getElementById('champ_statut');
+        statutForm.style.display = 'none';
+    }
+
+    function toggleStatutForm() {
+        const statutForm = document.getElementById('champ_statut');
+
+        if (statutForm.style.display === 'none' || statutForm.style.display === '') {
+            console.log("Toggle : Affichage du statut");
+            afficherStatutForm();
+        } else {
+            console.log("Toggle : Masquage du statut");
+            cacherStatutForm();
+        }
+    }
+
+    function soumettreStatutForm() {
+        // Ajoutez ici la logique pour envoyer le nouveau statut à la base de données
+        // Par exemple, vous pouvez utiliser AJAX ou soumettre le formulaire
+        // Si le formulaire est soumis, le nouveau statut sera envoyé à votre script PHP pour mise à jour dans la base de données
+        const nouveauStatut = document.getElementById('nouveau_statut').value;
+        console.log("Nouveau statut à envoyer à la base de données : " + nouveauStatut);
+
+        // Cacher le formulaire après la soumission
+        cacherStatutForm();
+
+        // Vous pouvez ajouter ici la logique pour soumettre le formulaire avec AJAX ou une redirection si nécessaire
+        document.getElementById('form_statut').submit();
+    }
 
         
