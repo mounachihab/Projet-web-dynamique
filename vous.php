@@ -1,6 +1,9 @@
-<?php
+ <?php
+error_reporting(E_ALL);
 
 ini_set("display_errors", 1);
+session_start(); // Démarre la session
+
 // Identifier le nom de base de données
 $database = "ece";
 // Connectez-vous dans votre BDD
@@ -18,6 +21,8 @@ if (!$db_found) {
 
 $id=3; //a modifier
 
+
+//pr les utilisateurs
 $sql="SELECT * FROM utilisateurs WHERE ID=$id";
 $result = mysqli_query($db_handle, $sql);
 // Vérifier s'il y a une erreur lors de l'exécution de la requête SQL
@@ -26,6 +31,7 @@ if (!$result) {
     exit;
 }
 
+//pr le statut
 $sql_statut="SELECT * FROM statut WHERE ID=$id";
 $result_statut = mysqli_query($db_handle, $sql_statut);
 
@@ -35,13 +41,28 @@ if (!$result_statut) {
     exit;
 }
 
+//pr les formations
 
+$sql_formations="SELECT * FROM formations WHERE ID=$id";
+$result_formations = mysqli_query($db_handle, $sql_formations);
 
 // Vérifier s'il y a une erreur lors de l'exécution de la requête SQL
 if (!$result_formations) {
     echo "Erreur lors de l'exécution de la requête formations: " . mysqli_error($db_handle);
     exit;
 }
+
+//pr les projets
+
+$sql_projets="SELECT * FROM projets WHERE ID=$id";
+$result_projets = mysqli_query($db_handle, $sql_projets);
+
+// Vérifier s'il y a une erreur lors de l'exécution de la requête SQL
+if (!$result_projets) {
+    echo "Erreur lors de l'exécution de la requête projets: " . mysqli_error($db_handle);
+    exit;
+}
+
 
 if ($db_found) {  
     $utilisateur = mysqli_fetch_assoc($result);
@@ -51,33 +72,181 @@ if ($db_found) {
     $mdp = $utilisateur['mdp'];
     $photo = $utilisateur['photo'];
 
-    $statut=mysqli_fetch_assoc($result_statut);
+    $statut = mysqli_fetch_assoc($result_statut);
     $tonstatut = $statut['tonstatut'];
 
-    $formations=mysqli_fetch_assoc($result_formations);
-    $tesformations = $statut['tesformations'];
+    // Vérifier si le formulaire des formations a été soumis
+    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['formation_form_submit'])) {
+        // Récupérer les données du formulaire
+        $ecole = isset($_POST['ecole']) ? mysqli_real_escape_string($db_handle, $_POST['ecole']) : '';
+        $competence = isset($_POST['competence']) ? mysqli_real_escape_string($db_handle, $_POST['competence']) : '';
+        $domaine = isset($_POST['domaine']) ? mysqli_real_escape_string($db_handle, $_POST['domaine']) : '';
+        
+        // Vérifier si les dates sont vides avant de les traiter
+        $dateDebut = isset($_POST['dateDebut']) && !empty($_POST['dateDebut']) ? mysqli_real_escape_string($db_handle, $_POST['dateDebut']) : '2023-01-01';
+        $dateFin = isset($_POST['dateFin']) && !empty($_POST['dateFin']) ? mysqli_real_escape_string($db_handle, $_POST['dateFin']) : '2023-01-01';
+
+        // Insérer les informations dans la table formations
+        $sql_insert_formation = "INSERT INTO formations (ID, ecole, competence, domaine, dateDebut, dateFin) 
+                            VALUES ($id, '$ecole', '$competence', '$domaine', '$dateDebut', '$dateFin')";
+
+        $result_insert_formation = mysqli_query($db_handle, $sql_insert_formation);
+
+        if (!$result_insert_formation) {
+            echo "Erreur lors de la mise à jour des informations des formations : " . mysqli_error($db_handle);
+        }
+    }
+
+    // Vérifier si le formulaire des projets a été soumis
+    elseif ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['projet_form_submit'])) {
+        // Récupérer les données du formulaire
+        $Lieu = isset($_POST['Lieu']) ? mysqli_real_escape_string($db_handle, $_POST['Lieu']) : '';
+        $competence = isset($_POST['competence']) ? mysqli_real_escape_string($db_handle, $_POST['competence']) : '';
+        $domaine = isset($_POST['domaine']) ? mysqli_real_escape_string($db_handle, $_POST['domaine']) : '';
+        
+        // Vérifier si les dates sont vides avant de les traiter
+        $dateDebut = isset($_POST['dateDebut']) && !empty($_POST['dateDebut']) ? mysqli_real_escape_string($db_handle, $_POST['dateDebut']) : '2023-01-01';
+        $dateFin = isset($_POST['dateFin']) && !empty($_POST['dateFin']) ? mysqli_real_escape_string($db_handle, $_POST['dateFin']) : '2023-01-01';
+
+        // Insérer les informations dans la table projets
+        $sql_insert_projet = "INSERT INTO projets (ID, Lieu, competence, domaine, dateDebut, dateFin) 
+                            VALUES ($id, '$Lieu', '$competence', '$domaine', '$dateDebut', '$dateFin')";
+
+        $result_insert_projet = mysqli_query($db_handle, $sql_insert_projet);
+
+        if (!$result_insert_projet) {
+            echo "Erreur lors de la mise à jour des informations du projet : " . mysqli_error($db_handle);
+        }
+    }
+
+    // Charger les projets depuis la base de données ou la session
+    $projets_session = isset($_SESSION['projets']) ? $_SESSION['projets'] : [];
+    if (empty($projets_session)) {
+        $sql_projets = "SELECT * FROM projets WHERE ID=$id";
+        $result_projets = mysqli_query($db_handle, $sql_projets);
+
+        if (!$result_projets) {
+            echo "Erreur lors de l'exécution de la requête projets: " . mysqli_error($db_handle);
+            exit;
+        }
+
+        while ($row = mysqli_fetch_assoc($result_projets)) {
+            $projets_session[] = $row;
+        }
+
+        $_SESSION['projets'] = $projets_session;
+    }
+
+    // Reste du code pour les projets
+    if (!empty($projets_session)) {
+        $dernier_projet = end($projets_session);
+        $Lieu = isset($dernier_projet['Lieu']) ? $dernier_projet['Lieu'] : '';
+        $competence = isset($dernier_projet['competence']) ? $dernier_projet['competence'] : '';
+        $domaine = isset($dernier_projet['domaine']) ? $dernier_projet['domaine'] : '';
+        $dateDebut = isset($dernier_projet['dateDebut']) ? $dernier_projet['dateDebut'] : '';
+        $dateFin = isset($dernier_projet['dateFin']) ? $dernier_projet['dateFin'] : '';
+    } else {
+        // If no projet is found, initialize variables to default values
+        $Lieu = '';
+        $competence = '';
+        $domaine = '';
+        $dateDebut = '';
+        $dateFin = '';
+    }
 } else {
     echo "Utilisateur non trouvé.";
     exit;
 }
 
+
+
 // Vérifier si le formulaire du statut a été soumis
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Récupérer la nouvelle valeur du statut depuis le formulaire
-    $nouveau_statut = mysqli_real_escape_string($db_handle, $_POST['nouveau_statut']);
+    // Vérifier si le formulaire du statut a été soumis
+    if (isset($_POST['statut_form_submit'])) {
+        // Récupérer la nouvelle valeur du statut depuis le formulaire
+        $nouveau_statut = mysqli_real_escape_string($db_handle, $_POST['nouveau_statut']);
 
-    // Mettre à jour la table statut avec le nouveau statut
-    $sql_update_statut = "UPDATE statut SET tonstatut = '$nouveau_statut' WHERE ID = $id";
-    $result_update_statut = mysqli_query($db_handle, $sql_update_statut);
+        // Mettre à jour la table statut avec le nouveau statut
+        $sql_update_statut = "UPDATE statut SET tonstatut = '$nouveau_statut' WHERE ID = $id";
+        $result_update_statut = mysqli_query($db_handle, $sql_update_statut);
 
-    if (!$result_update_statut) {
-        echo "Erreur lors de la mise à jour du statut : " . mysqli_error($db_handle);
-    } else {
-        // Rafraîchir la page pour afficher le nouveau statut
-        header("Location: {$_SERVER['PHP_SELF']}");
-        exit();
+        if (!$result_update_statut) {
+            echo "Erreur lors de la mise à jour du statut : " . mysqli_error($db_handle);
+        } else {
+            // Rafraîchir la page pour afficher le nouveau statut
+            header("Location: {$_SERVER['PHP_SELF']}");
+            exit();
+        }
     }
+
+     // Vérifier si le formulaire des formations a été soumis
+    elseif (isset($_POST['formation_form_submit'])) {
+        // Récupérer les données du formulaire
+        $ecole = isset($_POST['ecole']) ? mysqli_real_escape_string($db_handle, $_POST['ecole']) : '';
+        $competence = isset($_POST['competence']) ? mysqli_real_escape_string($db_handle, $_POST['competence']) : '';
+        $domaine = isset($_POST['domaine']) ? mysqli_real_escape_string($db_handle, $_POST['domaine']) : '';
+        
+
+        // Vérifier si les dates sont vides avant de les traiter
+        $dateDebut = isset($_POST['dateDebut']) && !empty($_POST['dateDebut']) ? mysqli_real_escape_string($db_handle, $_POST['dateDebut']) : '2023-01-01';
+        $dateFin = isset($_POST['dateFin']) && !empty($_POST['dateFin']) ? mysqli_real_escape_string($db_handle, $_POST['dateFin']) : '2023-01-01';
+
+        // Insérer les informations dans la table formations
+        $sql_insert_formation = "INSERT INTO formations (ID, ecole, competence, domaine, dateDebut, dateFin) 
+                            VALUES ($id, '$ecole', '$competence', '$domaine', '$dateDebut', '$dateFin')";
+
+        $result_insert_formation = mysqli_query($db_handle, $sql_insert_formation);
+
+        if (!$result_insert_formation) {
+            echo "Erreur lors de la mise à jour des informations des formations : " . mysqli_error($db_handle);
+        }
+    }    
+        // Vérifier si le formulaire des projets a été soumis
+    elseif (isset($_POST['projet_form_submit'])) {
+        // Récupérer les données du formulaire
+        $Lieu = isset($_POST['Lieu']) ? mysqli_real_escape_string($db_handle, $_POST['Lieu']) : '';
+        $competence = isset($_POST['competence']) ? mysqli_real_escape_string($db_handle, $_POST['competence']) : '';
+        $domaine = isset($_POST['domaine']) ? mysqli_real_escape_string($db_handle, $_POST['domaine']) : '';
+        
+        // Vérifier si les dates sont vides avant de les traiter
+        $dateDebut = isset($_POST['dateDebut']) && !empty($_POST['dateDebut']) ? mysqli_real_escape_string($db_handle, $_POST['dateDebut']) : '2023-01-01';
+        $dateFin = isset($_POST['dateFin']) && !empty($_POST['dateFin']) ? mysqli_real_escape_string($db_handle, $_POST['dateFin']) : '2023-01-01';
+
+        // Insérer les informations dans la table projets
+        $sql_insert_projet = "INSERT INTO projets (ID, Lieu, competence, domaine, dateDebut, dateFin) 
+                            VALUES ($id, '$Lieu', '$competence', '$domaine', '$dateDebut', '$dateFin')";
+
+        $result_insert_projet = mysqli_query($db_handle, $sql_insert_projet);
+
+        if (!$result_insert_projet) {
+            echo "Erreur lors de la mise à jour des informations du projet : " . mysqli_error($db_handle);
+        }
+    }
+        
+    
 }
+/*
+// Chemin du fichier SQL de création de table
+$sql_file = "vous.sql";
+
+// Lire le contenu du fichier SQL
+$sql_content = file_get_contents($sql_file);
+
+
+// Exécuter la requête SQL
+$result_create_table = mysqli_multi_query($db_handle, $sql_content);
+
+// Vérifier si la requête a réussi
+if (!$result_create_table) {
+    echo "Erreur lors de la création de la table formations : " . mysqli_error($db_handle);
+    exit;
+}
+*/
+
+
+// Fermer la connexion
+mysqli_close($db_handle);
 
 ?>
 
@@ -215,7 +384,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <?php echo $tonstatut  ?>
                     <button onclick="toggleStatutForm()">Modifier votre statut </button>
                     <!-- Formulaire de modification du statut -->
-                    <form id="champ_statut" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>" style="display: none;">
+                    <form id="champ_statut" name="form_statut" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>" style="display: none;">
+                        <input type="hidden" name="statut_form_submit" value="1">
                         
                             <label for="nouveau_statut"></label>
                             <input type="text" name="nouveau_statut" id="nouveau_statut" placeholder="Nouveau statut">
@@ -243,55 +413,98 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div id="ssbloc_haut">
                     
                         <h3>Liste des formations :</h3>
-                        <div id="listeFormations"></div>
+                         <?php
+            // Vérifier s'il y a des formations à afficher
+            if (mysqli_num_rows($result_formations) > 0) {
+                while ($formation = mysqli_fetch_assoc($result_formations)) {
+                    echo '<div>';
+                    echo '<strong style="text-align:left; display: block;">' . $formation['ecole'] . '</strong>';
+
+                    echo ' <span style="text-align:left;  display: block;">' . $formation['domaine'] . '</span>';
+
+
+                    echo '<span style="text-align:left; display: block;">' . $formation['dateDebut'] . ' / ' . $formation['dateFin'] . '<br>';
+
+
+                    echo '</div>';
+                    echo '<hr>';
+                }
+            } else {
+                echo 'Aucune formation trouvée.';
+            }
+            ?>
+
                 </div>
 
                 <div id="ssbloc_milieu">
                     
                         <h3>Liste des projets :</h3>
-                        <div id="listeProjets"></div>
+                        <?php
+                        // Vérifier s'il y a des formations à afficher
+                        if (mysqli_num_rows($result_projets) > 0) {
+                            while ($projets = mysqli_fetch_assoc($result_projets)) {
+                                echo '<div>';
+                                echo '<strong style="text-align:left; display: block;">' . $projets['Lieu'] . '</strong>';
+
+                                echo ' <span style="text-align:left;  display: block;">' . $projets['domaine'] . '</span>';
+
+
+                                echo '<span style="text-align:left; display: block;">' . $projets['dateDebut'] . ' / ' . $projets['dateFin'] . '<br>';
+
+
+                                echo '</div>';
+                                echo '<hr>';
+                            }
+                        } else {
+                            echo 'Aucun projet trouvé.';
+                        }
+                        ?>
+                        
                 </div>
                 
                 <div id="ssbloc_bas">    
-                    <button class="button-container" onclick="toggleformulaire()">Ajouter une Formation</button>
+                    <button class="button-container" onclick="toggleformationformulaire()">Ajouter une Formation</button>
 
-                     <form id="ajouterformationformulaire" style="display: none;">
+                     <form id="ajouterformationformulaire" name="formationformulaire" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>" style="display: none;">
                           <table>
+                                <input type="hidden" name="formation_form_submit" value="1">
+
                                <tr>
                                     <td><label for="ecole">École:</label></td>
-                                    <td><input type="text" id="ecole" required></td>
+                                    <td><input type="text" name="ecole" id="ecole" required></td>
                                </tr>
                                <tr>
                                     <td><label for="competence">Compétences acquises:</label></td>
-                                    <td><input type="text" id="competence" required></td>
+                                    <td><input type="text" name="competence" id="competence" required></td>
                                </tr>
                                
                                <tr>
                                     <td><label for="domaine">Domaine d'étude:</label></td>
-                                    <td><input type="text" id="domaine" required></td>
+                                    <td><input type="text" name="domaine" id="domaine" required></td>
                                </tr>
                                <tr>
                                     <td><label for="dateDebut">Date de début:</label></td>
-                                    <td><input type="date" id="dateDebut" required></td>
+                                    <td><input type="date" name="dateDebut"id="dateDebut" required></td>
                                </tr>
                                <tr>
                                     <td><label for="dateFin">Date de fin:</label></td>
-                                    <td><input type="date" id="dateFin" required></td>
+                                    <td><input type="date" name="dateFin"  id="dateFin" required></td>
                                </tr>
                                <!--<tr>
                                     <td><label for="description">Description:</label></td>
                                     <td><textarea id="description" rows="4"></textarea></td>
                                </tr> -->  
                           </table>
-                          <button type="button" onclick="ajouterformations()">Envoyer </button>
+                          <button type="submit" onclick="soumettreformationformulaire()">Envoyer </button>
                      </form> 
-                    <button class="button-container" onclick="toggleFormulaireProjet('ajouterProjetFormulaire')">Ajouter un Projet</button>
+                    <button class="button-container" onclick="toggleFormulaireProjet()">Ajouter un Projet</button>
 
-                    <form id="ajouterProjetFormulaire" style="display: none;"onsubmit="ajouterProjet(event);">
+                    <form id="ajouterProjetFormulaire" name="projetformulaire" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?> " style="display: none;">
                           <table>
+                            <input type="hidden" name="projet_form_submit" value="1">
                                <tr>
                                     <td><label for="lieu">Lieu:</label></td>
-                                    <td><select id="lieu">
+                                    <td><select name="Lieu" id="lieu"  >
                                             <option value="ecoleEce">Ecole ECE</option>
                                             <option value="etranger">A l'étranger</option>
                                             <option value="entreprise">En entreprise</option>
@@ -299,24 +512,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                </tr>
                                <tr>
                                     <td><label for="competence">Compétences acquises:</label></td>
-                                    <td><input type="text" id="competence" required></td>
+                                    <td><input type="text" name="competence" id="competence" required></td>
                                </tr>
                                
                                <tr>
-                                    <td><label for="domaineProjet">Domaine d'études:</label></td>
-                                    <td><input type="text" id="domaineProjet" required></td>
+                                    <td><label for="domaine">Domaine d'études:</label></td>
+                                    <td><input type="text" name="domaine" id="domaine" required></td>
                                </tr>
                                <tr>
-                                    <td><label for="dateDebutProjet">Date de début:</label></td>
-                                    <td><input type="date" id="dateDebutProjet" required></td>
+                                    <td><label for="dateDebut">Date de début:</label></td>
+                                    <td><input type="date" name="dateDebut" id="dateDebut" required></td>
                                </tr>
                                <tr>
-                                    <td><label for="dateFinProjet">Date de fin:</label></td>
-                                    <td><input type="date" id="dateFinProjet" required></td>
+                                    <td><label for="dateFin">Date de fin:</label></td>
+                                    <td><input type="date" name="dateFin" id="dateFin" required></td>
                                </tr>
                                   
                           </table>
-                          <button type="button" id="envoyerProjetBtn" onclick="ajouterProjet()">Envoyer</button>
+                          <button type="submit" onclick="soumettreprojetformulaire()">Envoyer</button>
 
                      </form>
                 </div>      
