@@ -16,19 +16,23 @@ $dbname = "ece";
 $mysqli = new mysqli($servername, $username, $password, $dbname);
 
 
+$emploi_id = isset($_GET["id"]) ? $mysqli->real_escape_string($_GET["id"]):"";
+echo $emploi_id;
+
 
 //Requete pour supprimer un emploi lorsque le bouton "supprimer l'emploi" est appuyé
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["supprimer"])) {
-    $emploi_id = $mysqli->real_escape_string($_POST["emploi_id"]);
+if ($mysqli) {
 
     // Requête pour supprimer l'emploi
     $sql = "DELETE FROM emplois WHERE ID_emplois = $emploi_id";
 
     // Exécution de la requête
     if ($mysqli->query($sql) === TRUE) {
+        echo "test";
         header('Location: emplois.php');
     } else {
         echo "Erreur" . $mysqli->error;
+        header('Location: emplois.php');
     }
 
     $mysqli->close();
