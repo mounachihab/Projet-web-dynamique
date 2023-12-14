@@ -118,6 +118,7 @@ $mysqli->close();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="emplois.js"></script>
+    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"> </script>
     <title> Emplois </title>
     <link rel="stylesheet" href="emplois.css">
 
@@ -143,6 +144,36 @@ $mysqli->close();
 
                     // Affichez la modale avec le même message pour tous les emplois
                     afficherModale();
+                });
+            });
+
+            document.addEventListener("DOMContentLoaded", () => {
+                const boutonsSupprimer = document.querySelectorAll(".offre-emploi button");
+
+                boutonsSupprimer.forEach(boutonSupprimer => {
+                    boutonSupprimer.addEventListener("click", async event => {
+                        event.preventDefault();
+
+                        const emploiId = boutonSupprimer.getAttribute("data-id");
+
+                        try {
+                            const response = await fetch("supp_emploi.php", {
+                                method: "POST",
+                                headers: {
+                                    "Content-Type": "application/x-www-form-urlencoded"
+                                },
+                                body: `emploi_id=${emploiId}&supprimer=1`
+                            });
+
+                            if (response.ok) {
+                                window.location.href = 'emplois.php';
+                            } else {
+                                console.error('Erreur lors de la suppression de l\'emploi.');
+                            }
+                        } catch (error) {
+                            console.error('Erreur lors de la suppression de l\'emploi.', error);
+                        }
+                    });
                 });
             });
 
@@ -407,11 +438,24 @@ $mysqli->close();
                                 </a>
                             </h3>
                             <p>
-                                <!--On affiche chaque élement de la base de données-->
                                 <strong>Type:</strong>
                                 <?php echo isset($emploi["type"]) ? $emploi["type"] : ''; ?> -
                                 <strong>Lieu:</strong>
-                                <?php echo isset($emploi["lieu"]) ? $emploi["lieu"] : ''; ?></p>
+                                <?php echo isset($emploi["lieu"]) ? $emploi["lieu"] : ''; ?>
+                            </p>
+                            <?php
+                            $emploi_id = $emploi["ID_emplois"];
+                            if($admin === 'YES'){
+                                echo "<button onclick='openPopup()'>Supprimer le compte</button>
+
+                            <div id='overlay'></div>
+                
+                            <div id='popup'>
+                                <p>Voulez-vous vraiment supprimer votre compte ?</p>
+                                <button id='yesBtn' onclick='redirectToPage($emploi_id)'>Supprimer</button>
+                                <button id='noBtn' onclick='closePopup()'>Non</button></div>";
+                            }
+                            ?>
                         </div>
                     <?php endforeach; ?>
                 </ul>
