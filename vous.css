@@ -250,7 +250,7 @@ body {
 #ssbloc_haut {
 
     width: 340px;
-    height: 170px;
+    height: 200px;
     border: 1px solid #ddd;
     padding: 10px;
     margin: 10px;
@@ -261,7 +261,7 @@ body {
 #ssbloc_milieu {
 
     width: 340px;
-    height:170px;
+    height:200px;
     border: 1px solid #ddd;
     padding: 10px;
     margin: 10px;
@@ -271,7 +271,7 @@ body {
 #ssbloc_bas {
 
     width: 340px;
-    height:175px;
+    height:155px;
     padding: 10px;
     margin: 10px;
     border: 1px solid #ddd;
@@ -400,4 +400,9 @@ body {
 
 }
 
+.ecole {
+        display: inline-block;
+        text-align: left;
+        font-weight: bold; /* si vous voulez maintenir le gras */
+    }
 
