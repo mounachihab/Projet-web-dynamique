@@ -175,7 +175,7 @@ $nbr_membres = $data['COUNT(ID)'] ;
                      height=""/>
             </a>
 
-            <a href="messagerie.php"> <!-- lien vers messagerie -->
+            <a href="messagerie.php?id="> <!-- lien vers messagerie -->
                 <img src="boutons/bouton_messagerie_0.png"
                      alt="messagerie"
                      width="150"

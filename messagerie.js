@@ -45,3 +45,20 @@ function affiche_image_date() {
 window.onload = affiche_image_date;
 
 
+
+
+// Fonctions pour verifictaion de supprimer :
+function openPopupA() {
+    document.getElementById('popup').style.display = 'block';
+    document.getElementById('overlay').style.display = 'block';
+}
+
+function closePopupA() {
+    document.getElementById('popup').style.display = 'none';
+    document.getElementById('overlay').style.display = 'none';
+}
+
+function redirectToPageA(id_conv) {
+    // Remplacez "URL_DE_REDIRECTION" par l'URL réelle vers laquelle vous souhaitez rediriger l'utilisateur.
+    window.location.href = `supp_conv.php?id=${id_conv}`;
+}

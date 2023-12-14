@@ -34,6 +34,8 @@ $user_name = $_SESSION['user_name'];
 $photo = $_SESSION['photo'];
 $id = $_SESSION['id'];
 
+$id_conv = isset($_GET["id"]) ? $mysqli->real_escape_string($_GET["id"]) : "";
+
 if ($user_name == '') {
     header('Location: connexion.html');
     exit() ;
@@ -192,45 +194,29 @@ $nbr_membres = $data['COUNT(ID)'] ;
     </div>
 
     <div id="blocA">
-        <a href="">
-            <img src="boutons/bouton_plus_0.png" width="80" alt="ajout">
+        <a href="ajout_conv.php">
+            <img src="boutons/bouton_plus_0.png" width="50" alt="ajout">
         </a>
     </div>
 
     <div id="blocB">
-        <div id="titre_conv1"></div>
-        <div id="bloc">
-            <div id="bloc_conv">
-                <div id="cliquable"> <b>Titre conv </b> <hr/> Personnes </div>
-                <div id="btn_sup">
-                    <button style="cursor: pointer;" type="submit">Supprimer</button>
-                </div>
-            </div>
+        <div id="titre_conv1">
+            <h3>
+                Vos Conversation
+            </h3>
+        </div>
+        <div class="scrollable-container_y">
+        <?php include "liste_messages.php"; ?>
         </div>
 
-        
     </div>
 
-
     <div id="blocC">
-        <div id="titre_conv"></div>
 
-        <div id="conversation">
-            <div id="bulle_ami"></div>
-            <div id="bulle_info">
-                <div id="date"></div>
-            </div>
-            <div id="bulle_moi"></div>
-            <div id="bulle_info_moi">
-                <div id="date_moi"></div>
-            </div>
-        </div>
-
-        <div id="envoie_mess"></div>
+        <?php include "messages.php"; ?>
     </div>
 
 </div>
-
 
 
 <div id="retour_haut">
