@@ -446,7 +446,7 @@ $mysqli->close();
                             <?php
                             $emploi_id = $emploi["ID_emplois"];
                             if($admin === 'YES'){
-                                echo "<button onclick='openPopup()'>Supprimer le compte</button>
+                                echo "<button onclick='openPopup()'>Supprimer l'emploi</button>
 
                             <div id='overlay'></div>
                 
