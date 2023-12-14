@@ -255,7 +255,7 @@ $mysqli->close();
         </div>
 
         <div id="nomCompte">
-            <?php echo "<img src='$photo' height='50' width=''>";?>
+            <?php echo "<img style='border-radius: 10px;' src='$photo' height='50' width=''>";?>
             <p> </p>
             <?php echo $user_name; ?>
         </div>
