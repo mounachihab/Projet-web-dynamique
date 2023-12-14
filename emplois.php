@@ -308,7 +308,7 @@ $mysqli->close();
                      height=""/>
             </a>
 
-            <a href=""> <!-- lien vers notifications -->
+            <a href="notification.php"> <!-- lien vers notifications -->
                 <img src="bouton_notification_0.png"
                      alt="notifications"
                      width="150"
@@ -322,7 +322,7 @@ $mysqli->close();
                      height=""/>
             </a>
 
-            <a href=""> <!-- lien vers emplois -->
+            <a href="emplois.php"> <!-- lien vers emplois -->
                 <img src="bouton_emplois_1.png"
                      alt="emplois"
                      width="150"
