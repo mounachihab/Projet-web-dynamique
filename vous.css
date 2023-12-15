@@ -1,26 +1,6 @@
 /* Définition des styles pour toutes les pages !!!!*/ 
-body {
 
-    background-color: #0a7677;
-    margin: 0; /* Aucune marge extérieure */
-    padding: 0; /* Aucun remplissage intérieur */
-    font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
-
-
-}
-
-/* Styles pour les boutons de direction */
-#boutons{
-
-    cursor: pointer;
-    padding-top: 6px;
-
-}
-
-
-/* Styles pour l'intro afficher dans une boite */
-#overlayContainer {
-
+#container {
     display: none;
     position: fixed;
     top: 0;
@@ -32,106 +12,150 @@ body {
     justify-content: center;
     align-items: center;
     text-align: center;
-
 }
 
-
-#messageOverlay {
-
+#message_intro {
     background: #fff;
     width: 60%; /* largeur */
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+/* CSS COUMMUN POUR TOUTE LES PAGES*/
 
+/* Définition des styles pour la page Accueil*/
+body {
+    background-color: #0a7677;
+    margin: 0; /* Aucune marge extérieure */
+    padding: 0; /* Aucun remplissage intérieur */
+    font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
 }
 
 
-
+/*-----------------------------------------------------------------------------------------*/
 /* Définition des styles pour la bannière */
 #banderole {
     background-color: #a6cccc;
-    padding-bottom: 10px; /* Espacement en bas */
-    padding-top: 20px; /* Espacement en haut */
+    padding-bottom: 1%; /* Espacement en bas */
+    padding-top: 1%; /* Espacement en haut */
     display: flex; /* Utilisation du modèle de boîte flexible */
-    justify-content: space-between; /* Espace équitable entre les éléments enfants */
-
+    align-items: center;
+    text-align: center;
+    justify-content: space-evenly;
 }
-
-
-/* Styles spécifiques pour le logo dans la bannière */
-#logo {
-
-    padding-left: 220px; /* Espacement à gauche */
-    cursor: pointer; /* Curseur pointer au survol */
-}
-
-
-/* Styles spécifiques pour le titre dans la bannière */
-#titre {
-
-    padding-top: 23px; /* Espacement en haut */
-    padding-right: 190px; /* Espacement à droite */
-
-}
-
 
 /* Styles pour la barre en dessous de la bannière */
 #couleur{
-
     background-color: #585858;
     padding: 10px; /* Remplissage intérieur */
-
 }
 
+/* Styles spécifiques pour le logo dans la bannière */
+#logo {
+    cursor: pointer; /* Curseur pointer au survol */
+    height: 120px;
+    width: 260px;
+}
+
+/* Styles spécifiques pour le titre dans la bannière */
+#titre {
+    height: 120px;
+    width: 710px;
+    align-items: center;
+    display: flex;
+    text-align: center;
+}
+
+#nbr_membre {
+    height: 120px;
+    width: 70px;
+    align-items: center;
+    display: flex;
+    text-align: center;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    align-content: center;
+}
 
 /* Styles pour le nom avec lequel l'utilisateur est connecté */
 #nomCompte {
-
-    padding-top: 16px; /* Espacement en haut */
-
+    float : right;
+    height: 120px;
+    width: 110px;
+    align-items: center;
 }
-
 
 /* Styles pour le logo deconnexion */
 #deco {
-
     cursor: pointer; /* Curseur pointer au survol */
-    float: right; /* Flotter à droite */
-    padding-right: 240px; /* Espacement à droite */
-    padding-top: 6px; /* Espacement en haut */
+    height: 120px;
+    width: 110px;
+    align-items: center;
+    display: flex;
+}
 
+
+/*-----------------------------------------------------------------------------------------*/
+/* Définition des styles pour le conteneur principal (celui où les bloc sont stocke) */
+#wrapper {
+    max-width: 1200px; /* Largeur max*/
+    height: auto; /* Hauteur fixe */
+    min-height: 1350px; /* Largeur minimale */
+    margin: auto; /* Centrer horizontalement */
+    padding: 2%; /* Remplissage intérieur */
+    text-align: center; /* Alignement du texte au centre */
+}
+
+/* Styles pour les boutons de direction */
+#boutons{
+    cursor: pointer;
+    padding-top: 6px;
 }
 
 /* Styles pour le copyright */
 #copy {
-
     background-color: #a6cccc;
     clear: both; /* Annule le flottement à gauche et à droite, permettant à "copy" de se positionner sous les éléments précédents */
     text-align: center; /* Alignement du texte au centre */
-    width: 100%; /* Utiliser toute la largeur disponible */    position: absolute; /* Position absolue par rapport au bas */
-    bottom: 0; /* Aligner en bas */
-     position: absolute;
-    bottom: 0;
-    left: 0; /* Ajustement pour démarrer depuis le bord gauche */
-    padding: 10px;
-
 }
 
 
-/*partie propre a la page "vous"*/
-
-/* Définition des styles pour le conteneur principal (celui où les bloc sont stocke) */
-#wrapper {
-
-    width: 1200px; /* Largeur fixe */
-    height: 1350px; /* Hauteur fixe */
-    min-width: 1200px; /* Largeur minimale */
-    margin: auto; /* Centrer horizontalement */
-    padding: 10px; /* Remplissage intérieur */
-    text-align: center; /* Alignement du texte au centre */
+/*-----------------------------------------------------------------------------------------*/
+/*-----------------------------------------------------------------------------------------*/
+/* POUR les images du mois de decembre*/
+#image_decembre_1 {
+    position: absolute;
+    margin-top: 13%;
+    margin-left: 80%;
 }
 
+#image_decembre_2 {
+    position: absolute;
+    margin-top: 15%;
+    margin-right: 90%;
+}
+
+
+/*-----------------------------------------------------------------------------------------*/
+/*-----------------------------------------------------------------------------------------*/
+/* CONDITIONS SUR LA TAILLE DE LA PAGE WEB*/
+
+@media screen and (max-width: 1250px) {
+    #wrapper {
+        max-width: 680px; /* Largeur fixe */
+        height: 2000px;
+    }
+    #image_decembre_1{
+        margin-top: 16%;
+        margin-left: 80%;
+    }
+
+    #image_decembre_2{
+        margin-top: 16%;
+        margin-left: 1%;
+    }
+
+}
 /* pr le style de la page avec photo */
 #pagephoto {
 
@@ -168,17 +192,16 @@ body {
 /* pr le style de la page avec les formations*/
 
 #formations {
-
     background-color: #FFF;
     border-radius: 10px; /* Bordure arrondie */
     width: 385px; /* Largeur fixe */
-    height: 750px; /* Hauteur fixe */
+    height: auto; /* Hauteur dynamique */
     text-align: center; /* Alignement du texte au centre */
     cursor: pointer; /* Curseur pointer au survol */
     float: left; /* Flotter à droite */
     margin-top: 15px; /* Espacement en haut */
-    margin-left: 15px; /* Espacement a gauche */
-
+    margin-left: 15px; /* Espacement à gauche */
+    overflow-y: auto; /* Barre de défilement verticale */
 }
 
 #listeFormations{
@@ -216,8 +239,7 @@ body {
 
     width: 550px;
     height:140px;
-    border: 1px solid #ddd;
-    padding: 10px;
+border: 2px solid #0a7677; border-radius: 10px; /* Bordure arrondie */    padding: 10px;
     margin: 10px;
 
 }
@@ -234,27 +256,24 @@ body {
     width: 550px;
     height: 140px;
     margin-left: 15px;
-    border: 1px solid #ddd;
-    padding: 10px;
+border: 2px solid #0a7677; border-radius: 10px; /* Bordure arrondie */    padding: 10px;
     margin: 10px;
 
 }
 
 #conteneurFormations {
-
-    display: flex;
-    flex-direction: column; /* Ajout de cette ligne */
-
+    all: unset;
 }
 
 #ssbloc_haut {
 
     width: 340px;
     height: 200px;
-    border: 1px solid #ddd;
-    padding: 10px;
+    border: 2px solid #0a7677; border-radius: 10px; /* Bordure arrondie */    padding: 10px;
     margin: 10px;
     margin-bottom: 0;
+    overflow-y: auto;
+
 
 }
 
@@ -262,9 +281,10 @@ body {
 
     width: 340px;
     height:200px;
-    border: 1px solid #ddd;
-    padding: 10px;
+    border: 2px solid #0a7677; border-radius: 10px; /* Bordure arrondie */    padding: 10px;
     margin: 10px;
+    overflow-y: auto;
+
 
 }
 
@@ -274,8 +294,7 @@ body {
     height:155px;
     padding: 10px;
     margin: 10px;
-    border: 1px solid #ddd;
-    display: flex; /* Utilisation du modèle de boîte flexible */
+    border: 2px solid #0a7677; border-radius: 10px; /* Bordure arrondie */    display: flex; /* Utilisation du modèle de boîte flexible */
     flex-direction: column; /* Empiler les éléments verticalement */
     align-items: center; /* Centrer verticalement le contenu */
 
@@ -318,9 +337,8 @@ body {
 #statut{
 
     width: 755px;
-    height:150px;
-    border: 1px solid #ddd;
-    padding: 10px;
+    height:100px;
+border: 2px solid #0a7677; border-radius: 10px; /* Bordure arrondie */    padding: 10px;
     margin: 10px;
 
 }
@@ -331,23 +349,51 @@ body {
 
 }
 
-#publication{
-
+#publication {
     width: 755px;
-    height:300px;
-    border: 1px solid #ddd;
+    height: 360px; /* Utilisation d'une hauteur automatique */
+    border: 2px solid #0a7677;
+    border-radius: 10px;
+    /* Bordure arrondie */
     padding: 10px;
     margin: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centre les éléments horizontalement */
+    text-align: center;
+}
+#blocpubligauche{
+    width: 355px;
+    height:310px;
+    //*border: 2px solid #0a7677; border-radius: 10px; /* Bordure arrondie */    
+    margin: 10px;
+    padding: 10px;
+
+
 
 }
 
+#blocpublidroite{
+    width: 355px;
+    height:310px;
+    //*border: 2px solid #0a7677; border-radius: 10px; /* Bordure arrondie */    
+    margin: 10px;
+    padding: 10px;
+
+
+
+}
 #publication h3{
 
     margin: 0; /* Supprimer la marge par défaut du titre h3 */
 
 }
-
-
+#blocsPub {
+    display: flex;
+    flex-direction: row; /* Alignement horizontal des blocs */
+    justify-content: space-between;
+    width: 100%; /* Remplir tout l'espace disponible */
+}
 #conteneurPhotos {
 
     display: flex;
@@ -406,3 +452,48 @@ body {
         font-weight: bold; /* si vous voulez maintenir le gras */
     }
 
+
+#descriptionphoto {
+    width: 320px;
+    height:250px;
+    border: 2px solid #0a7677; border-radius: 10px; /* Bordure arrondie */    padding: 10px;
+    margin: 10px;
+    padding: 10px;
+    overflow-y: auto; /* Barre de défilement verticale */
+}
+
+.evenement {
+    margin-bottom: 20px; /* Ajoutez une marge entre chaque événement */
+  }
+
+  .info {
+    margin: 5px 0; /* Ajoutez une marge autour de chaque information */
+    text-align: left;
+  }
+
+
+ .supprimer-button {
+    background-color: #ff0000; /* Couleur de fond du bouton Supprimer */
+    color: #ffffff; /* Couleur du texte du bouton Supprimer */
+    border: none;
+    cursor: pointer;
+  } 
+
+
+  .modifier-button {
+    margin-left: auto;
+    background-color: white;
+    color: black;
+    border: 1px solid black;
+    cursor: pointer;
+    text-align: right;
+    
+  }
+
+  .parametres-button {
+    background-color: white;
+    color: black;
+    border: 1px solid black;
+    cursor: pointer;
+    margin-left: 5px; /* Ajout d'une marge à gauche pour espacer les boutons */
+  }
