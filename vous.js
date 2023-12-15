@@ -1,14 +1,33 @@
-function afficherMessageIntro() {
+// Pour l'intro dans le logo
+function afficher_message_intro() {
     // Afficher la boîte de dialogue
-    document.getElementById("overlayContainer").style.display = "flex";
+    document.getElementById("container").style.display = "flex";
 }
 
-function cacherMessageIntro() {
+function cacher_message_intro() {
     // Cacher la boîte de dialogue
-    document.getElementById("overlayContainer").style.display = "none";
+    document.getElementById("container").style.display = "none";
 }
 
+// fonction pour afficher en decembre
+// Fonction pour afficher l'image en fonction de la date
+function affiche_image_date() {
+    //  On regarde la date actuelle
+    var dateActuelle = new Date();
 
+    // Vérifier si c'est decembre (va de 0 à 11)
+    if (dateActuelle.getMonth() === 11) {
+        // Si le mois est décembre, afficher l'image
+        document.getElementById('image_dec_1').src = "dec_sapins.png";
+        document.getElementById('image_dec_2').src = "dec_sapin.png";
+    } else {
+        // Sinon on n'affiche pas
+        document.getElementById('image_dec').src = '';
+    }
+}
+
+// Appeler la fonction au chargement de la page
+window.onload = affiche_image_date;
 
 //fonction pr generer le cv en pdf ou html
 
@@ -49,6 +68,25 @@ function deposerCV() {
                     document.getElementById("deposerCvBtn").style.display = "inline-block";
                     document.getElementById("fileInput").style.display = "none"; // Cacher le champ de fichier
 
+
+                                    // Ajouter le bouton "Supprimer" et "Paramètres" pour chaque CV déposé
+                    for (var i = 0; i < fichiersEnvoyes.length; i++) {
+                        var fichier = fichiersEnvoyes[i];
+                        var nouveauFichier = document.createElement("div");
+                        nouveauFichier.textContent = fichier;
+
+                        // Ajouter le bouton "Supprimer"
+                        var boutonSupprimer = document.createElement("button");
+                        boutonSupprimer.textContent = "Supprimer le CV";
+                        nouveauFichier.appendChild(boutonSupprimer);
+
+                        // Ajouter le bouton "Paramètres"
+                        var boutonParametres = document.createElement("button");
+                        boutonParametres.textContent = "Paramètres du CV ";
+                        nouveauFichier.appendChild(boutonParametres);
+
+                        listeFichiers.appendChild(nouveauFichier);
+                    }
                 } else {
                     alert('Veuillez sélectionner un fichier PDF.');
                 }
@@ -202,3 +240,84 @@ function toggleFormulaireProjet() {
         const projetformulaire = document.getElementById('ajouterProjetFormulaire');
         projetformulaire.style.display = 'block';
     }    
+
+
+function toggleformevenement(){
+    const evenformulaire = document.getElementById('ajouterevenementform');
+
+        if (evenformulaire.style.display === 'none' || evenformulaire.style.display === '') {
+            console.log("Toggle : Affichage des evenements");
+            afficherevenformulaire();
+        } else {
+            console.log("Toggle : Masquage des evenements");
+            cacherevenformulaire();
+        }
+
+} 
+
+function afficherevenformulaire(){
+    const evenformulaire = document.getElementById('ajouterevenementform');
+    evenformulaire.style.display = 'block';
+
+}  
+
+function cacherevenformulaire(){
+    const evenformulaire = document.getElementById('ajouterevenementform');
+    evenformulaire.style.display = 'none';
+
+}
+
+function soumettreformevenement(){
+        const type= document.getElementById('type').value;
+        const lieu= document.getElementById('lieu').value;
+        const commentaire= document.getElementById('commentaire').value;
+        const photo= document.getElementById('photo').value;
+        const date= document.getElementById('date').value;
+
+        // Cacher le formulaire après la soumission
+        cacherevenformulaire();
+
+        document.getElementById('evenformulaire').submit();
+
+}
+
+
+
+function toggleformpost(){
+    const postformulaire = document.getElementById('ajouterphotovideoform');
+
+        if (postformulaire.style.display === 'none' || postformulaire.style.display === '') {
+            console.log("Toggle : Affichage des post");
+            afficherpostformulaire();
+        } else {
+            console.log("Toggle : Masquage des post");
+            cacherpostformulaire();
+        }
+
+} 
+
+function afficherpostformulaire(){
+    const postformulaire = document.getElementById('ajouterphotovideoform');
+    postformulaire.style.display = 'block';
+
+}  
+
+function cacherpostformulaire(){
+    const postformulaire = document.getElementById('ajouterphotovideoform');
+    postformulaire.style.display = 'none';
+
+}
+
+function soumettreformpost(){
+        const type= document.getElementById('type').value;
+        const lieu= document.getElementById('lieu').value;
+        const commentaire= document.getElementById('commentaire').value;
+        const photo= document.getElementById('photo').value;
+        const date= document.getElementById('date').value;
+
+        // Cacher le formulaire après la soumission
+        cacherpostformulaire();
+
+        document.getElementById('postformulaire').submit();
+
+}
