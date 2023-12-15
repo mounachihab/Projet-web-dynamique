@@ -19,8 +19,20 @@ if (!$db_found) {
     exit;
 }
 
-$id=3; //a modifier
 
+// Accéder aux informations sur l'utilisateur
+$user_name = $_SESSION['user_name'];
+$id = $_SESSION['id'];
+$photo = $_SESSION['photo'];
+// recuperer les donners pour les afficher :
+$resultat = mysqli_query($db_handle,"SELECT COUNT(ID) FROM utilisateurs"); //elise doit remplacer db_handle par mysqli
+$data = mysqli_fetch_assoc($resultat);
+$nbr_membres = $data['COUNT(ID)'] ;
+
+if ($user_name == '') {
+    header('Location: connexion.html');
+    exit() ;
+}
 
 //pr les utilisateurs
 $sql="SELECT * FROM utilisateurs WHERE ID=$id";
@@ -241,12 +253,11 @@ $result_create_table = mysqli_multi_query($db_handle, $sql_content);
 if (!$result_create_table) {
     echo "Erreur lors de la création de la table formations : " . mysqli_error($db_handle);
     exit;
-}
-*/
+}*/
+
 
 
 // Fermer la connexion
-mysqli_close($db_handle);
 
 ?>
 
@@ -258,9 +269,12 @@ mysqli_close($db_handle);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="vous.css">
+    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"> </script>
+
     <script type="text/javascript" src="vous.js" defer></script>
     <title>ECE In - Votre profil</title>
 </head>
+
 
 <body>
     <!-- Partie du logo -->
@@ -270,12 +284,12 @@ mysqli_close($db_handle);
                  alt="logo ECE in"
                  width="260"
                  height=""
-                 onclick="afficherMessageIntro()"/>
+                 onclick="afficher_message_intro()"/>
         </div>
 
-        <!-- L'intro de l'ece in si on appuie sur le logo -->
-        <div id="overlayContainer">
-            <div id="messageOverlay">
+        <!-- si on appuie sur le logo : -->
+        <div id="container">
+            <div id="message_intro">
                 <h3 style="color: #0a7677">
                     <u>Qu'est ce qu'ECE in ?</u>
                 </h3>
@@ -291,7 +305,8 @@ mysqli_close($db_handle);
                     Votre espace personnel sur le site vous permettra de publier des statuts, des évènements, des photos,
                     des vidéos, et même votre curriculum vitae.
                 </p>
-                <button onclick="cacherMessageIntro()">Fermer</button>
+                <button onclick="cacher_message_intro()">Fermer</button>
+
             </div>
         </div>
 
@@ -299,21 +314,51 @@ mysqli_close($db_handle);
             <h2>ECE In - Social Media Professionnel de l'ECE Paris</h2>
         </div>
 
-        <div id="nomCompte">
-            Nom compte
+        <div id="image_decembre_1">
+            <img id="image_dec_1"
+                 src=""
+                 width="250"
+                 height=""/>
+        </div>
+        <div id="image_decembre_2">
+            <img id="image_dec_2"
+                 src=""
+                 width="150"
+                 height=""/>
         </div>
 
-        <!-- Partie du boutons de déconnexion -->
+
+<!-- Faite attention si les variables non pas le meme nom !! (ces variable $ on ete recupéré par partage d'info - voir plus bas) -->
+        <div id="nbr_membre">
+            <b>Membres</b>
+            <?php echo $nbr_membres?>
+        </div>
+
+        <div id="nomCompte">
+            <?php echo "<img src='$photo' height='50' width=''>";?>
+            <p> </p>
+            <?php echo $user_name; ?>
+        </div>
+
+        <!-- Partie du boutons de reglage et du boutons de déconnexion -->
         <div id="deco">
-            <a href="connexion.html">
+
+            <a href="reglages.php">
+                <img src="bouton_reglages.png"
+                     alt="reglages"
+                     width="54"
+                     height=""/>
+            </a>
+
+            <a href="connexion.php">
                 <img src="bouton_deconnexion.png"
-                 alt="deconnexion"
-                 width="50"
-                 height=""/>
+                     alt="deconnexion"
+                     width="50"
+                     height=""/>
             </a>
         </div>
-    </div>
 
+    </div>
     <!-- Partie du bandeau de couleur -->
     <div id="couleur"></div>
 
@@ -321,42 +366,42 @@ mysqli_close($db_handle);
     <div id="wrapper">
         <!-- Partie des boutons -->
         <div id="boutons">
-            <a href="accueil.html">
+            <a href="accueil.php">
                 <img src="bouton_accueil_0.png"
                                  alt="accueil"
                                  width="150"
                                  height=""/>
             </a>
 
-            <a href="monreseau.html">
+            <a href="monreseau.php">
                 <img src="bouton_mon_reseau_0.png"
                      alt="mon resau"
                      width="150"
                      height=""/>
             </a>
 
-            <a href="vous.html">
+            <a href="vous.php">
                 <img src="bouton_vous_1.png"
                      alt="vous"
                      width="150"
                      height=""/>
             </a>
 
-            <a href="notification.html">
+            <a href="notification.php">
                 <img src="bouton_notification_0.png"
                      alt="notifications"
                      width="150"
                      height=""/>
             </a>
 
-            <a href="messagerie.html">
+            <a href="messagerie.php">
                 <img src="bouton_messagerie_0.png"
                      alt="messagerie"
                      width="150"
                      height=""/>
             </a>
 
-            <a href="emplois.html">
+            <a href="emplois.php">
                 <img src="bouton_emplois_0.png"
                                  alt="emplois"
                                  width="150"
@@ -375,7 +420,8 @@ mysqli_close($db_handle);
                     <div id="infos">
                         <div class="prenom"><?php echo $prenom  ?></div> 
                         <div class="nom"><?php echo $nom  ?></div> 
-                        <div class="email"><?php echo $email ; ?></div>  
+                        <div class="email"><?php echo $email ; ?></div>
+                        <button type="submit">Modifier votre photo</button>  
                     </div>
 
                 </div>
@@ -398,14 +444,138 @@ mysqli_close($db_handle);
 
 
 
-                <div id="publication"><h3>Vos publications :</h3></div>
+                <div id="publication">
+                    <h3>Vos publications :</h3>
+                    <div id="blocsPub">
+                        <div id ="blocpubligauche">
+                            Vos évènements :
+                            <button onclick="toggleformevenement()">Ajouter un événement</button>
+                                <form id="ajouterevenementform" action="ajouter_evenement.php" method="post" enctype="multipart/form-data">
+                                    <table>
+                                        <tr>
+                                            <td><label for="type">Type: </label></td>
+                                            <td><input type="text" name="type"></td>
+                                        </tr>    
+
+                                        <tr>
+                                            <td><label for="lieu">Lieu: </label></td>
+                                            <td><input type="text" name="lieu"></td>
+                                        </tr>    
+
+                                        <tr>
+
+                                            <td><label for="commentaire">Commentaire: </label></td>
+                                            <td><textarea name="commentaire"></textarea></td>
+                                        </tr>    
+
+                                        <tr>
+                                            <td><label for="photo">Photo: </label></td>
+                                            <td><input type="file" name="photo"></td>
+                                        </tr> 
+
+                                        <tr>    
+                                            <td><label for="date">Date: </label></td>
+                                            <td><input type="date" name="date"></td>
+                                        </tr> 
+                                        </table>   
+                                            <button type="submit" onclick="soumettreformevenement()">Poster</button>
+                                    </form>
+                            <div id="descriptionphoto">
+                                <br>
+                                 <?php
+                                    // Affichage des événements existants si le bouton "Ajouter un événement" n'est pas cliqué
+                                    if (!isset($_POST['ajouterevenementform'])) {
+                                        $resultats = mysqli_query($db_handle, "SELECT * FROM evenements WHERE ID_createur = '$id'");
+                                        while ($row = mysqli_fetch_assoc($resultats)) {
+                                            echo '<div class="evenement">';
+                                            echo '<img src="' . $row['photo'] . '" alt="Événement" width="300">';
+                                            echo '<p class="info">Lieu: ' . $row['lieu'] . ' <button class="modifier-button" onclick="modifierChamp(\'lieu\', \'' . $row['lieu'] . '\')">Modifier</button></p>';
+                                            echo '<p class="info">Date: ' . $row['date'] . ' <button class="modifier-button" onclick="modifierChamp(\'date\', \'' . $row['date'] . '\')">Modifier</button></p>';
+                                            echo '<p class="info">Type: ' . $row['type'] . ' <button class="modifier-button" onclick="modifierChamp(\'type\', \'' . $row['type'] . '\')">Modifier</button></p>';
+                                            echo '<p class="info">Commentaire: ' . $row['commentaire'] . ' <button class="modifier-button" onclick="modifierChamp(\'commentaire\', \'' . $row['commentaire'] . '\')">Modifier</button></p>';
+                                            echo '<form method="post" action="supprimer_photo.php">'; // Remplacez "supprimer_photo.php" par le fichier où vous gérez la suppression
+                                            //echo '<input type="hidden" name="photo_url" value="' . $row['photo'] . '">';//
+                                            echo '<button type="submit" class="supprimer-button">Supprimer la photo </button>';
+                                            echo '<button class="parametres-button">Paramètres de la photo</button>';
+
+                                            echo '</form>';
+                                            
+                                            echo '</div>';
+
+                                        }
+                                    }
+                                    ?>
+                            </div>
+                                
+
+                        </div>
+                        <div id ="blocpublidroite">
+                            Vos posts :
+                            <button onclick="toggleformpost()">Ajouter une photo/video</button>
+
+                            <form id="ajouterphotovideoform" action="ajouter_photo_video.php" method="post" enctype="multipart/form-data" style="display: none;">
+                            <table>
+                                <tr>
+                                    <td><label for="type">Type: </label></td>
+                                    <td><input type="text" name="type"></td>
+                                </tr>
+
+                                <tr>
+                                    <td><label for="lieu">Lieu: </label></td>
+                                    <td><input type="text" name="lieu"></td>
+                                </tr>
+
+                                <tr>
+                                    <td><label for="commentaire">Commentaire: </label></td>
+                                    <td><textarea name="commentaire"></textarea></td>
+                                </tr>
+
+                                <tr>
+                                    <td><label for="photo">Photo/Video: </label></td>
+                                    <td><input type="file" name="photo"></td>
+                                </tr>
+
+                                <tr>
+                                    <td><label for="date">Date: </label></td>
+                                    <td><input type="date" name="date"></td>
+                                </tr>
+                            </table>
+                            <button type="submit" onclick="soumettreformpost()">Ajouter</button>
+                        </form>
+
+                        <div id="descriptionphoto">
+                            <?php
+                            $resultats = mysqli_query($db_handle, "SELECT * FROM post WHERE ID_createur = '$id'");
+                            while ($row = mysqli_fetch_assoc($resultats)) {
+                                echo '<div class="post">';
+                                echo '<img src="' . $row['photo'] . '" alt="Photo/Video" width="150">';
+                                // Afficher chaque champ avec un bouton "Modifier"
+                                echo '<p class="info">Lieu: ' . $row['lieu'] . ' <button onclick="modifierChamp(\'lieu\', ' . $row['ID_post'] . ')">Modifier</button></p>';
+                                echo '<p class="info">Date: ' . $row['date'] . ' <button onclick="modifierChamp(\'date\', ' . $row['ID_post'] . ')">Modifier</button></p>';
+                                echo '<p class="info">Type: ' . $row['type'] . ' <button onclick="modifierChamp(\'type\', ' . $row['ID_post'] . ')">Modifier</button></p>';
+                                echo '<p class="info">Commentaire: ' . $row['commentaire'] . ' <button onclick="modifierChamp(\'commentaire\', ' . $row['ID_post'] . ')">Modifier</button></p>';
+                               
+                                echo '<button type="submit" class="supprimer-button">Supprimer la photo </button>';
+                                echo '<button class="parametres-button">Paramètres de la photo</button>';
+                                echo '</div>';
+                            }
+                            ?>
+                        </div>
+
+                        </div>
+                    </div>    
+                </div>
             </div>    
+        </div>
+        <!-- Formulaire d'ajout d'événement (initiallement caché) -->
+        <div id="formulaireEvenement" style="display:none;">
+            
         </div>
 
 
         <!--pr la page a droite avec la liste des formations etc -->
         <div id ="formations">
-            <div id="conteneurFormations"><!--les fomations ajoutées s ajoutent ici -->
+            <div id="conteneurFormations" ><!--les fomations ajoutées s ajoutent ici -->
                 <h2>
                     Vos formations/projets :
                 </h2>
@@ -555,6 +725,7 @@ mysqli_close($db_handle);
 
                    
                 </div>
+
 
                 <!-- Sous-bloc à droite -->
                 <div id="ssblocdroite">   
