@@ -88,7 +88,6 @@ body {
 
 /* Styles pour les boutons de direction */
 #boutons{
-    cursor: pointer;
     padding-top: 6px;
 }
 
