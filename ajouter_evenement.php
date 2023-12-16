@@ -1,4 +1,4 @@
- <?php
+<?php
 error_reporting(E_ALL);
 
 ini_set("display_errors", 1);
@@ -32,33 +32,69 @@ if ($user_name == '') {
     exit() ;
 }
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $type = mysqli_real_escape_string($db_handle, $_POST['type']);
-    $lieu = mysqli_real_escape_string($db_handle, $_POST['lieu']);
-    $commentaire = mysqli_real_escape_string($db_handle, $_POST['commentaire']);
-    $date = $_POST['date'];
-    $id_createur = $_SESSION['id'];
+//pr les utilisateurs
+$sql="SELECT * FROM utilisateurs WHERE ID=$id";
+$result = mysqli_query($db_handle, $sql);
+// Vérifier s'il y a une erreur lors de l'exécution de la requête SQL
+if (!$result) {
+    echo "Erreur lors de l'exécution de la requête utilisateurs : " . mysqli_error($db_handle);
+    exit;
+}
 
-    // Gestion de l'upload de la photo
-    $target_dir = __DIR__ . "/"; // Répertoire actuel du script
-    $target_file = $target_dir . basename($_FILES["photo"]["name"]);
-    move_uploaded_file($_FILES["photo"]["tmp_name"], $target_file);
+if (isset($_POST['evenements_form_submit'])) {$type_event = mysqli_real_escape_string($db_handle, $_POST['type_event']);
+    $lieu_event = mysqli_real_escape_string($db_handle, $_POST['lieu_event']);
+    $commentaire_event = mysqli_real_escape_string($db_handle, $_POST['commentaire_event']);
+    $date_event = isset($_POST['date_event']) ? $_POST['date_event'] : null;
+    $ID_createur = $_SESSION['id'];
 
-// Obtenez l'URL complète du fichier
-    //$photo_url = "http://" . $_SERVER['SERVER_NAME'] . "/".$target_file;
+    // Validation : Vérifier si la date et le commentaire sont saisis
+if (empty($date_event) ) {
+    echo "Veuillez saisir la date ";
+    exit; // Arrêter l'exécution du script si la validation échoue
+}
+
+if (empty($commentaire_event) ) {
+    echo "Veuillez saisir un commentaire ";
+    exit; // Arrêter l'exécution du script si la validation échoue
+}
+
+
+
+    // Vérifier si un fichier a été téléchargé
+    if (isset($_FILES['photo_event']) && $_FILES['photo_event']['error'] == UPLOAD_ERR_OK) {
+        // Gestion de l'upload de la photo
+        // Gestion de l'upload de la photo
+        $target_dir = __DIR__ . "/";
+        $target_file = $target_dir . basename($_FILES["photo_event"]["name"]);
+        $filename = basename($_FILES["photo_event"]["name"]); // Obtenez le nom du fichier
+
+        // Modifier le chemin pour enregistrer seulement le nom du fichier
+        $target_file = $target_dir . $filename;
+
+        move_uploaded_file($_FILES["photo_event"]["tmp_name"], $target_file);
+
+                
+    } else {
+        $target_file = null; 
+
+    }
+
+
 
 // Ajouter l'événement à la table
-    $sql = "INSERT INTO evenements (type, lieu, commentaire, photo, date, ID_createur) VALUES ('$type', '$lieu', '$commentaire', '$target_file', '$date', '$id_createur')";
+    $sql = "INSERT INTO evenements (type_event, lieu_event, commentaire_event, photo_event, date_event, ID_createur) VALUES ('$type_event', '$lieu_event', '$commentaire_event', '$filename', '$date_event', '$ID_createur')";
     $result = mysqli_query($db_handle, $sql);
 
         if ($result) {
             echo "Événement ajouté avec succès.";
+            header('Location: vous.php'); // Rediriger vers la page précédente après l'ajout
+
         } else {
             echo "Erreur lors de l'ajout de l'événement : " . mysqli_error($db_handle);
+            echo "<br>";
+            echo "Requête SQL : " . $sql;
         }
     }
 
-header('Location: ' . $_SERVER['HTTP_REFERER']); // Rediriger vers la page précédente après l'ajout
-exit();
-
+  
 ?>
