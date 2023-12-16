@@ -287,42 +287,42 @@ $mysqli->close();
     <div id="wrapper">
         <!-- Partie des boutons -->
         <div id="boutons">
-            <a href="accueil.php"> <!-- lien vers accueil -->
+            <a href="accueil.php" style='text-decoration: none;'> <!-- lien vers accueil -->
                 <img src="bouton_accueil_0.png"
                      alt="accueil"
                      width="150"
                      height=""/>
             </a>
 
-            <a href=""> <!-- lien vers mon reseau -->
+            <a href="mon_reseau.php" style='text-decoration: none;'> <!-- lien vers mon reseau -->
                 <img src="bouton_mon_reseau_0.png"
                      alt="mon resau"
                      width="150"
                      height=""/>
             </a>
 
-            <a href="vous.html"> <!-- lien vers vous -->
+            <a href="vous.html" style='text-decoration: none;'> <!-- lien vers vous -->
                 <img src="bouton_vous_0.png"
                      alt="vous"
                      width="150"
                      height=""/>
             </a>
 
-            <a href="notification.php"> <!-- lien vers notifications -->
+            <a href="notification.php" style='text-decoration: none;'> <!-- lien vers notifications -->
                 <img src="bouton_notification_0.png"
                      alt="notifications"
                      width="150"
                      height=""/>
             </a>
 
-            <a href=""> <!-- lien vers messagerie -->
+            <a href="messagerie.php" style='text-decoration: none;'> <!-- lien vers messagerie -->
                 <img src="bouton_messagerie_0.png"
                      alt="messagerie"
                      width="150"
                      height=""/>
             </a>
 
-            <a href="emplois.php"> <!-- lien vers emplois -->
+            <a href="emplois.php" style='text-decoration: none;'> <!-- lien vers emplois -->
                 <img src="bouton_emplois_1.png"
                      alt="emplois"
                      width="150"
