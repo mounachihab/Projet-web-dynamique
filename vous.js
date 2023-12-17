@@ -240,20 +240,32 @@ function toggleFormulaireProjet() {
         const projetformulaire = document.getElementById('ajouterProjetFormulaire');
         projetformulaire.style.display = 'block';
     }    
+//pr la description des events
 
+
+function afficherDescriptionPhoto() {
+    document.getElementById("descriptionphoto").style.display = 'block';
+}
+
+function cacherDescriptionPhoto() {
+    document.getElementById("descriptionphoto").style.display = 'none';
+}
+
+//pr les events
 
 function toggleformevenement(){
     const evenformulaire = document.getElementById('ajouterevenementform');
 
-        if (evenformulaire.style.display === 'none' || evenformulaire.style.display === '') {
-            console.log("Toggle : Affichage des evenements");
-            afficherevenformulaire();
-        } else {
-            console.log("Toggle : Masquage des evenements");
-            cacherevenformulaire();
-        }
-
-} 
+    if (evenformulaire.style.display === 'none' || evenformulaire.style.display === '') {
+        console.log("Toggle : Affichage des evenements");
+        afficherevenformulaire();
+        cacherDescriptionPhoto();
+    } else {
+        console.log("Toggle : Masquage des evenements");
+        cacherevenformulaire();
+        afficherDescriptionPhoto();
+    }
+}
 
 function afficherevenformulaire(){
     const evenformulaire = document.getElementById('ajouterevenementform');
@@ -267,57 +279,95 @@ function cacherevenformulaire(){
 
 }
 
-function soumettreformevenement(){
-        const type= document.getElementById('type').value;
-        const lieu= document.getElementById('lieu').value;
-        const commentaire= document.getElementById('commentaire').value;
-        const photo= document.getElementById('photo').value;
-        const date= document.getElementById('date').value;
 
+
+
+function soumettreformevenement() {
+    const type_event = document.getElementById('type_event').value;
+    const lieu_event = document.getElementById('lieu_event').value;
+    const commentaire_event = document.getElementById('commentaire_event').value;
+    const photo_event = document.getElementById('photo_event').value;
+    const date_event = document.getElementById('date_event').value;
+
+    // Mettre à jour les champs de date et d'heure avec la date et l'heure actuelles
+        var dateActuelle = new Date();
+        var date_irl_event = dateActuelle.toISOString().split('T')[0]; // Format 'YYYY-MM-DD'
+        var heure_irl_event = dateActuelle.toTimeString().split(' ')[0]; // Format 'HH:mm:ss'
         // Cacher le formulaire après la soumission
-        cacherevenformulaire();
+        cacherpublicationsformulaire();
+        document.getElementById('date_irl_event').value = dateEvent;
+        document.getElementById('heure_irl_event').value = heureEvent;
 
         document.getElementById('evenformulaire').submit();
 
+    
 }
 
+//pr les publis
 
+function toggleformpublications(){
+    const publicationsformulaire = document.getElementById('ajouterpublicationsform');
 
-function toggleformpost(){
-    const postformulaire = document.getElementById('ajouterphotovideoform');
-
-        if (postformulaire.style.display === 'none' || postformulaire.style.display === '') {
-            console.log("Toggle : Affichage des post");
-            afficherpostformulaire();
+        if (publicationsformulaire.style.display === 'none' || publicationsformulaire.style.display === '') {
+            console.log("Toggle : Affichage des publications");
+            afficherpublicationsformulaire();
+            cacherDescriptionPubli();
         } else {
-            console.log("Toggle : Masquage des post");
-            cacherpostformulaire();
+            console.log("Toggle : Masquage des publications");
+            cacherpublicationsformulaire();
+            afficherDescriptionPubli();
         }
 
 } 
 
-function afficherpostformulaire(){
-    const postformulaire = document.getElementById('ajouterphotovideoform');
-    postformulaire.style.display = 'block';
+function afficherpublicationsformulaire(){
+    const publicationsformulaire = document.getElementById('ajouterpublicationsform');
+    publicationsformulaire.style.display = 'block';
 
 }  
 
-function cacherpostformulaire(){
-    const postformulaire = document.getElementById('ajouterphotovideoform');
-    postformulaire.style.display = 'none';
+function cacherpublicationsformulaire(){
+    const publicationsformulaire = document.getElementById('ajouterpublicationsform');
+    publicationsformulaire.style.display = 'none';
 
 }
 
-function soumettreformpost(){
-        const type= document.getElementById('type').value;
-        const lieu= document.getElementById('lieu').value;
-        const commentaire= document.getElementById('commentaire').value;
-        const photo= document.getElementById('photo').value;
-        const date= document.getElementById('date').value;
+function soumettreformpublications(){
+        const lieu_publications= document.getElementById('lieu_publications').value;
+        const commentaire_publications= document.getElementById('commentaire_publications').value;
+        const photo_publications= document.getElementById('photo_publications').value;
 
+        // Mettre à jour les champs de date et d'heure avec la date et l'heure actuelles
+        var dateActuelle = new Date();
+        var date_publications = dateActuelle.toISOString().split('T')[0]; // Format 'YYYY-MM-DD'
+        var heure_publications = dateActuelle.toTimeString().split(' ')[0]; // Format 'HH:mm:ss'
         // Cacher le formulaire après la soumission
-        cacherpostformulaire();
+        cacherpublicationsformulaire();
+        document.getElementById('date_publications').value = datePublication;
+        document.getElementById('heure_publications').value = heurePublication;
 
-        document.getElementById('postformulaire').submit();
+        document.getElementById('publicationsformulaire').submit();
 
+}
+
+//pr la description des publis
+
+
+function afficherDescriptionPubli() {
+    document.getElementById("descriptionphoto2").style.display = 'block';
+}
+
+function cacherDescriptionPubli() {
+    document.getElementById("descriptionphoto2").style.display = 'none';
+}
+function afficherFormulaire(champ, id) {
+    // Masquer tous les formulaires
+    const tousLesFormulaires = document.querySelectorAll('form');
+    tousLesFormulaires.forEach(formulaire => {
+        formulaire.style.display = 'none';
+    });
+
+    // Afficher le formulaire spécifique
+    const formulaireAafficher = document.getElementById('form_' + champ + '_' + id);
+    formulaireAafficher.style.display = 'block';
 }
