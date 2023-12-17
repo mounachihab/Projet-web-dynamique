@@ -90,10 +90,53 @@ $commentaire_publications = isset($row_publications['commentaire_publications'])
 $photo_publications = isset($row_publications['photo_publications']) ? $row_publications['photo_publications'] : null;
 //$pv_public_publications=$publications['pv_public_publications'];
 
+//pr les formations
+
+$sql_formations="SELECT * FROM formations WHERE ID=$id";
+$result_formations = mysqli_query($db_handle, $sql_formations);
+$formations = mysqli_fetch_assoc($result_formations);
+$ecole = $formations['ecole'];
+$competence = $formations['competence'];
+$domaine = $formations['domaine'];
+$dateDebut = $formations['dateDebut'];
+$dateFin=$formations['dateFin'];   
+
+
+// Vérifier s'il y a une erreur lors de l'exécution de la requête SQL
+if (!$result_formations) {
+    echo "Erreur lors de l'exécution de la requête formations: " . mysqli_error($db_handle);
+    exit;
+}
+
+//pr les projets
+
+$sql_projets="SELECT * FROM projets WHERE ID=$id";
+$result_projets = mysqli_query($db_handle, $sql_projets);
+$projets = mysqli_fetch_assoc($result_projets);
+$Lieu = $projets['Lieu'];
+$competence = $projets['competence'];
+$domaine = $projets['domaine'];
+$dateDebut = $projets['dateDebut'];
+$dateFin=$projets['dateFin'];   
+
+
+// Vérifier s'il y a une erreur lors de l'exécution de la requête SQL
+if (!$result_projets) {
+    echo "Erreur lors de l'exécution de la requête projets: " . mysqli_error($db_handle);
+    exit;
+}
+
+//pr les cv
+$sql_cv="SELECT * FROM CV WHERE ID=$id";
+$result_cv = mysqli_query($db_handle, $sql_cv);
+$cv = mysqli_fetch_assoc($result_cv);
+$lienCV= $cv['lienCV'];
+ 
 
 
 
-/*    $sql_file = "mouna.sql";
+
+/* $sql_file = "vous.sql";
 
 // Lire le contenu du fichier SQL
 $sql_content = file_get_contents($sql_file);
@@ -108,6 +151,8 @@ if (!$result_create_table) {
     exit;
 }*/
 
+
+include('ajouterNotificationsEventPubli.php');
 
 ?>
 
@@ -556,25 +601,22 @@ if (!$result_create_table) {
                     
                         <h3>Liste des formations :</h3>
                          <?php
-            // Vérifier s'il y a des formations à afficher
-            if (mysqli_num_rows($result_formations) > 0) {
-                while ($formation = mysqli_fetch_assoc($result_formations)) {
-                    echo '<div>';
-                    echo '<strong style="text-align:left; display: block;">' . $formation['ecole'] . '</strong>';
+                         if(!isset($_POST['ajouterformationformulaire'])){
+                            $resultats = mysqli_query($db_handle, "SELECT * FROM formations WHERE ID = '$id'");
 
-                    echo ' <span style="text-align:left;  display: block;">' . $formation['domaine'] . '</span>';
-
-
-                    echo '<span style="text-align:left; display: block;">' . $formation['dateDebut'] . ' / ' . $formation['dateFin'] . '<br>';
-
-
-                    echo '</div>';
-                    echo '<hr>';
-                }
-            } else {
-                echo 'Aucune formation trouvée.';
-            }
-            ?>
+                         
+                            while ($formations = mysqli_fetch_assoc($resultats)) {
+                                echo '<div>';
+                                echo '<strong style="text-align:left; display: block;">' . $formations['ecole'] . '</strong>';
+                                echo ' <span style="text-align:left;  display: block;">' . $formations['domaine'] . '</span>';
+                                echo '<span style="text-align:left; display: block;">' . $formations['dateDebut'] . ' / ' . $formations['dateFin'] . '<br>';
+                                echo '</div>';
+                                echo '<hr>';
+                            
+                            }
+                        }
+                            
+                        ?>
 
                 </div>
 
@@ -582,32 +624,30 @@ if (!$result_create_table) {
                     
                         <h3>Liste des projets :</h3>
                         <?php
-                        // Vérifier s'il y a des formations à afficher
-                        if (mysqli_num_rows($result_projets) > 0) {
-                            while ($projets = mysqli_fetch_assoc($result_projets)) {
+                         if(!isset($_POST['ajouterProjetFormulaire'])){
+                            $resultats = mysqli_query($db_handle, "SELECT * FROM projets WHERE ID = '$id'");
+
+                         
+                            while ($projets = mysqli_fetch_assoc($resultats)) {
                                 echo '<div>';
                                 echo '<strong style="text-align:left; display: block;">' . $projets['Lieu'] . '</strong>';
-
                                 echo ' <span style="text-align:left;  display: block;">' . $projets['domaine'] . '</span>';
-
-
                                 echo '<span style="text-align:left; display: block;">' . $projets['dateDebut'] . ' / ' . $projets['dateFin'] . '<br>';
-
-
                                 echo '</div>';
                                 echo '<hr>';
+                            
                             }
-                        } else {
-                            echo 'Aucun projet trouvé.';
                         }
+                            
                         ?>
+                    
                         
                 </div>
                 
                 <div id="ssbloc_bas">    
                     <button class="button-container" onclick="toggleformationformulaire()">Ajouter une Formation</button>
 
-                     <form id="ajouterformationformulaire" name="formationformulaire" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>" style="display: none;">
+                     <form id="ajouterformationformulaire" name="formationformulaire" method="post" action="ajouter_formations.php" style="display: none;">
                           <table>
                                 <input type="hidden" name="formation_form_submit" value="1">
 
@@ -637,11 +677,12 @@ if (!$result_create_table) {
                                     <td><textarea id="description" rows="4"></textarea></td>
                                </tr> -->  
                           </table>
-                          <button type="submit" onclick="soumettreformationformulaire()">Envoyer </button>
+                            <button type="submit"  onclick="soumettreformationformulaire()">Envoyer</button>
                      </form> 
                     <button class="button-container" onclick="toggleFormulaireProjet()">Ajouter un Projet</button>
+                    
 
-                    <form id="ajouterProjetFormulaire" name="projetformulaire" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?> " style="display: none;">
+                    <form id="ajouterProjetFormulaire" name="projetformulaire" method="post" action="ajouter_projets.php " style="display: none;">
                           <table>
                             <input type="hidden" name="projet_form_submit" value="1">
                                <tr>
@@ -687,13 +728,30 @@ if (!$result_create_table) {
             <div id="conteneurSousBlocs">    
                 
                     <!-- Sous-bloc à gauche -->
-                <div id="ssblocgauche">
+                <div id="ssblocgauche"style="        overflow-y: auto;
+">
                     <h3>Liste des CV  : </h3>
+
+                                    <?php
+                $resultatsCV = mysqli_query($db_handle, "SELECT ID_CV, lienCV FROM cv WHERE ID = $id");
+
+                    if ($resultatsCV) {
+                        while ($cv = mysqli_fetch_assoc($resultatsCV)) {
+                            echo '<p>';
+                            echo '<a href="' . $cv['lienCV'] . '" target="_blank">' . $cv['lienCV'] . '</a>';
+                            echo ' <form method="post" action="supprimer_cv.php">';
+        echo '<input type="hidden" name="ID_CV" value="' . $cv['ID_CV'] . '">';
+
+                            echo '    <button type="submit" name="supprimerCV" class="supprimer-button">Supprimer</button>';
+                            echo ' </form>';
+                            echo '</p>';
+                        }
+                    } else {
+                        echo "Erreur lors de la récupération des CV : " . mysqli_error($db_handle);
+                    }
+                    ?>
                         
-                        <!--pr la liste des CV deposés-->
-                        <div id="listeFichiers" ></div>
-                         <!-- Nouveau div pour la liste des CV générés -->
-                        <div id="listeCvGenere"></div>
+                        
 
                    
                 </div>
@@ -701,40 +759,42 @@ if (!$result_create_table) {
 
                 <!-- Sous-bloc à droite -->
                 <div id="ssblocdroite">   
-                    <form id="uploadForm" onsubmit="return false;">
+                    <tr>
+                                <td class="button-container">
+                                    <button type="button" id="deposerCvBtn" class="fixed-width-button" onclick="toggleformulairecv()">Déposer mon CV</button>
+                                </td>
+                            </tr>
+                   <form id="uploadForm" enctype="multipart/form-data" action="ajouter_cv.php" name="cvformulaire" method="post" style="display:none;">
+                        <input type="hidden" name="ID_utilisateur" value="<?php echo $id; ?>"> 
                         <table>
                             
-                            <tr>
-                                <td class="button-container"><button type="button" id="deposerCvBtn" class="fixed-width-button" onclick="afficherInput()">Déposer mon CV</button></td>
+                          
+                                <td>
+                                    <label for="lienCV">Choisir votre fichier :</label>
+                                    <input type="file" name="lienCV" id="lienCV" accept=".pdf">
+                                </td>
                             </tr>
-                            <tr>
-                                <td><input type="file" id="fileInput" style="display: none;" onchange="afficherNomFichier()"></td>
-                                <td><button type="button" id="envoyerBtn" onclick="deposerCV()" style="display: none;">Envoyer</button></td>
+                            </table>
+
+                            <tr id="submitRow" style="display:none;">
+                                <td>
+                                    <button type="submit" id="envoyerCvBtn" class="fixed-width-button" onclick="soumettreformcv()">Envoyer</button>
+                                </td>
                             </tr>
-                            
-                        </table>
+                        
                     </form>
-                    <form><table>
+                    <form id="genererCvForm" action="generercv.php" method="post">
+                    <table>
                         <tr>
-                            <td class="button-container"><button id="genererCvBtn"  class="fixed-width-button" onclick="genererCV()">Générer mon CV</button>
+                            <td class="button-container">
+                                <button id="genererCvBtn" class="fixed-width" type="submit">Générer mon CV</button>
                             </td>
                         </tr>
-                        </table>
-                    </form>
+                    </table>
+                </form>
                 </div>   
                
-                                    
-           
-            
-            </div>
-        <!-- Copyright 
-        <div id="copy">
-            <footer>
-            <p>
-                &copy; 2023 ECE In. Tous droits réservés.
-            </p>-->
-        </footer>
-        </div>
+                            
     </div>    
 
 
