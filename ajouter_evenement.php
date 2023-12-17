@@ -46,6 +46,9 @@ if (isset($_POST['evenements_form_submit'])) {$type_event = mysqli_real_escape_s
     $commentaire_event = mysqli_real_escape_string($db_handle, $_POST['commentaire_event']);
     $date_event = isset($_POST['date_event']) ? $_POST['date_event'] : null;
     $ID_createur = $_SESSION['id'];
+    $etat_event = $_POST['etat_event'];
+    var_dump($etat_event); 
+
 
     // Validation : Vérifier si la date et le commentaire sont saisis
 if (empty($date_event) ) {
@@ -79,10 +82,8 @@ if (empty($commentaire_event) ) {
 
     }
 
-
-
 // Ajouter l'événement à la table
-    $sql = "INSERT INTO evenements (type_event, lieu_event, commentaire_event, photo_event, date_event, heure_irl_event, date_irl_event, ID_createur) VALUES ('$type_event', '$lieu_event', '$commentaire_event', '$filename', '$date_event', CURRENT_TIME(), CURRENT_DATE(),  '$ID_createur')";
+    $sql = "INSERT INTO evenements (type_event, lieu_event, commentaire_event, photo_event, date_event, heure_irl_event, date_irl_event, etat_event, ID_createur) VALUES ('$type_event', '$lieu_event', '$commentaire_event', '$filename', '$date_event', CURRENT_TIME(), CURRENT_DATE(), '$etat_event',  '$ID_createur')";
     $result = mysqli_query($db_handle, $sql);
 
         if ($result) {
