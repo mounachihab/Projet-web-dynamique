@@ -1,4 +1,4 @@
-<?php
+ <?php
 error_reporting(E_ALL);
 
 ini_set("display_errors", 1);
@@ -43,16 +43,12 @@ if (!$result) {
 
 if (isset($_POST['publications_form_submit'])) {
     $lieu_publications = mysqli_real_escape_string($db_handle, $_POST['lieu_publications']);
-    $date_publications =isset($_POST['date_publications']) ? $_POST['date_publications'] : null;
-    $heure_publications = mysqli_real_escape_string($db_handle, $_POST['heure_publications']);
+    
     $commentaire_publications = isset($_POST['commentaire_publications']) ? $_POST['commentaire_publications'] : null;
     $ID_createur = $_SESSION['id'];
 
-    // Validation : Vérifier si la date et le commentaire sont saisis
-if (empty($date_publications) ) {
-    echo "Veuillez saisir la date ";
-    exit; // Arrêter l'exécution du script si la validation échoue
-}
+    // Validation : Vérifier si le commentaire sont saisis
+
 
 if (empty($commentaire_publications) ) {
     echo "Veuillez saisir un commentaire ";
@@ -81,7 +77,7 @@ if (empty($commentaire_publications) ) {
     }
 
 // Ajouter l'événement à la table
-    $sql = "INSERT INTO publications (lieu_publications, date_publications, heure_publications, commentaire_publications, photo_publications, ID_createur) VALUES ('$lieu_publications', '$date_publications', '$heure_publications', '$commentaire_publications', '$filename', '$ID_createur')";
+    $sql = "INSERT INTO publications (lieu_publications, date_publications, heure_publications, commentaire_publications, photo_publications, ID_createur) VALUES ('$lieu_publications', CURRENT_DATE(), CURRENT_TIME(), '$commentaire_publications', '$filename', '$ID_createur')";
     $result = mysqli_query($db_handle, $sql);
 
         if ($result) {
@@ -97,3 +93,4 @@ if (empty($commentaire_publications) ) {
 
   
 ?>
+
