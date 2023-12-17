@@ -247,7 +247,8 @@ border: 2px solid #0a7677; border-radius: 10px; /* Bordure arrondie */    padd
 
 #ssblocgauche h3 {
 
-    margin: 0; /* Supprimer la marge par défaut du titre h3 */
+        overflow-y: auto;
+margin: 0; /* Supprimer la marge par défaut du titre h3 */
 
 }
 
@@ -482,8 +483,8 @@ border: 2px solid #0a7677; border-radius: 10px; /* Bordure arrondie */    padd
 
 
  .supprimer-button {
-    background-color: #ff0000; /* Couleur de fond du bouton Supprimer */
-    color: #ffffff; /* Couleur du texte du bouton Supprimer */
+    background-color: #0a7677; /* Couleur de fond du bouton Supprimer */
+    color:white; /* Couleur du texte du bouton Supprimer */
     border: none;
     cursor: pointer;
   } 
@@ -506,3 +507,24 @@ border: 2px solid #0a7677; border-radius: 10px; /* Bordure arrondie */    padd
     cursor: pointer;
     margin-left: 5px; /* Ajout d'une marge à gauche pour espacer les boutons */
   }
+
+  #choixVisibilite {
+    font-size: 16px;
+}
+
+#choixVisibilite a {
+    cursor: pointer;
+    text-decoration: none;
+    color: #333;
+    margin-right: 10px;
+}
+
+#choixVisibilite a:hover {
+    text-decoration: underline;
+}
+
+#visibilité{
+    text-align: left;
+        display: flex;
+
+}
