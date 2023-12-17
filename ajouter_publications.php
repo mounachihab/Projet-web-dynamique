@@ -97,5 +97,3 @@ if (empty($commentaire_publications) ) {
 
   
 ?>
-
-

@@ -1,4 +1,4 @@
- <?php
+<?php
 error_reporting(E_ALL);
 
 ini_set("display_errors", 1);
@@ -18,8 +18,6 @@ if (!$db_found) {
     mysqli_close($db_handle);
     exit;
 }
-
-
 // Accéder aux informations sur l'utilisateur
 $user_name = $_SESSION['user_name'];
 $id = $_SESSION['id'];
@@ -33,50 +31,46 @@ if ($user_name == '') {
     header('Location: connexion.html');
     exit() ;
 }
-
-//pr les utilisateurs
-$sql="SELECT * FROM utilisateurs WHERE ID=$id";
+// récupérer les données pour les afficher
+$sql = "SELECT * FROM utilisateurs WHERE ID=$id";
 $result = mysqli_query($db_handle, $sql);
+
 // Vérifier s'il y a une erreur lors de l'exécution de la requête SQL
 if (!$result) {
     echo "Erreur lors de l'exécution de la requête utilisateurs : " . mysqli_error($db_handle);
     exit;
 }
 
-//pr le statut
-$sql_statut="SELECT * FROM statut WHERE ID=$id";
-$result_statut = mysqli_query($db_handle, $sql_statut);
-$statut = mysqli_fetch_assoc($result_statut);
-$tonstatut = $statut['tonstatut'];
-
-// Vérifier s'il y a une erreur lors de l'exécution de la requête SQL
-if (!$result_statut) {
-    echo "Erreur lors de l'exécution de la requête statut: " . mysqli_error($db_handle);
-    exit;
-}
+if (isset($_FILES['lienCV']) && $_FILES['lienCV']['error'] == UPLOAD_ERR_OK) {
+   
 
 
-    // Vérifier si le formulaire de modification du statut a été soumis
-if (isset($_POST['statut_form_submit'])) {
+    // Gestion de l'upload de la photo
+        $target_dir = __DIR__ . "/";
+        $target_file = $target_dir . basename($_FILES["lienCV"]["name"]);
+        $filename = basename($_FILES["lienCV"]["name"]); // Obtenez le nom du fichier
 
-    // Récupérer le nouveau statut depuis le formulaire
-    $nouveauStatut = mysqli_real_escape_string($db_handle, $_POST['nouveau_statut']);
+        // Modifier le chemin pour enregistrer seulement le nom du fichier
+        $target_file = $target_dir . $filename;
 
-    // Mettez à jour le statut dans la base de données
-    $requete = mysqli_query($db_handle, "UPDATE statut SET tonstatut = '$nouveauStatut' WHERE ID = $id");
+        move_uploaded_file($_FILES["lienCV"]["tmp_name"], $target_file);
 
-    if ($requete) {
-        // Mettez à jour la variable $tonstatut pour refléter le nouveau statut
-        $tonstatut = $nouveauStatut;
-        // Rediriger l'utilisateur vers la même page pour actualiser le contenu
-    header('Location: vous.php');
-        exit();
+  
+        
+        $sql = "INSERT INTO cv (ID, lienCV) VALUES ('$id', '$filename')";
+        $result = mysqli_query($db_handle, $sql);
 
-    } 
-    else {
-        echo "Erreur lors de la mise à jour du statut : " . mysqli_error($db_handle);
+        if ($result) {
+            echo "CV ajouté avec succès.";
+                    header('Location: vous.php');
+
+        } else {
+            echo "Erreur lors de l'ajout du CV à la base de données : " . mysqli_error($db_handle);
+        }
+    } else {
+        echo "Erreur lors du déplacement du fichier vers le dossier de destination.";
     }
-}
 
 
 ?>
+

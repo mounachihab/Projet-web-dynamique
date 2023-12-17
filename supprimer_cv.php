@@ -31,16 +31,22 @@ if ($user_name == '') {
     header('Location: connexion.html');
     exit() ;
 }
-// Récupérer les données du formulaire
-$champ = $_POST['champ'];
-$ID_publication = $_POST['ID_publication'];
-$nouvelle_valeur = mysqli_real_escape_string($db_handle, $_POST['nouvelle_valeur']);
 
-// Effectuer la mise à jour dans la base de données
-$sql = "UPDATE publications SET $champ = '$nouvelle_valeur' WHERE ID_publication = $ID_publication";
-mysqli_query($db_handle, $sql);
+if (isset($_POST['ID_CV'])) {
+    $ID_CV = $_POST['ID_CV'];
 
-// Rediriger vers la page d'origine 
-header('Location: vous.php');
-exit;
+    $sql = "DELETE FROM cv WHERE ID_CV = $ID_CV ";
+    $result = mysqli_query($db_handle, $sql);
+
+    if ($result) {
+        echo "CV supprimé avec succès.";
+                header('Location: vous.php');
+
+    } else {
+        echo "Erreur lors de la suppression du CV : " . mysqli_error($db_handle);
+    }
+} else {
+    echo "ID du CV non spécifié.";
+}
 ?>
+

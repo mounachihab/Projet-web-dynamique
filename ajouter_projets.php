@@ -1,4 +1,4 @@
- <?php
+<?php
 error_reporting(E_ALL);
 
 ini_set("display_errors", 1);
@@ -18,8 +18,6 @@ if (!$db_found) {
     mysqli_close($db_handle);
     exit;
 }
-
-
 // Accéder aux informations sur l'utilisateur
 $user_name = $_SESSION['user_name'];
 $id = $_SESSION['id'];
@@ -33,50 +31,36 @@ if ($user_name == '') {
     header('Location: connexion.html');
     exit() ;
 }
-
-//pr les utilisateurs
-$sql="SELECT * FROM utilisateurs WHERE ID=$id";
+// récupérer les données pour les afficher
+$sql = "SELECT * FROM utilisateurs WHERE ID=$id";
 $result = mysqli_query($db_handle, $sql);
+
 // Vérifier s'il y a une erreur lors de l'exécution de la requête SQL
 if (!$result) {
     echo "Erreur lors de l'exécution de la requête utilisateurs : " . mysqli_error($db_handle);
     exit;
 }
 
-//pr le statut
-$sql_statut="SELECT * FROM statut WHERE ID=$id";
-$result_statut = mysqli_query($db_handle, $sql_statut);
-$statut = mysqli_fetch_assoc($result_statut);
-$tonstatut = $statut['tonstatut'];
+// Ajout de formation si le formulaire est soumis
+if (isset($_POST['projet_form_submit'])) {
+    $Lieu = mysqli_real_escape_string($db_handle, $_POST['Lieu']);
+    $competence = mysqli_real_escape_string($db_handle, $_POST['competence']);
+    $domaine = mysqli_real_escape_string($db_handle, $_POST['domaine']);
+    $dateDebut = $_POST['dateDebut'];
+    $dateFin = $_POST['dateFin'];
 
-// Vérifier s'il y a une erreur lors de l'exécution de la requête SQL
-if (!$result_statut) {
-    echo "Erreur lors de l'exécution de la requête statut: " . mysqli_error($db_handle);
-    exit;
-}
+    // Exemple d'insertion dans la base de données
+    $sql = "INSERT INTO projets (ID, Lieu, competence, domaine, dateDebut, dateFin) VALUES ('$id', '$Lieu', '$competence', '$domaine', '$dateDebut', '$dateFin')";
+    $result = mysqli_query($db_handle, $sql);
 
-
-    // Vérifier si le formulaire de modification du statut a été soumis
-if (isset($_POST['statut_form_submit'])) {
-
-    // Récupérer le nouveau statut depuis le formulaire
-    $nouveauStatut = mysqli_real_escape_string($db_handle, $_POST['nouveau_statut']);
-
-    // Mettez à jour le statut dans la base de données
-    $requete = mysqli_query($db_handle, "UPDATE statut SET tonstatut = '$nouveauStatut' WHERE ID = $id");
-
-    if ($requete) {
-        // Mettez à jour la variable $tonstatut pour refléter le nouveau statut
-        $tonstatut = $nouveauStatut;
-        // Rediriger l'utilisateur vers la même page pour actualiser le contenu
-    header('Location: vous.php');
+    // Affichage des messages et redirection
+    if ($result) {
+        echo "Porjet ajoutée avec succès.";
+        header('Location: vous.php');
         exit();
-
-    } 
-    else {
-        echo "Erreur lors de la mise à jour du statut : " . mysqli_error($db_handle);
+    } else {
+        echo "Erreur lors de l'ajout du projet : " . mysqli_error($db_handle);
+        echo "Requête SQL : " . $sql;
     }
 }
-
-
 ?>

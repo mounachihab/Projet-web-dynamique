@@ -41,7 +41,8 @@ if (!$result) {
     exit;
 }
 
-if (isset($_POST['evenements_form_submit'])) {$type_event = mysqli_real_escape_string($db_handle, $_POST['type_event']);
+if (isset($_POST['evenements_form_submit'])) {
+    $type_event = mysqli_real_escape_string($db_handle, $_POST['type_event']);
     $lieu_event = mysqli_real_escape_string($db_handle, $_POST['lieu_event']);
     $commentaire_event = mysqli_real_escape_string($db_handle, $_POST['commentaire_event']);
     $date_event = isset($_POST['date_event']) ? $_POST['date_event'] : null;
@@ -88,7 +89,7 @@ if (empty($commentaire_event) ) {
 
         if ($result) {
             echo "Événement ajouté avec succès.";
-            header('Location: vous.php'); // Rediriger vers la page précédente après l'ajout
+            header('Location: vous.php'); 
 
         } else {
             echo "Erreur lors de l'ajout de l'événement : " . mysqli_error($db_handle);

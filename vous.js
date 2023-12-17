@@ -29,104 +29,6 @@ function affiche_image_date() {
 // Appeler la fonction au chargement de la page
 window.onload = affiche_image_date;
 
-//fonction pr generer le cv en pdf ou html
-
-function genererCV(){
-
-}
-
-
-var fichiersEnvoyes = []; // Tableau pour stocker les noms des fichiers
-
-function deposerCV() {
-            // Récupérer l'élément input de type "file"
-            const cvInput = document.getElementById('fileInput');
-
-            // Vérifier si un fichier a été sélectionné
-            if (cvInput.files.length > 0) {
-                const cvFile = cvInput.files[0];
-
-                // Vérifier si le fichier est au format PDF
-                if (cvFile.type === 'application/pdf') {
-                    // Ajouter le nom du fichier au tableau
-                    fichiersEnvoyes.push(cvFile.name);
-
-                    // Mettre à jour la liste des fichiers
-                    var listeFichiers = document.getElementById("listeFichiers");
-                    listeFichiers.innerHTML = "Liste des CV déposés :<br>";
-
-                    for (var i = 0; i < fichiersEnvoyes.length; i++) {
-                        var fichier = fichiersEnvoyes[i];
-                        var nouveauFichier = document.createElement("div");
-                        nouveauFichier.textContent = fichier;
-                        listeFichiers.appendChild(nouveauFichier);
-                    }
-
-                    // Réinitialiser le champ de fichier et masquer le bouton "Envoyer"
-                    cvInput.value = ""; // Efface le fichier sélectionné
-                    document.getElementById("envoyerBtn").style.display = "none";
-                    document.getElementById("deposerCvBtn").style.display = "inline-block";
-                    document.getElementById("fileInput").style.display = "none"; // Cacher le champ de fichier
-
-
-                                    // Ajouter le bouton "Supprimer" et "Paramètres" pour chaque CV déposé
-                    for (var i = 0; i < fichiersEnvoyes.length; i++) {
-                        var fichier = fichiersEnvoyes[i];
-                        var nouveauFichier = document.createElement("div");
-                        nouveauFichier.textContent = fichier;
-
-                        // Ajouter le bouton "Supprimer"
-                        var boutonSupprimer = document.createElement("button");
-                        boutonSupprimer.textContent = "Supprimer le CV";
-                        nouveauFichier.appendChild(boutonSupprimer);
-
-                        // Ajouter le bouton "Paramètres"
-                        var boutonParametres = document.createElement("button");
-                        boutonParametres.textContent = "Paramètres du CV ";
-                        nouveauFichier.appendChild(boutonParametres);
-
-                        listeFichiers.appendChild(nouveauFichier);
-                    }
-                } else {
-                    alert('Veuillez sélectionner un fichier PDF.');
-                }
-            } else {
-                alert('Veuillez sélectionner un fichier.');
-            }
-        }
-
-function afficherInput() {
-            var btnDeposerCv = document.getElementById("deposerCvBtn");
-            var fileInput = document.getElementById("fileInput");
-            var envoyerBtn = document.getElementById("envoyerBtn");
-
-            // Cacher le bouton "Déposer mon CV"
-            btnDeposerCv.style.display = "none";
-
-            // Afficher le champ de fichier et le bouton "Envoyer"
-            fileInput.style.display = "block";
-            envoyerBtn.style.display = "inline-block";
-        }
-
- 
-
-// Fonction pour mettre à jour l'affichage du fichier sélectionné
-function afficherNomFichier() {
-    var fileInput = document.getElementById("fileInput");
-    var nomFichier = fileInput.files[0].name;
-
-    // Mettre à jour le texte de l'élément existant pour afficher le nom du fichier
-    var listeFichiers = document.getElementById("listeFichiers");
-    listeFichiers.innerHTML = "Fichier sélectionné : " + nomFichier;
-
-    // Ajouter le fichier au tableau de fichiers dans le stockage local
-    var fichiersEnvoyes = JSON.parse(localStorage.getItem("fichiersEnvoyes")) || [];
-    fichiersEnvoyes.push(nomFichier);
-    localStorage.setItem("fichiersEnvoyes", JSON.stringify(fichiersEnvoyes));
-
-    // Mettre à jour la liste des fichiers
-    chargerListeFichiers();
-}
 
 
 
@@ -168,6 +70,9 @@ function afficherNomFichier() {
         document.getElementById('form_statut').submit();
     }
 
+
+
+
 //pr les formations
 function toggleformationformulaire() {
         const formationformulaire = document.getElementById('ajouterformationformulaire');
@@ -180,7 +85,11 @@ function toggleformationformulaire() {
             cacherformationformulaire();
         }
     }
+
+
+
     function soumettreformationformulaire() {
+
         
         const ecole= document.getElementById('ecole').value;
         const competence= document.getElementById('competence').value;
@@ -194,9 +103,10 @@ function toggleformationformulaire() {
         document.getElementById('formationformulaire').submit();
     }
 
+
     function cacherformationformulaire() {
         const formationformulaire = document.getElementById('ajouterformationformulaire');
-        statutForm.style.display = 'none';
+        formationformulaire.style.display = 'none';
     }
 
     function afficherformationformulaire() {
@@ -250,6 +160,43 @@ function afficherDescriptionPhoto() {
 function cacherDescriptionPhoto() {
     document.getElementById("descriptionphoto").style.display = 'none';
 }
+//pr les cv
+function toggleformulairecv(){
+    const cvformulaire = document.getElementById('uploadForm');
+
+    if (cvformulaire.style.display === 'none' || cvformulaire.style.display === '') {
+        console.log("Toggle : Affichage des cv");
+        affichercvformulaire();
+    } else {
+        console.log("Toggle : Masquage des cv");
+        cachercvformulaire();
+        
+    }
+}
+
+function affichercvformulaire(){
+    const cvformulaire = document.getElementById('uploadForm');
+    cvformulaire.style.display = 'block';
+
+}
+
+function cachercvformulaire(){
+    const cvformulaire = document.getElementById('uploadForm');
+    cvformulaire.style.display = 'none';
+}
+
+
+
+function soumettreformcv() {
+
+    const lienCV = document.getElementById('lienCV').value;
+    
+    // Cacher le formulaire après la soumission
+        cachercvformulaire();
+
+        document.getElementById('cvformulaire').submit();
+}
+    
 
 //pr les events
 
@@ -289,6 +236,9 @@ function soumettreformevenement() {
     const photo_event = document.getElementById('photo_event').value;
     const date_event = document.getElementById('date_event').value;
 
+
+    const etat_event = document.querySelector('input[name="etat_event"]:checked').value;
+
     // Mettre à jour les champs de date et d'heure avec la date et l'heure actuelles
         var dateActuelle = new Date();
         var date_irl_event = dateActuelle.toISOString().split('T')[0]; // Format 'YYYY-MM-DD'
@@ -297,6 +247,7 @@ function soumettreformevenement() {
         cacherpublicationsformulaire();
         document.getElementById('date_irl_event').value = dateEvent;
         document.getElementById('heure_irl_event').value = heureEvent;
+        document.getElementById('etat_event').value = etat_event;
 
         document.getElementById('evenformulaire').submit();
 
@@ -371,3 +322,83 @@ function afficherFormulaire(champ, id) {
     const formulaireAafficher = document.getElementById('form_' + champ + '_' + id);
     formulaireAafficher.style.display = 'block';
 }
+
+function choisirVisibilite(visibilite) {
+    // si la prsn choisit public la colonne etat_event est remplie par 'PUBLIC' sinon 'AMIS'
+    var valeurEtatEvent = (visibilite === 'public') ? 'PUBLIC' : 'AMIS';
+    console.log("Valeur de etat_event avant soumission :", document.getElementById('etat_event').value);
+    document.getElementById('etat_event').value = valeurEtatEvent;
+}/*function afficherParametres(ID_event) {
+    console.log("Fonction afficherParametres appelée avec ID_event =", ID_event);
+
+    // Afficher les options de visibilité (boutons radio "Public" et "Privé")
+    var publicBtn = document.getElementById('publicBtn_' + ID_event);
+    var priveBtn = document.getElementById('priveBtn_' + ID_event);
+
+    if (publicBtn && priveBtn) {
+        // Afficher les options de visibilité (boutons radio "Public" et "Privé")
+        publicBtn.style.display = 'block';
+        priveBtn.style.display = 'block';
+
+        // Pré-remplir la valeur en fonction de la visibilité actuelle
+        var etat_event = document.querySelector('input[name="etat_event"]:checked').value;
+
+        if (etat_event === 'public') {
+            document.querySelector('input[name="etat_event"][value="public"]').checked = true;
+        } else if (etat_event === 'prive') {
+            document.querySelector('input[name="etat_event"][value="prive"]').checked = true;
+        }
+    } else {
+        console.error('Les éléments ne sont pas trouvés.');
+    }
+}*/
+
+function choisirVisibilitepubli(visibilite) {
+    // si la prsn choisit public la colonne etat_event est remplie par 'PUBLIC' sinon 'AMIS'
+    var valeurEtatPubli = (visibilite === 'public') ? 'PUBLIC' : 'AMIS';
+    console.log("Valeur de etat_event avant soumission :", document.getElementById('etat_event').value);
+    document.getElementById('etat_publications').value = valeurEtatPubli;
+}
+
+function afficherFormulaire() {
+    var formulaire = document.getElementById('formulaireModification');
+    formulaire.style.display = 'block';
+}
+
+
+
+function genererCV() {
+    // Soumettez le formulaire pour déclencher le script PHP
+    var form = document.createElement('form');
+    form.method = 'POST';
+    form.action = 'generercv.php'; // Assurez-vous que le chemin est correct
+
+    var input = document.createElement('input');
+    input.type = 'hidden';
+    input.name = 'genererCV';
+    input.value = '1';
+    form.appendChild(input);
+
+    document.body.appendChild(form);
+
+    // Soumettez le formulaire
+    form.submit();
+
+    // Retirez le formulaire du DOM après la soumission
+    document.body.removeChild(form);
+}
+
+function configurerFormulaireGenererCV() {
+    document.getElementById('genererCvForm').addEventListener('submit', function (event) {
+        // Empêcher le formulaire de se soumettre normalement
+        event.preventDefault();
+
+        // Soumettre le formulaire
+        this.submit();
+    });
+}
+
+// Appeler la fonction au chargement de la page
+document.addEventListener('DOMContentLoaded', function () {
+    configurerFormulaireGenererCV();
+});

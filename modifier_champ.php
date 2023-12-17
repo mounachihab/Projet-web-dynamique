@@ -33,11 +33,11 @@ if ($user_name == '') {
 }
 // Récupérer les données du formulaire
 $champ = $_POST['champ'];
-$ID_publication = $_POST['ID_publication'];
+$ID_event = $_POST['ID_event'];
 $nouvelle_valeur = mysqli_real_escape_string($db_handle, $_POST['nouvelle_valeur']);
 
 // Effectuer la mise à jour dans la base de données
-$sql = "UPDATE publications SET $champ = '$nouvelle_valeur' WHERE ID_publication = $ID_publication";
+$sql = "UPDATE evenements SET $champ = '$nouvelle_valeur' WHERE ID_event = $ID_event";
 mysqli_query($db_handle, $sql);
 
 // Rediriger vers la page d'origine 
