@@ -82,7 +82,7 @@ if (empty($commentaire_event) ) {
 
 
 // Ajouter l'événement à la table
-    $sql = "INSERT INTO evenements (type_event, lieu_event, commentaire_event, photo_event, date_event, ID_createur) VALUES ('$type_event', '$lieu_event', '$commentaire_event', '$filename', '$date_event', '$ID_createur')";
+    $sql = "INSERT INTO evenements (type_event, lieu_event, commentaire_event, photo_event, date_event, heure_irl_event, date_irl_event, ID_createur) VALUES ('$type_event', '$lieu_event', '$commentaire_event', '$filename', '$date_event', CURRENT_TIME(), CURRENT_DATE(),  '$ID_createur')";
     $result = mysqli_query($db_handle, $sql);
 
         if ($result) {
