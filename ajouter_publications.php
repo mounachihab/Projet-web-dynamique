@@ -44,8 +44,12 @@ if (!$result) {
 if (isset($_POST['publications_form_submit'])) {
     $lieu_publications = mysqli_real_escape_string($db_handle, $_POST['lieu_publications']);
     
-    $commentaire_publications = isset($_POST['commentaire_publications']) ? $_POST['commentaire_publications'] : null;
+$commentaire_publications = mysqli_real_escape_string($db_handle, $_POST['commentaire_publications']);
+
     $ID_createur = $_SESSION['id'];
+    $etat_publications = $_POST['etat_publications'];
+
+
 
     // Validation : Vérifier si le commentaire sont saisis
 
@@ -77,7 +81,7 @@ if (empty($commentaire_publications) ) {
     }
 
 // Ajouter l'événement à la table
-    $sql = "INSERT INTO publications (lieu_publications, date_publications, heure_publications, commentaire_publications, photo_publications, ID_createur) VALUES ('$lieu_publications', CURRENT_DATE(), CURRENT_TIME(), '$commentaire_publications', '$filename', '$ID_createur')";
+    $sql = "INSERT INTO publications (lieu_publications, date_publications, heure_publications, commentaire_publications, photo_publications, etat_publications, ID_createur) VALUES ('$lieu_publications', CURRENT_DATE(), CURRENT_TIME(), '$commentaire_publications', '$filename', '$etat_publications', '$ID_createur')";
     $result = mysqli_query($db_handle, $sql);
 
         if ($result) {
@@ -93,4 +97,5 @@ if (empty($commentaire_publications) ) {
 
   
 ?>
+
 
