@@ -49,6 +49,7 @@ $prenom = $utilisateur['prenom'];
 $email = $utilisateur['email'];
 $mdp = $utilisateur['mdp'];
 $photo = $utilisateur['photo'];
+$description=$utilisateur['description'];
 
 
 //pr le statut
@@ -67,32 +68,32 @@ if (!$result_statut) {
 $sql_evenements="SELECT * FROM evenements where ID_createur=$id";
 $result_evenements = mysqli_query($db_handle, $sql_evenements);
 $evenements = mysqli_fetch_assoc($result_evenements);
-$type_event = $evenements['type_event'];
-$lieu_event= $evenements['lieu_event'];
-$commentaire_event= $evenements['commentaire_event'];
-$photo_event= $evenements['photo_event'];
-$date_event= $evenements['date_event'];
-$date_irl_event= $evenements['date_irl_event'];
-$heure_irl_event= $evenements['heure_irl_event'];
-
+// Accéder aux informations de l'événement en vérifiant si la clé existe
+$type_event = isset($evenements['type_event']) ? $evenements['type_event'] : null;
+$lieu_event = isset($evenements['lieu_event']) ? $evenements['lieu_event'] : null;
+$commentaire_event = isset($evenements['commentaire_event']) ? $evenements['commentaire_event'] : null;
+$photo_event = isset($evenements['photo_event']) ? $evenements['photo_event'] : null;
+$date_event = isset($evenements['date_event']) ? $evenements['date_event'] : null;
+$date_irl_event = isset($evenements['date_irl_event']) ? $evenements['date_irl_event'] : null;
+$etat_event = isset($evenements['etat_event']) ? $evenements['etat_event'] : null;
 
 
 //pr les publications
  
 $sql_publications="SELECT * FROM publications where ID_createur=$id";
 $result_publications = mysqli_query($db_handle, $sql_publications);
-$publications= mysqli_fetch_assoc($result_publications);
-$lieu_publications= $publications['lieu_publications'];
-$date_publications= $publications['date_publications'];
-$heure_publications= $publications['heure_publications'];
-$commentaire_publications= $publications['commentaire_publications'];
-$photo_publications= $publications['photo_publications'];
+// Accéder aux informations de la publication en vérifiant si la clé existe
+$lieu_publications = isset($row_publications['lieu_publications']) ? $row_publications['lieu_publications'] : null;
+$date_publications = isset($row_publications['date_publications']) ? $row_publications['date_publications'] : null;
+$heure_publications = isset($row_publications['heure_publications']) ? $row_publications['heure_publications'] : null;
+$commentaire_publications = isset($row_publications['commentaire_publications']) ? $row_publications['commentaire_publications'] : null;
+$photo_publications = isset($row_publications['photo_publications']) ? $row_publications['photo_publications'] : null;
+//$pv_public_publications=$publications['pv_public_publications'];
 
 
-    
 
-/* Chemin du fichier SQL de création de table
-$sql_file = "mouna.sql";
+
+/*    $sql_file = "mouna.sql";
 
 // Lire le contenu du fichier SQL
 $sql_content = file_get_contents($sql_file);
@@ -106,8 +107,6 @@ if (!$result_create_table) {
     echo "Erreur lors de la création de la table formations : " . mysqli_error($db_handle);
     exit;
 }*/
-
-
 
 
 ?>
@@ -272,7 +271,23 @@ if (!$result_create_table) {
                         <div class="prenom"><?php echo $prenom  ?></div> 
                         <div class="nom"><?php echo $nom  ?></div> 
                         <div class="email"><?php echo $email ; ?></div>
-                        <button type="submit">Modifier votre photo</button>  
+                        <div class="description"><?php echo $description ; ?>
+                            <button onclick="afficherFormulaire()">Modifier</button>
+
+                        <form id="formulaireModification" method="post" action="modifier_description_utilisateur.php" style="display: none;">
+                            <label for="nouvelleDescription">Nouvelle description :</label>
+                            <input type="text" id="nouvelleDescription" name="nouvelleDescription" required>
+                            <button type="submit">Envoyer</button>
+                        </form>
+                        </div>
+
+
+                        <button onclick="afficherFormulaire()">Modifier votre photo</button>
+
+                        <form id="formulaireModification" method="post" action="modifier_photo_utilisateur.php" enctype="multipart/form-data" style="display: none;">
+                            <input type="file" name="nouvelle_photo" accept=".jpg, .jpeg">
+                            <button type="submit">Envoyer</button>
+                        </form>
                     </div>
 
                 </div>
@@ -333,6 +348,22 @@ if (!$result_create_table) {
                                             <td><input type="date" id="date_event" name="date_event"></td>
 
                                         </tr> 
+
+                                        <tr>
+                                            <td>Visibilité:</td>
+                                            <td>
+                                                <div id="visibilite">
+                                                    <input type="hidden" id="etat_event" name="etat_event" value="PUBLIC">
+
+                                                    <label><input type="radio" name="etat_event" value="public" onclick="choisirVisibilite('public')">Public</label>
+                                                    <label><input type="radio" name="etat_event" value="prive" onclick="choisirVisibilite('prive')">Privé</label>
+
+                                                    <!-- Boutons radio masqués -->
+                                                    <!--<label style="display: none;"><input type="radio" name="etat_event" value="public" id="publicBtn_' . $row['ID_event'] . '">Public</label>
+                                                    <label style="display: none;"><input type="radio" name="etat_event" value="prive" id="priveBtn_' . $row['ID_event'] . '">Privé</label>-->
+                                                </div>
+                                            </td>
+                                        </tr>        
                                         
 
                                         </table>   
@@ -392,8 +423,14 @@ if (!$result_create_table) {
 
                                             
                                             
-                                            echo '<button type="submit" class="supprimer-button">Supprimer la photo </button>';
-                                            echo '<button class="parametres-button">Paramètres de la photo</button>';
+                                            echo '<form method="post" action="supprimer_photo.php">';
+                                            echo '<input type="hidden" name="ID_event" value="' . $row['ID_event'] . '">';
+                                            echo '<button type="submit" class="supprimer-button">Supprimer l évènement</button>';
+                                            echo '</form>';
+                                            echo '<form>';
+                                            echo '<input type="hidden" name="ID_event" value="' . $row['ID_event'] . '">';
+                                           
+                                            //echo '<button class="parametres-button" onclick="afficherParametres(' . $row['ID_event'] . ')" type="button">Paramètres de l évènement</button>';
 
                                             echo '</form>';
                                             
@@ -433,8 +470,24 @@ if (!$result_create_table) {
                             </table>
                             <input type="hidden" id="date_publication" name="date_publication" value="">
                             <input type="hidden" id="heure_publication" name="heure_publication" value="">
+                            <tr>
+                                            <td>Visibilité:</td>
+                                            <td>
+                                                <div id="visibilite">
+                                                    <input type="hidden" id="etat_publications" name="etat_publications" value="PUBLIC">
+
+                                                    <label><input type="radio" name="etat_publications" value="public" onclick="choisirVisibilite('public')">Public</label>
+                                                    <label><input type="radio" name="etat_publications" value="prive" onclick="choisirVisibilite('prive')">Privé</label>
+
+                                                    
+                                                </div>
+                                            </td>
+                                        </tr> 
+
+                        </table>
                             <button type="submit" onclick="soumettreformpublications()">Poster</button>
                         </form>
+
 
                         <div id="descriptionphoto2">
                             <br>
@@ -470,9 +523,12 @@ if (!$result_create_table) {
                                 echo '<p class="info"><strong>Publié le :</strong> ' . date("d/m/Y", strtotime($row['date_publications'])) . ' à ' . date("H:i", strtotime($row['heure_publications'])) . '</p>';
 
 
-                               
-                                echo '<button type="submit" class="supprimer-button">Supprimer la photo </button>';
-                                echo '<button class="parametres-button">Paramètres de la photo</button>';
+                                echo '<form method="post" action="supprimer_photo.php">';
+                                echo '<input type="hidden" name="ID_publication" value="' . $row['ID_publication'] . '">';
+                                echo '<button type="submit" class="supprimer-button">Supprimer le post</button>';
+                                echo '</form>';
+                                
+                                //echo '<button class="parametres-button">Paramètres de la photo</button>';
                                 echo '</div>';
                             }
                             ?>
