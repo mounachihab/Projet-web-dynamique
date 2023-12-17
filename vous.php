@@ -6,8 +6,7 @@ session_start(); // Démarre la session
 
 // Identifier le nom de base de données
 $database = "ece";
-// Connectez-vous dans votre BDD
-// Rappel : votre serveur = localhost | votre login = root | votre mot de pass = '' (rien)
+//connexion bdd
 $db_handle = mysqli_connect("localhost", "root", "root");
 $db_found = mysqli_select_db($db_handle, $database);
 
@@ -43,9 +42,20 @@ if (!$result) {
     exit;
 }
 
+
+$utilisateur = mysqli_fetch_assoc($result);
+$nom = $utilisateur['nom'];
+$prenom = $utilisateur['prenom'];
+$email = $utilisateur['email'];
+$mdp = $utilisateur['mdp'];
+$photo = $utilisateur['photo'];
+
+
 //pr le statut
 $sql_statut="SELECT * FROM statut WHERE ID=$id";
 $result_statut = mysqli_query($db_handle, $sql_statut);
+$statut = mysqli_fetch_assoc($result_statut);
+$tonstatut = $statut['tonstatut'];
 
 // Vérifier s'il y a une erreur lors de l'exécution de la requête SQL
 if (!$result_statut) {
@@ -53,194 +63,36 @@ if (!$result_statut) {
     exit;
 }
 
-//pr les formations
-
-$sql_formations="SELECT * FROM formations WHERE ID=$id";
-$result_formations = mysqli_query($db_handle, $sql_formations);
-
-// Vérifier s'il y a une erreur lors de l'exécution de la requête SQL
-if (!$result_formations) {
-    echo "Erreur lors de l'exécution de la requête formations: " . mysqli_error($db_handle);
-    exit;
-}
-
-//pr les projets
-
-$sql_projets="SELECT * FROM projets WHERE ID=$id";
-$result_projets = mysqli_query($db_handle, $sql_projets);
-
-// Vérifier s'il y a une erreur lors de l'exécution de la requête SQL
-if (!$result_projets) {
-    echo "Erreur lors de l'exécution de la requête projets: " . mysqli_error($db_handle);
-    exit;
-}
-
-
-if ($db_found) {  
-    $utilisateur = mysqli_fetch_assoc($result);
-    $nom = $utilisateur['nom'];
-    $prenom = $utilisateur['prenom'];
-    $email = $utilisateur['email'];
-    $mdp = $utilisateur['mdp'];
-    $photo = $utilisateur['photo'];
-
-    $statut = mysqli_fetch_assoc($result_statut);
-    $tonstatut = $statut['tonstatut'];
-
-    // Vérifier si le formulaire des formations a été soumis
-    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['formation_form_submit'])) {
-        // Récupérer les données du formulaire
-        $ecole = isset($_POST['ecole']) ? mysqli_real_escape_string($db_handle, $_POST['ecole']) : '';
-        $competence = isset($_POST['competence']) ? mysqli_real_escape_string($db_handle, $_POST['competence']) : '';
-        $domaine = isset($_POST['domaine']) ? mysqli_real_escape_string($db_handle, $_POST['domaine']) : '';
-        
-        // Vérifier si les dates sont vides avant de les traiter
-        $dateDebut = isset($_POST['dateDebut']) && !empty($_POST['dateDebut']) ? mysqli_real_escape_string($db_handle, $_POST['dateDebut']) : '2023-01-01';
-        $dateFin = isset($_POST['dateFin']) && !empty($_POST['dateFin']) ? mysqli_real_escape_string($db_handle, $_POST['dateFin']) : '2023-01-01';
-
-        // Insérer les informations dans la table formations
-        $sql_insert_formation = "INSERT INTO formations (ID, ecole, competence, domaine, dateDebut, dateFin) 
-                            VALUES ($id, '$ecole', '$competence', '$domaine', '$dateDebut', '$dateFin')";
-
-        $result_insert_formation = mysqli_query($db_handle, $sql_insert_formation);
-
-        if (!$result_insert_formation) {
-            echo "Erreur lors de la mise à jour des informations des formations : " . mysqli_error($db_handle);
-        }
-    }
-
-    // Vérifier si le formulaire des projets a été soumis
-    elseif ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['projet_form_submit'])) {
-        // Récupérer les données du formulaire
-        $Lieu = isset($_POST['Lieu']) ? mysqli_real_escape_string($db_handle, $_POST['Lieu']) : '';
-        $competence = isset($_POST['competence']) ? mysqli_real_escape_string($db_handle, $_POST['competence']) : '';
-        $domaine = isset($_POST['domaine']) ? mysqli_real_escape_string($db_handle, $_POST['domaine']) : '';
-        
-        // Vérifier si les dates sont vides avant de les traiter
-        $dateDebut = isset($_POST['dateDebut']) && !empty($_POST['dateDebut']) ? mysqli_real_escape_string($db_handle, $_POST['dateDebut']) : '2023-01-01';
-        $dateFin = isset($_POST['dateFin']) && !empty($_POST['dateFin']) ? mysqli_real_escape_string($db_handle, $_POST['dateFin']) : '2023-01-01';
-
-        // Insérer les informations dans la table projets
-        $sql_insert_projet = "INSERT INTO projets (ID, Lieu, competence, domaine, dateDebut, dateFin) 
-                            VALUES ($id, '$Lieu', '$competence', '$domaine', '$dateDebut', '$dateFin')";
-
-        $result_insert_projet = mysqli_query($db_handle, $sql_insert_projet);
-
-        if (!$result_insert_projet) {
-            echo "Erreur lors de la mise à jour des informations du projet : " . mysqli_error($db_handle);
-        }
-    }
-
-    // Charger les projets depuis la base de données ou la session
-    $projets_session = isset($_SESSION['projets']) ? $_SESSION['projets'] : [];
-    if (empty($projets_session)) {
-        $sql_projets = "SELECT * FROM projets WHERE ID=$id";
-        $result_projets = mysqli_query($db_handle, $sql_projets);
-
-        if (!$result_projets) {
-            echo "Erreur lors de l'exécution de la requête projets: " . mysqli_error($db_handle);
-            exit;
-        }
-
-        while ($row = mysqli_fetch_assoc($result_projets)) {
-            $projets_session[] = $row;
-        }
-
-        $_SESSION['projets'] = $projets_session;
-    }
-
-    // Reste du code pour les projets
-    if (!empty($projets_session)) {
-        $dernier_projet = end($projets_session);
-        $Lieu = isset($dernier_projet['Lieu']) ? $dernier_projet['Lieu'] : '';
-        $competence = isset($dernier_projet['competence']) ? $dernier_projet['competence'] : '';
-        $domaine = isset($dernier_projet['domaine']) ? $dernier_projet['domaine'] : '';
-        $dateDebut = isset($dernier_projet['dateDebut']) ? $dernier_projet['dateDebut'] : '';
-        $dateFin = isset($dernier_projet['dateFin']) ? $dernier_projet['dateFin'] : '';
-    } else {
-        // If no projet is found, initialize variables to default values
-        $Lieu = '';
-        $competence = '';
-        $domaine = '';
-        $dateDebut = '';
-        $dateFin = '';
-    }
-} else {
-    echo "Utilisateur non trouvé.";
-    exit;
-}
+//pr les evenements 
+$sql_evenements="SELECT * FROM evenements where ID_createur=$id";
+$result_evenements = mysqli_query($db_handle, $sql_evenements);
+$evenements = mysqli_fetch_assoc($result_evenements);
+$type_event = $evenements['type_event'];
+$lieu_event= $evenements['lieu_event'];
+$commentaire_event= $evenements['commentaire_event'];
+$photo_event= $evenements['photo_event'];
+$date_event= $evenements['date_event'];
+$date_irl_event= $evenements['date_irl_event'];
+$heure_irl_event= $evenements['heure_irl_event'];
 
 
 
-// Vérifier si le formulaire du statut a été soumis
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Vérifier si le formulaire du statut a été soumis
-    if (isset($_POST['statut_form_submit'])) {
-        // Récupérer la nouvelle valeur du statut depuis le formulaire
-        $nouveau_statut = mysqli_real_escape_string($db_handle, $_POST['nouveau_statut']);
+//pr les publications
+ 
+$sql_publications="SELECT * FROM publications where ID_createur=$id";
+$result_publications = mysqli_query($db_handle, $sql_publications);
+$publications= mysqli_fetch_assoc($result_publications);
+$lieu_publications= $publications['lieu_publications'];
+$date_publications= $publications['date_publications'];
+$heure_publications= $publications['heure_publications'];
+$commentaire_publications= $publications['commentaire_publications'];
+$photo_publications= $publications['photo_publications'];
 
-        // Mettre à jour la table statut avec le nouveau statut
-        $sql_update_statut = "UPDATE statut SET tonstatut = '$nouveau_statut' WHERE ID = $id";
-        $result_update_statut = mysqli_query($db_handle, $sql_update_statut);
 
-        if (!$result_update_statut) {
-            echo "Erreur lors de la mise à jour du statut : " . mysqli_error($db_handle);
-        } else {
-            // Rafraîchir la page pour afficher le nouveau statut
-            header("Location: {$_SERVER['PHP_SELF']}");
-            exit();
-        }
-    }
-
-     // Vérifier si le formulaire des formations a été soumis
-    elseif (isset($_POST['formation_form_submit'])) {
-        // Récupérer les données du formulaire
-        $ecole = isset($_POST['ecole']) ? mysqli_real_escape_string($db_handle, $_POST['ecole']) : '';
-        $competence = isset($_POST['competence']) ? mysqli_real_escape_string($db_handle, $_POST['competence']) : '';
-        $domaine = isset($_POST['domaine']) ? mysqli_real_escape_string($db_handle, $_POST['domaine']) : '';
-        
-
-        // Vérifier si les dates sont vides avant de les traiter
-        $dateDebut = isset($_POST['dateDebut']) && !empty($_POST['dateDebut']) ? mysqli_real_escape_string($db_handle, $_POST['dateDebut']) : '2023-01-01';
-        $dateFin = isset($_POST['dateFin']) && !empty($_POST['dateFin']) ? mysqli_real_escape_string($db_handle, $_POST['dateFin']) : '2023-01-01';
-
-        // Insérer les informations dans la table formations
-        $sql_insert_formation = "INSERT INTO formations (ID, ecole, competence, domaine, dateDebut, dateFin) 
-                            VALUES ($id, '$ecole', '$competence', '$domaine', '$dateDebut', '$dateFin')";
-
-        $result_insert_formation = mysqli_query($db_handle, $sql_insert_formation);
-
-        if (!$result_insert_formation) {
-            echo "Erreur lors de la mise à jour des informations des formations : " . mysqli_error($db_handle);
-        }
-    }    
-        // Vérifier si le formulaire des projets a été soumis
-    elseif (isset($_POST['projet_form_submit'])) {
-        // Récupérer les données du formulaire
-        $Lieu = isset($_POST['Lieu']) ? mysqli_real_escape_string($db_handle, $_POST['Lieu']) : '';
-        $competence = isset($_POST['competence']) ? mysqli_real_escape_string($db_handle, $_POST['competence']) : '';
-        $domaine = isset($_POST['domaine']) ? mysqli_real_escape_string($db_handle, $_POST['domaine']) : '';
-        
-        // Vérifier si les dates sont vides avant de les traiter
-        $dateDebut = isset($_POST['dateDebut']) && !empty($_POST['dateDebut']) ? mysqli_real_escape_string($db_handle, $_POST['dateDebut']) : '2023-01-01';
-        $dateFin = isset($_POST['dateFin']) && !empty($_POST['dateFin']) ? mysqli_real_escape_string($db_handle, $_POST['dateFin']) : '2023-01-01';
-
-        // Insérer les informations dans la table projets
-        $sql_insert_projet = "INSERT INTO projets (ID, Lieu, competence, domaine, dateDebut, dateFin) 
-                            VALUES ($id, '$Lieu', '$competence', '$domaine', '$dateDebut', '$dateFin')";
-
-        $result_insert_projet = mysqli_query($db_handle, $sql_insert_projet);
-
-        if (!$result_insert_projet) {
-            echo "Erreur lors de la mise à jour des informations du projet : " . mysqli_error($db_handle);
-        }
-    }
-        
     
-}
-/*
-// Chemin du fichier SQL de création de table
-$sql_file = "vous.sql";
+
+/* Chemin du fichier SQL de création de table
+$sql_file = "mouna.sql";
 
 // Lire le contenu du fichier SQL
 $sql_content = file_get_contents($sql_file);
@@ -257,7 +109,6 @@ if (!$result_create_table) {
 
 
 
-// Fermer la connexion
 
 ?>
 
@@ -430,7 +281,7 @@ if (!$result_create_table) {
                     <?php echo $tonstatut  ?>
                     <button onclick="toggleStatutForm()">Modifier votre statut </button>
                     <!-- Formulaire de modification du statut -->
-                    <form id="champ_statut" name="form_statut" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>" style="display: none;">
+                    <form id="champ_statut" name="form_statut" method="post" action="ajouter_statut.php" style="display: none;">
                         <input type="hidden" name="statut_form_submit" value="1">
                         
                             <label for="nouveau_statut"></label>
@@ -450,35 +301,42 @@ if (!$result_create_table) {
                         <div id ="blocpubligauche">
                             Vos évènements :
                             <button onclick="toggleformevenement()">Ajouter un événement</button>
-                                <form id="ajouterevenementform" action="ajouter_evenement.php" method="post" enctype="multipart/form-data">
+
+                                <form id="ajouterevenementform"  name="evenformulaire" method="post" action="ajouter_evenement.php" style="display: none;" enctype="multipart/form-data" >
+                                    <input type="hidden" name="evenements_form_submit" value="1">
                                     <table>
                                         <tr>
-                                            <td><label for="type">Type: </label></td>
-                                            <td><input type="text" name="type"></td>
+                                            <td><label for="type_event">Type: </label></td>
+                                            <td><input type="text" id="type_event" name="type_event"></td>
                                         </tr>    
 
                                         <tr>
-                                            <td><label for="lieu">Lieu: </label></td>
-                                            <td><input type="text" name="lieu"></td>
+                                            <td><label for="lieu_event">Lieu: </label></td>
+                                            <td><input type="text" id="lieu_event" name="lieu_event"></td>
                                         </tr>    
 
                                         <tr>
 
-                                            <td><label for="commentaire">Commentaire: </label></td>
-                                            <td><textarea name="commentaire"></textarea></td>
+                                            <td><label for="commentaire_event">Commentaire: </label></td>
+                                            <td><textarea id="commentaire_event" name="commentaire_event"></textarea></td>
+
+
                                         </tr>    
 
                                         <tr>
-                                            <td><label for="photo">Photo: </label></td>
-                                            <td><input type="file" name="photo"></td>
+                                            <td><label for="photo_event">Photo: </label></td>
+                                            <td><input type="file" id="photo_event" name="photo_event" ></td>
                                         </tr> 
 
                                         <tr>    
-                                            <td><label for="date">Date: </label></td>
-                                            <td><input type="date" name="date"></td>
+                                            <td><label for="date_event">Date: </label></td>
+                                            <td><input type="date" id="date_event" name="date_event"></td>
+
                                         </tr> 
+                                        
+
                                         </table>   
-                                            <button type="submit" onclick="soumettreformevenement()">Poster</button>
+                                        <button type="submit" onclick="soumettreformevenement()">Poster</button>
                                     </form>
                             <div id="descriptionphoto">
                                 <br>
@@ -488,13 +346,52 @@ if (!$result_create_table) {
                                         $resultats = mysqli_query($db_handle, "SELECT * FROM evenements WHERE ID_createur = '$id'");
                                         while ($row = mysqli_fetch_assoc($resultats)) {
                                             echo '<div class="evenement">';
-                                            echo '<img src="' . $row['photo'] . '" alt="Événement" width="300">';
-                                            echo '<p class="info">Lieu: ' . $row['lieu'] . ' <button class="modifier-button" onclick="modifierChamp(\'lieu\', \'' . $row['lieu'] . '\')">Modifier</button></p>';
-                                            echo '<p class="info">Date: ' . $row['date'] . ' <button class="modifier-button" onclick="modifierChamp(\'date\', \'' . $row['date'] . '\')">Modifier</button></p>';
-                                            echo '<p class="info">Type: ' . $row['type'] . ' <button class="modifier-button" onclick="modifierChamp(\'type\', \'' . $row['type'] . '\')">Modifier</button></p>';
-                                            echo '<p class="info">Commentaire: ' . $row['commentaire'] . ' <button class="modifier-button" onclick="modifierChamp(\'commentaire\', \'' . $row['commentaire'] . '\')">Modifier</button></p>';
-                                            echo '<form method="post" action="supprimer_photo.php">'; // Remplacez "supprimer_photo.php" par le fichier où vous gérez la suppression
-                                            //echo '<input type="hidden" name="photo_url" value="' . $row['photo'] . '">';//
+                                            echo '<img src="' . $row['photo_event'] . '" alt="Événement" width="300">';
+                                            // Affichage du lieu avec le bouton "Modifier"
+                                            echo '<p class="info"><strong>Lieu:</strong> ' . $row['lieu_event'];
+                                            echo '<button onclick="afficherFormulaire(\'lieu_event\', ' . $row['ID_event'] . ')">Modifier</button>';
+                                            echo '<form id="form_lieu_event_' . $row['ID_event'] . '" method="post" action="modifier_champ_event.php" style="display: none;">';
+                                            echo '<input type="hidden" name="champ" value="lieu_event">';
+                                            echo '<input type="hidden" name="ID_event" value="' . $row['ID_event'] . '">';
+                                            echo '<input type="text" name="nouvelle_valeur" placeholder="Nouveau lieu">';
+                                            echo '<button type="submit">Envoyer</button>';
+                                            echo '</form>';
+
+                                            // Affichage de la date avec le bouton "Modifier"
+                                            echo '<p class="info"><strong>Date de l évènement:</strong> ' . $row['date_event'];
+                                            echo '<button onclick="afficherFormulaire(\'date_event\', ' . $row['ID_event'] . ')">Modifier Date</button>';
+                                            echo '<form id="form_date_event_' . $row['ID_event'] . '" method="post" action="modifier_champ_event.php" style="display: none;">';
+                                            echo '<input type="hidden" name="champ" value="date_event">';
+                                            echo '<input type="hidden" name="ID_event" value="' . $row['ID_event'] . '">';
+                                            echo '<input type="date" name="nouvelle_valeur">';
+                                            echo '<button type="submit">Envoyer</button>';
+                                            echo '</form>';
+
+                                            // Affichage du type avec le bouton "Modifier"
+                                            echo '<p class="info"><strong>Type:</strong> ' . $row['type_event'];
+                                            echo '<button onclick="afficherFormulaire(\'type_event\', ' . $row['ID_event'] . ')">Modifier Type</button>';
+                                            echo '<form id="form_type_event_' . $row['ID_event'] . '" method="post" action="modifier_champ_event.php" style="display: none;">';
+                                            echo '<input type="hidden" name="champ" value="type_event">';
+                                            echo '<input type="hidden" name="ID_event" value="' . $row['ID_event'] . '">';
+                                            echo '<input type="text" name="nouvelle_valeur" placeholder="Nouveau type">';
+                                            echo '<button type="submit">Envoyer</button>';
+                                            echo '</form>';
+
+                                            // Affichage commentaire avec le bouton "Modifier"
+                                            echo '<p class="info"><strong>Commentaire:</strong> ' . $row['commentaire_event'];
+                                            echo '<button onclick="afficherFormulaire(\'commentaire_event\', ' . $row['ID_event'] . ')">Modifier Commentaire</button>';
+                                            echo '<form id="form_commentaire_event_' . $row['ID_event'] . '" method="post" action="modifier_champ_event.php" style="display: none;">';
+                                            echo '<input type="hidden" name="champ" value="commentaire_event">';
+                                            echo '<input type="hidden" name="ID_event" value="' . $row['ID_event'] . '">';
+                                            echo '<textarea name="nouvelle_valeur" placeholder="Nouveau commentaire"></textarea>';
+                                            echo '<button type="submit">Envoyer</button>';
+                                            echo '</form>';
+
+                                            //affichage de la date et l heure de l event
+                                            echo '<p class="info"><strong>Publié le :</strong> ' . date("d/m/Y", strtotime($row['date_irl_event'])) . ' à ' . date("H:i", strtotime($row['heure_irl_event'])) . '</p>';
+
+                                            
+                                            
                                             echo '<button type="submit" class="supprimer-button">Supprimer la photo </button>';
                                             echo '<button class="parametres-button">Paramètres de la photo</button>';
 
@@ -510,50 +407,69 @@ if (!$result_create_table) {
 
                         </div>
                         <div id ="blocpublidroite">
-                            Vos posts :
-                            <button onclick="toggleformpost()">Ajouter une photo/video</button>
+                            Vos posts:
+                            <button onclick="toggleformpublications()">Ajouter une photo/video</button>
 
-                            <form id="ajouterphotovideoform" action="ajouter_photo_video.php" method="post" enctype="multipart/form-data" style="display: none;">
+                            <form id="ajouterpublicationsform" name="publicationsformulaire" method="post" action="ajouter_publications.php" style="display: none;" enctype="multipart/form-data" >
+                                <input type="hidden" name="publications_form_submit" value="1">
                             <table>
                                 <tr>
-                                    <td><label for="type">Type: </label></td>
-                                    <td><input type="text" name="type"></td>
+                                    <td><label for="lieu_publications">Lieu: </label></td>
+                                    <td><input type="text" id="lieu_publications" name="lieu_publications"></td>
+                                </tr>
+
+                                
+                                <tr>
+                                    <td><label for="commentaire_publications">Commentaire: </label></td>
+                                    <td><textarea id="commentaire_publications" name="commentaire_publications"></textarea></td>
                                 </tr>
 
                                 <tr>
-                                    <td><label for="lieu">Lieu: </label></td>
-                                    <td><input type="text" name="lieu"></td>
+                                    <td><label for="photo_publications">Photo/Video: </label></td>
+                                    <td><input type="file" id="photo_publications" name="photo_publications"></td>
                                 </tr>
 
-                                <tr>
-                                    <td><label for="commentaire">Commentaire: </label></td>
-                                    <td><textarea name="commentaire"></textarea></td>
-                                </tr>
-
-                                <tr>
-                                    <td><label for="photo">Photo/Video: </label></td>
-                                    <td><input type="file" name="photo"></td>
-                                </tr>
-
-                                <tr>
-                                    <td><label for="date">Date: </label></td>
-                                    <td><input type="date" name="date"></td>
-                                </tr>
+                                
                             </table>
-                            <button type="submit" onclick="soumettreformpost()">Ajouter</button>
+                            <input type="hidden" id="date_publication" name="date_publication" value="">
+                            <input type="hidden" id="heure_publication" name="heure_publication" value="">
+                            <button type="submit" onclick="soumettreformpublications()">Poster</button>
                         </form>
 
-                        <div id="descriptionphoto">
+                        <div id="descriptionphoto2">
+                            <br>
                             <?php
-                            $resultats = mysqli_query($db_handle, "SELECT * FROM post WHERE ID_createur = '$id'");
+                            $resultats = mysqli_query($db_handle, "SELECT * FROM publications WHERE ID_createur = '$id'");
                             while ($row = mysqli_fetch_assoc($resultats)) {
-                                echo '<div class="post">';
-                                echo '<img src="' . $row['photo'] . '" alt="Photo/Video" width="150">';
-                                // Afficher chaque champ avec un bouton "Modifier"
-                                echo '<p class="info">Lieu: ' . $row['lieu'] . ' <button onclick="modifierChamp(\'lieu\', ' . $row['ID_post'] . ')">Modifier</button></p>';
-                                echo '<p class="info">Date: ' . $row['date'] . ' <button onclick="modifierChamp(\'date\', ' . $row['ID_post'] . ')">Modifier</button></p>';
-                                echo '<p class="info">Type: ' . $row['type'] . ' <button onclick="modifierChamp(\'type\', ' . $row['ID_post'] . ')">Modifier</button></p>';
-                                echo '<p class="info">Commentaire: ' . $row['commentaire'] . ' <button onclick="modifierChamp(\'commentaire\', ' . $row['ID_post'] . ')">Modifier</button></p>';
+                                echo '<div class="publications">';
+                                echo '<img src="' . $row['photo_publications'] . '" alt="Photo/Video" width="150">';
+                                // Affichage du lieu avec le bouton "Modifier"
+                                echo '<p class="info"><strong>Lieu:</strong> ' . $row['lieu_publications'];
+                                echo '<button onclick="afficherFormulaire(\'lieu_publications\', ' . $row['ID_publication'] . ')">Modifier</button>';
+                                echo '<form id="form_lieu_publications_' . $row['ID_publication'] . '" method="post" action="modifier_champ_publications.php" style="display: none;">';
+                                echo '<input type="hidden" name="champ" value="lieu_publications">';
+                                echo '<input type="hidden" name="ID_publication" value="' . $row['ID_publication'] . '">';
+                                echo '<input type="text" name="nouvelle_valeur" placeholder="Nouveau lieu">';
+                                echo '<button type="submit">Envoyer</button>';
+                                echo '</form>';
+
+                                
+                                
+
+                                // Affichage du commentaire avec le bouton "Modifier"
+                                echo '<p class="info"><strong>Commentaire:</strong> ' . $row['commentaire_publications'];
+                                echo '<button onclick="afficherFormulaire(\'commentaire_publications\', ' . $row['ID_publication'] . ')">Modifier Commentaire</button>';
+                                echo '<form id="form_commentaire_publications_' . $row['ID_publication'] . '" method="post" action="modifier_champ_publications.php" style="display: none;">';
+                                echo '<input type="hidden" name="champ" value="commentaire_publications">';
+                                echo '<input type="hidden" name="ID_publication" value="' . $row['ID_publication'] . '">';
+                                echo '<textarea name="nouvelle_valeur" placeholder="Nouveau commentaire"></textarea>';
+                                echo '<button type="submit">Envoyer</button>';
+                                echo '</form>';
+
+                                //affichage de la date et l heure de publication
+                                echo '<p class="info"><strong>Publié le :</strong> ' . date("d/m/Y", strtotime($row['date_publications'])) . ' à ' . date("H:i", strtotime($row['heure_publications'])) . '</p>';
+
+
                                
                                 echo '<button type="submit" class="supprimer-button">Supprimer la photo </button>';
                                 echo '<button class="parametres-button">Paramètres de la photo</button>';
